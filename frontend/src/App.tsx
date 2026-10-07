@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { MainScreen } from './features/home/MainScreen';
 import { mockConfig } from './features/home/mockConfig';
 import type { ChatConfig } from './features/home/types';
+import { PageViewer } from './features/page/PageViewer';
+import { SettingsScreen } from './features/settings/SettingsScreen';
+import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './features/settings/linkStore';
 
 // 백엔드 주소: 배포 시 VITE_API_BASE 환경변수로 지정 (비우면 같은 도메인의 /v1)
 const API_BASE = import.meta.env.VITE_API_BASE ?? '';
@@ -9,6 +12,9 @@ const API_BASE = import.meta.env.VITE_API_BASE ?? '';
 export default function App() {
   const [config, setConfig] = useState<ChatConfig | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [view, setView] = useState<'home' | 'settings'>('home');
+  const [page, setPage] = useState<{ url: string; title: string } | null>(null);
+  const [links, setLinks] = useState<LinkMap>(loadLinks);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -26,20 +32,46 @@ export default function App() {
     window.setTimeout(() => setNotice(null), 2000);
   };
 
+  const isLinked = (key: string) => Boolean(links[key]);
+
+  // 연결 주소가 등록돼 있으면 챗봇 안에서 이동, 없으면 "준비중" 안내 후 종료
+  const openLink = (key: string, label: string) => {
+    const url = links[key];
+    if (!url) {
+      show(`'${label}' 서비스는 준비중입니다`);
+      return;
+    }
+    setPage({ url, title: label });
+  };
+
+  const save = (next: LinkMap) => {
+    const ok = saveLinks(next);
+    if (ok) setLinks(next);
+    return ok;
+  };
+
   if (!config) return null;
 
   return (
     <>
-      <MainScreen
-        config={config}
-        handlers={{
-          // TODO: 대화 화면 전환 + POST /v1/chat/messages
-          onAction: (m) => show(`${m.label} → intent: ${m.intent}${m.requiresAuth ? ' (인증 필요)' : ''}`),
-          onSendText: (t) => show(`질문 전송: ${t}`),
-          onAgent: () => show('상담원 연결 (준비 중)'),
-          onCallback: () => show('콜백 요청 (준비 중)'),
-        }}
-      />
+      {page ? (
+        <PageViewer url={page.url} title={page.title} onBack={() => setPage(null)} />
+      ) : view === 'settings' ? (
+        <SettingsScreen config={config} links={links} onSave={save} onBack={() => setView('home')} />
+      ) : (
+        <MainScreen
+          config={config}
+          isLinked={isLinked}
+          handlers={{
+            onAction: (m) => openLink(m.intent, m.label),
+            // TODO: 대화 화면 전환 + POST /v1/chat/messages
+            onSendText: (t) => show(`질문 전송: ${t}`),
+            onAgent: () => openLink(AGENT_KEY, '상담원 연결'),
+            onCallback: () => openLink(CALLBACK_KEY, '콜백 요청'),
+            onSettings: () => setView('settings'),
+          }}
+        />
+      )}
       {notice && (
         <div role="status" style={{
           position: 'fixed', left: '50%', bottom: 120, transform: 'translateX(-50%)',

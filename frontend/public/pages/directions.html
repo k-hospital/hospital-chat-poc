@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>오시는 길</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* 챗봇 메인 화면과 같은 디자인 토큰 */
+:root {
+  --accent: #1F4E8C;
+  --accent-soft: #E3ECF7;
+  --ink: #152238;
+  --ink-sub: #4A5668;
+  --line: #DDE3EB;
+  --line-strong: #C9D3E0;
+  --ground: #F4F6F9;
+  --danger: #B42318;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--ground); color: var(--ink);
+  font-family: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button { font-family: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 480px; margin: 0 auto; padding: 16px 20px 28px; display: flex; flex-direction: column; gap: 14px; }
+
+.intro h1 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.5px; }
+.intro p { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-sub); }
+/* 챗봇 안에서 열리면 상단 바에 제목이 있으므로 본문 제목 숨김 */
+.embedded .intro h1 { display: none; }
+.embedded .intro p { margin: 0; }
+
+.card { background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+
+/* 약도 */
+.map { position: relative; height: 190px; overflow: hidden; border-radius: 16px; border: 1px solid var(--line); background: #EEF1EC; }
+.map svg.bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pin { position: absolute; left: 56%; top: 54%; transform: translate(-50%, -100%); width: 28px; height: 38px; filter: drop-shadow(0 3px 4px rgba(0,0,0,.25)); }
+.map .tag {
+  position: absolute; left: 56%; top: 18%; transform: translateX(-50%);
+  background: var(--ink); color: #fff; font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+}
+
+/* 주소 */
+.addr { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.addr .row { display: flex; gap: 12px; align-items: flex-start; }
+.ico { width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; }
+.addr strong { display: block; font-size: 15px; }
+.addr span { display: block; font-size: 13px; color: var(--ink-sub); margin-top: 2px; }
+.btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.btn {
+  height: 44px; border-radius: 12px; border: 1.5px solid var(--accent); background: #fff; color: var(--accent);
+  font-size: 13.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;
+}
+.btn.fill { background: var(--accent); color: #fff; }
+
+/* 전화 */
+.calls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.call { padding: 14px; display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: inherit; }
+.call em { font-style: normal; font-size: 12px; color: var(--ink-sub); }
+.call b { font-size: 17px; letter-spacing: -0.2px; }
+.call.er b { color: var(--danger); }
+
+/* 교통수단 탭 */
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; background: #E7ECF2; border-radius: 12px; }
+.seg button { height: 38px; border: none; border-radius: 9px; background: none; font-size: 13.5px; font-weight: 600; color: var(--ink-sub); }
+.seg button[aria-selected="true"] { background: #fff; color: var(--accent); box-shadow: 0 1px 3px rgba(21,34,56,.12); }
+.panel { display: none; flex-direction: column; gap: 10px; }
+.panel.on { display: flex; }
+
+.route { padding: 14px 16px; }
+.route h3 { margin: 0 0 10px; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 7px; border-radius: 11px; color: #fff; font-size: 11.5px; font-weight: 700; }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.steps li { position: relative; padding: 0 0 12px 20px; font-size: 13.5px; line-height: 1.5; }
+.steps li:last-child { padding-bottom: 0; }
+.steps li::before { content: ""; position: absolute; left: 4px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: 7.5px; top: 16px; bottom: 2px; width: 1px; background: var(--line-strong); }
+.steps li:last-child::before { background: var(--danger); }
+.steps small { color: var(--ink-sub); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.chip { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
+
+.tip { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; background: #FFF8E6; border: 1px solid #F3DFA8; font-size: 12.5px; line-height: 1.5; color: #6B4E00; }
+
+.foot { text-align: center; font-size: 11.5px; color: #8592A3; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+  background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 10px; font-size: 13px;
+  opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.toast.on { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>오시는 길</h1>
+    <p>지하철 · 버스 · 자가용으로 오시는 방법이에요</p>
+  </div>
+
+  <!-- 샘플 약도 (실제 지도 API 아님) -->
+  <div class="map" role="img" aria-label="병원 위치 약도">
+    <svg class="bg" viewBox="0 0 480 190" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M330 0 C360 60 420 70 480 60 V190 H300 C310 140 300 90 330 0Z" fill="#D9E8D2"/>
+      <rect x="30" y="20" width="70" height="50" rx="5" fill="#E2E5EA"/>
+      <rect x="120" y="16" width="60" height="60" rx="5" fill="#E2E5EA"/>
+      <rect x="30" y="120" width="90" height="50" rx="5" fill="#E2E5EA"/>
+      <rect x="230" y="112" width="70" height="56" rx="8" fill="#F3D9CF"/>
+      <path d="M0 95 H480" stroke="#fff" stroke-width="16"/>
+      <path d="M0 95 H480" stroke="#F5C84C" stroke-width="2" stroke-dasharray="12 9"/>
+      <path d="M205 0 V190" stroke="#fff" stroke-width="12"/>
+      <circle cx="150" cy="95" r="9" fill="#fff" stroke="#3AA655" stroke-width="3"/>
+      <text x="150" y="122" text-anchor="middle" font-size="11" fill="#3A6B4A" font-weight="700" font-family="IBM Plex Sans KR">샘플역</text>
+    </svg>
+    <span class="tag">우리팀 챗봇 POC 병원</span>
+    <svg class="pin" viewBox="0 0 30 42" aria-hidden="true"><path d="M15 0C6.7 0 0 6.7 0 15c0 11 15 27 15 27s15-16 15-27C30 6.7 23.3 0 15 0z" fill="#B42318"/><circle cx="15" cy="15" r="6" fill="#fff"/></svg>
+  </div>
+
+  <section class="card addr" aria-label="주소">
+    <div class="row">
+      <span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></span>
+      <div>
+        <strong id="addr">샘플시 샘플구 샘플로 123</strong>
+        <span>(00000) 본관 1층 정문</span>
+      </div>
+    </div>
+    <div class="btns">
+      <button type="button" class="btn" id="copy">주소 복사</button>
+      <button type="button" class="btn fill" data-soon="지도 앱 연결">지도 앱으로 보기</button>
+    </div>
+  </section>
+
+  <div class="calls">
+    <a class="card call" href="tel:0000-0000"><em>예약 · 교통안내</em><b>0000-0000</b></a>
+    <a class="card call er" href="tel:0000-1119"><em>응급의료센터</em><b>0000-1119</b></a>
+  </div>
+
+  <div class="seg" role="tablist" aria-label="교통수단">
+    <button role="tab" aria-selected="true" data-t="subway">지하철</button>
+    <button role="tab" aria-selected="false" data-t="bus">버스</button>
+    <button role="tab" aria-selected="false" data-t="car">자가용</button>
+  </div>
+
+  <div class="panel on" id="subway" role="tabpanel">
+    <section class="card route">
+      <h3><span class="badge" style="background:#3AA655">2</span>2호선 샘플역</h3>
+      <ol class="steps">
+        <li>샘플역 <b>2번 출구</b></li>
+        <li>큰길 따라 직진 <small>· 도보 8분</small></li>
+        <li>병원 정문 도착</li>
+      </ol>
+    </section>
+    <section class="card route">
+      <h3><span class="badge" style="background:#0052A4">1</span>1호선 샘플대입구역</h3>
+      <ol class="steps">
+        <li>샘플대입구역 <b>2번 출구</b></li>
+        <li>버스 환승 <div class="chips"><span class="chip">간선 100</span></div></li>
+        <li>샘플초등학교 하차 <small>· 도보 3분</small></li>
+        <li>병원 정문 도착</li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="panel" id="bus" role="tabpanel">
+    <section class="card route">
+      <h3>병원 앞 정류장</h3>
+      <div class="chips"><span class="chip">간선 10</span><span class="chip">간선 20</span><span class="chip">지선 200</span><span class="chip">지선 201</span></div>
+    </section>
+    <section class="card route">
+      <h3>샘플초등학교 정류장 <small style="font-weight:500;color:var(--ink-sub)">· 도보 3분</small></h3>
+      <div class="chips"><span class="chip">간선 1</span><span class="chip">간선 30</span><span class="chip">간선 100</span></div>
+    </section>
+    <section class="card route">
+      <h3>샘플역 정류장</h3>
+      <ol class="steps">
+        <li>간선 40 · 50 승차</li>
+        <li>샘플경찰서 정류소에서 <b>지선 200</b> 환승</li>
+        <li>병원 앞 하차</li>
+      </ol>
+    </section>
+  </div>
+
+  <div class="panel" id="car" role="tabpanel">
+    <section class="card route">
+      <h3>고속도로 이용 시</h3>
+      <ol class="steps">
+        <li>샘플고속도로 <b>샘플IC</b></li>
+        <li>샘플로 방면 우회전 후 약 3km</li>
+        <li>병원 본관 주차장 입구</li>
+      </ol>
+    </section>
+    <section class="card route">
+      <h3>주차 안내</h3>
+      <ol class="steps">
+        <li>본관 지하 1~3층 주차장</li>
+        <li>외래 진료 고객 <b>2시간 무료</b> <small>· 원무과 등록</small></li>
+      </ol>
+    </section>
+    <div class="tip">💡 내비게이션에서 "샘플로 123"으로 검색하세요.</div>
+  </div>
+
+  <p class="foot">샘플 화면 · 주소, 노선, 전화번호는 가상 데이터입니다</p>
+</div>
+<div class="toast" role="status" id="toast"></div>
+
+<script>
+  if (window.self !== window.top) document.documentElement.classList.add('embedded');
+
+  const toast = (msg) => {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('on');
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(() => t.classList.remove('on'), 1800);
+  };
+
+  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+    document.querySelectorAll('.panel').forEach((p) => p.classList.toggle('on', p.id === b.dataset.t));
+  }));
+
+  document.getElementById('copy').addEventListener('click', async () => {
+    const text = document.getElementById('addr').textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      toast('주소를 복사했어요');
+    } catch (err) {
+      console.warn('클립보드 복사 실패', err);
+      toast('복사할 수 없어요. 주소를 길게 눌러 복사해 주세요');
+    }
+  });
+
+  document.querySelectorAll('[data-soon]').forEach((b) =>
+    b.addEventListener('click', () => toast(`'${b.dataset.soon}'은 준비중입니다`)));
+</script>
+</body>
+</html>

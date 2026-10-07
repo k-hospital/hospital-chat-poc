@@ -25,6 +25,12 @@
 .brand { display: flex; align-items: center; gap: 8px; }
 .hospital { font-size: 19px; font-weight: 700; letter-spacing: -0.4px; }
 .badge { font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 3px 7px; }
+.headerActions { display: flex; align-items: center; gap: 6px; }
+.settingsBtn {
+  width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 22px; background: #fff;
+  color: var(--ink-sub); display: flex; align-items: center; justify-content: center;
+}
+.settingsBtn:hover { color: var(--accent); border-color: var(--accent); }
 .agentBtn {
   display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px;
   border: 1.5px solid var(--accent); border-radius: 22px; background: #fff;
@@ -115,5 +121,17 @@
 .sendBtn { background: var(--accent); color: #fff; }
 .sendBtn:disabled { opacity: .45; cursor: default; }
 .srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* 연결 주소 미등록 기능: 아이콘을 회색으로 */
+.muted .tileIcon { background: #EEF0F3; color: #A3ACB9; }
+.hero.muted { background: #A7B1BF; }
+.hero.muted .heroEyebrow, .hero.muted .heroDesc { color: #EEF1F5; }
+.hero.muted .heroCta { color: #7A8596; }
+.hero.muted .heroIcon { background: rgba(255,255,255,.18); color: rgba(255,255,255,.75); }
+.agentBtn.muted { border-color: #C9D0DA; color: #8592A3; background: #F7F8FA; }
+.agentBtn.muted svg { color: #A3ACB9; }
+.chip.muted { color: #8592A3; }
+.chip.muted .lock { color: #B4BCC7; }
+.night button.muted { color: #8592A3; }
 
 @media (prefers-reduced-motion: reduce) { .screen * { transition: none !important; } }

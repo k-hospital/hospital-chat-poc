@@ -2,15 +2,20 @@ import { useState, type FormEvent } from 'react';
 import { Icon } from './icons';
 import type { ChatConfig, MainScreenHandlers, MenuItem } from './types';
 import styles from './MainScreen.module.css';
+import { AGENT_KEY, CALLBACK_KEY } from '../settings/linkStore';
 
 const DEFAULT_DISCLAIMER = 'AI 안내는 참고용이며 진단이 아닙니다';
 
 const byOrder = (items: MenuItem[]) =>
   items.filter((i) => i.visible).sort((a, b) => a.order - b.order);
 
-export function MainScreen({ config, handlers }: { config: ChatConfig; handlers: MainScreenHandlers }) {
+// isLinked: 연결 주소가 등록된 기능인지 — 미등록이면 아이콘을 회색으로 표시
+export function MainScreen({ config, handlers, isLinked }: {
+  config: ChatConfig; handlers: MainScreenHandlers; isLinked: (key: string) => boolean;
+}) {
   const [text, setText] = useState('');
   const day = config.isOperatingHours;
+  const muted = (key: string) => (isLinked(key) ? '' : ` ${styles.muted}`);
   const tiles = byOrder(config.tiles);
   const faqs = byOrder(config.faqs);
   // 면책 문구는 관리자가 비워도 기본 문구로 강제 노출
@@ -31,15 +36,20 @@ export function MainScreen({ config, handlers }: { config: ChatConfig; handlers:
           <span className={styles.hospital}>{config.hospitalName}</span>
           <span className={styles.badge}>AI 상담</span>
         </div>
-        {day ? (
-          <button type="button" className={styles.agentBtn} onClick={handlers.onAgent}>
-            <Icon name="headset" size={16} strokeWidth={2} /> 상담원 연결
+        <div className={styles.headerActions}>
+          {day ? (
+            <button type="button" className={styles.agentBtn + muted(AGENT_KEY)} onClick={handlers.onAgent}>
+              <Icon name="headset" size={16} strokeWidth={2} /> 상담원 연결
+            </button>
+          ) : (
+            <button type="button" className={styles.agentBtn + muted(CALLBACK_KEY)} onClick={handlers.onCallback}>
+              <Icon name="phone" size={16} strokeWidth={2} /> 콜백 요청
+            </button>
+          )}
+          <button type="button" className={styles.settingsBtn} onClick={handlers.onSettings} aria-label="설정">
+            <Icon name="gear" size={20} strokeWidth={1.8} />
           </button>
-        ) : (
-          <button type="button" className={styles.agentBtn} onClick={handlers.onCallback}>
-            <Icon name="phone" size={16} strokeWidth={2} /> 콜백 요청
-          </button>
-        )}
+        </div>
       </header>
 
       <main className={styles.body}>
@@ -49,7 +59,7 @@ export function MainScreen({ config, handlers }: { config: ChatConfig; handlers:
         </div>
 
         {day ? (
-          <button type="button" className={styles.hero}
+          <button type="button" className={styles.hero + muted(config.hero.intent)}
             onClick={() => handlers.onAction({ intent: config.hero.intent, label: config.hero.title, requiresAuth: false })}>
             <span className={styles.heroText}>
               <span className={styles.heroEyebrow}>{config.hero.eyebrow}</span>
@@ -63,14 +73,14 @@ export function MainScreen({ config, handlers }: { config: ChatConfig; handlers:
           <section className={styles.night} aria-label="운영시간 안내">
             <div className={styles.nightHead}><Icon name="moon" size={22} /> 지금은 상담원 운영시간이 아니에요</div>
             <p>상담원 운영: {config.operatingHoursText}<br />예약 · 안내는 지금도 AI로 이용할 수 있고,<br />상담원 문의는 콜백으로 접수돼요.</p>
-            <button type="button" onClick={handlers.onCallback}>상담원 콜백 요청하기</button>
+            <button type="button" className={muted(CALLBACK_KEY).trim() || undefined} onClick={handlers.onCallback}>상담원 콜백 요청하기</button>
           </section>
         )}
 
         <div className={day ? styles.tiles : styles.tilesCompact}>
           {(day ? tiles : [{ ...config.hero, id: 'hero', label: config.hero.title, icon: 'calendar' as const, requiresAuth: false, order: 0, visible: true }, ...tiles.slice(0, 3)])
             .map((t) => (
-              <button key={t.id} type="button" className={styles.tile}
+              <button key={t.id} type="button" className={styles.tile + muted(t.intent)}
                 onClick={() => handlers.onAction({ intent: t.intent, label: t.label, requiresAuth: t.requiresAuth })}>
                 <span className={styles.tileIcon}><Icon name={t.icon} /></span>
                 <span className={styles.tileText}>
@@ -86,7 +96,7 @@ export function MainScreen({ config, handlers }: { config: ChatConfig; handlers:
             <span className={styles.faqTitle}>자주 찾는 질문</span>
             <div className={styles.chips}>
               {faqs.map((f) => (
-                <button key={f.id} type="button" className={styles.chip}
+                <button key={f.id} type="button" className={styles.chip + muted(f.intent)}
                   onClick={() => handlers.onAction({ intent: f.intent, label: f.label, requiresAuth: f.requiresAuth })}>
                   {f.label}
                   {f.requiresAuth && <Icon name="lock" size={13} strokeWidth={2.2} className={styles.lock} />}
