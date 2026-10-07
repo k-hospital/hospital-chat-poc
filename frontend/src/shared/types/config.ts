@@ -1,4 +1,4 @@
-// /v1/config 응답 타입 — 백엔드 Pydantic 스키마(app/schemas/config.py)와 1:1 대응
+// /v1/config 응답 타입 — 백엔드 Pydantic 스키마(app/features/config/schemas.py)와 1:1 대응
 export type IconName = 'calendar' | 'clipboard' | 'stethoscope' | 'pin' | 'book' | 'search';
 
 export interface MenuItem {

@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react';
-import { Icon } from '../home/icons';
-import type { ChatConfig } from '../home/types';
-import { AGENT_KEY, CALLBACK_KEY, isValidUrl, type LinkMap } from './linkStore';
+import { Icon } from '../../shared/ui/icons';
+import type { ChatConfig } from '../../shared/types/config';
+import { AGENT_KEY, CALLBACK_KEY, isValidUrl, type LinkMap } from '../../shared/links/linkStore';
 import styles from './SettingsScreen.module.css';
 
 interface Row { key: string; label: string; hint: string }

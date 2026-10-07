@@ -1,4 +1,4 @@
-import type { ChatConfig } from './types';
+import type { ChatConfig } from '../../shared/types/config';
 
 // 백엔드 연결 전 화면 확인용 목업
 export const mockConfig: ChatConfig = {

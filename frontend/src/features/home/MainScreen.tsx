@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from 'react';
-import { Icon } from './icons';
-import type { ChatConfig, MainScreenHandlers, MenuItem } from './types';
+import { Icon } from '../../shared/ui/icons';
+import type { ChatConfig, MainScreenHandlers, MenuItem } from '../../shared/types/config';
 import styles from './MainScreen.module.css';
-import { AGENT_KEY, CALLBACK_KEY } from '../settings/linkStore';
+import { AGENT_KEY, CALLBACK_KEY } from '../../shared/links/linkStore';
 
 const DEFAULT_DISCLAIMER = 'AI 안내는 참고용이며 진단이 아닙니다';
 

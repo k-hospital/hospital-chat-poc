@@ -3,7 +3,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import config
+from app.features.config.router import router as config_router
 
 app = FastAPI(title="Hospital Chat POC")
 
@@ -11,7 +11,7 @@ app = FastAPI(title="Hospital Chat POC")
 origins = [o for o in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",") if o]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["*"], allow_headers=["*"])
 
-app.include_router(config.router)
+app.include_router(config_router)
 
 
 @app.get("/health")
