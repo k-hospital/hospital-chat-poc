@@ -2,7 +2,7 @@ import type { ChatConfig } from '../../shared/types/config';
 
 // 백엔드 연결 전 화면 확인용 목업
 export const mockConfig: ChatConfig = {
-  hospitalName: 'OO병원',
+  hospitalName: '우리팀 챗봇 POC',
   isOperatingHours: true,
   operatingHoursText: '평일 08:30 – 17:30',
   hero: {
