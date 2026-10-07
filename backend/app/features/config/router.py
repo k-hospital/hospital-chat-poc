@@ -26,7 +26,7 @@ async def get_config() -> ChatConfig:
     # TODO: 메뉴/문구는 관리자 콘솔이 저장한 DB 값으로 교체
     disclaimer = ""  # DB 값
     return ChatConfig(
-        hospital_name="OO병원",
+        hospital_name="우리팀 챗봇 POC",
         is_operating_hours=is_operating_hours(),
         operating_hours_text="평일 08:30 – 17:30",
         hero=HeroConfig(
