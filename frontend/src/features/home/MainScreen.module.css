@@ -21,17 +21,18 @@
   outline: 2px solid var(--accent); outline-offset: 2px;
 }
 
-.header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 10px; }
-.brand { display: flex; align-items: center; gap: 8px; }
-.hospital { font-size: 19px; font-weight: 700; letter-spacing: -0.4px; }
-.badge { font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 3px 7px; }
-.headerActions { display: flex; align-items: center; gap: 6px; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 18px 20px 10px; }
+.brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.hospital { font-size: 19px; font-weight: 700; letter-spacing: -0.4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.badge { flex-shrink: 0; white-space: nowrap; font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 3px 7px; }
+.headerActions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .settingsBtn {
   width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 22px; background: #fff;
   color: var(--ink-sub); display: flex; align-items: center; justify-content: center;
 }
 .settingsBtn:hover { color: var(--accent); border-color: var(--accent); }
 .agentBtn {
+  white-space: nowrap;
   display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px;
   border: 1.5px solid var(--accent); border-radius: 22px; background: #fff;
   color: var(--accent); font-size: 13px; font-weight: 600;
@@ -133,5 +134,8 @@
 .chip.muted { color: #8592A3; }
 .chip.muted .lock { color: #B4BCC7; }
 .night button.muted { color: #8592A3; }
+
+/* 좁은 화면: 병원 이름이 잘리지 않도록 배지 숨김 */
+@media (max-width: 400px) { .badge { display: none; } }
 
 @media (prefers-reduced-motion: reduce) { .screen * { transition: none !important; } }
