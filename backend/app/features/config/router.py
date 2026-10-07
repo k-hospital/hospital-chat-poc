@@ -3,7 +3,7 @@ from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter
 
-from app.schemas.config import ChatConfig, HeroConfig, MenuItem
+from app.features.config.schemas import ChatConfig, HeroConfig, MenuItem
 
 router = APIRouter(prefix="/v1", tags=["config"])
 

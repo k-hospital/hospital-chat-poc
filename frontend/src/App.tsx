@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { MainScreen } from './features/home/MainScreen';
 import { mockConfig } from './features/home/mockConfig';
-import type { ChatConfig } from './features/home/types';
+import type { ChatConfig } from './shared/types/config';
 import { PageViewer } from './features/page/PageViewer';
 import { SettingsScreen } from './features/settings/SettingsScreen';
-import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './features/settings/linkStore';
+import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './shared/links/linkStore';
 
 // 백엔드 주소: 배포 시 VITE_API_BASE 환경변수로 지정 (비우면 같은 도메인의 /v1)
 const API_BASE = import.meta.env.VITE_API_BASE ?? '';

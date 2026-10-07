@@ -1,4 +1,4 @@
-import { Icon } from '../home/icons';
+import { Icon } from '../../shared/ui/icons';
 import styles from './PageViewer.module.css';
 
 // 등록된 연결 주소를 챗봇 화면 안에서 보여줌 (뒤로 가기 시 메인으로 복귀)
