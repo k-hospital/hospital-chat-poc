@@ -47,6 +47,22 @@ describe('routeQuestion', () => {
     expect(intentOf(text)).toBe(intent);
   });
 
+  it.each(['병원 어떻게 가요?', '병원 가는 방법', '거기 가려면 어떻게 해', '길 좀 알려줘', '응급실 위치 알려줘'])(
+    '오시는 길 일상 표현: %s', (text) => {
+      expect(intentOf(text)).toBe('info.directions');
+    },
+  );
+
+  it('교통수단을 말하면 오시는 길의 해당 탭 주제로 판별', () => {
+    expect(routeQuestion('지하철로 가는 방법')).toMatchObject({ intent: 'info.directions', topic: 'subway' });
+    expect(routeQuestion('버스 노선 알려주세요')).toMatchObject({ intent: 'info.directions', topic: 'bus' });
+    expect(routeQuestion('자가용으로 가는 방법')).toMatchObject({ intent: 'info.directions', topic: 'car' });
+  });
+
+  it("'주차'는 교통수단(차)보다 주차 안내가 우선", () => {
+    expect(intentOf('주차 요금은요?')).toBe('faq.parking');
+  });
+
   it("'배'가 들어가도 증상이 아닌 말은 증상으로 보지 않음", () => {
     expect(intentOf('배송 문의')).toBe('unknown');
     expect(intentOf('배우고 싶어요')).toBe('unknown');

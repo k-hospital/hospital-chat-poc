@@ -2,19 +2,22 @@
 // 백엔드 AI(POST /v1/chat/messages)가 준비되면 routeQuestion 내부만 교체한다.
 
 export type SymptomTopic = 'digestive' | 'headache' | 'respiratory';
+// 오시는 길 화면의 탭 (지하철 / 버스 / 자가용)
+export type DirectionsTopic = 'subway' | 'bus' | 'car';
+export type Topic = SymptomTopic | DirectionsTopic;
 
 export const SYMPTOM_INTENT = 'symptom.guide';
 
 export type RouteResult =
   | { kind: 'emergency' }
-  | { kind: 'intent'; intent: string; label: string; reply: string; topic?: SymptomTopic }
+  | { kind: 'intent'; intent: string; label: string; reply: string; topic?: Topic }
   | { kind: 'unknown' };
 
 interface Rule {
   intent: string;
   label: string;
   reply: string;
-  topic?: SymptomTopic;
+  topic?: Topic;
   patterns: RegExp[];
 }
 
@@ -67,10 +70,29 @@ const RULES: Rule[] = [
     reply: '주차 안내로 이동할게요',
     patterns: [/주차/],
   },
+  // 교통수단을 말하면 오시는 길의 해당 탭으로 ('주차'는 위의 주차 안내가 먼저 잡는다)
+  {
+    intent: 'info.directions', label: '오시는 길', topic: 'subway',
+    reply: '지하철로 오시는 길을 보여 드릴게요',
+    patterns: [/지하철|전철|\d\s*호선|역에서/],
+  },
+  {
+    intent: 'info.directions', label: '오시는 길', topic: 'bus',
+    reply: '버스로 오시는 길을 보여 드릴게요',
+    patterns: [/버스|정류장|노선/],
+  },
+  {
+    intent: 'info.directions', label: '오시는 길', topic: 'car',
+    reply: '자가용으로 오시는 길을 보여 드릴게요',
+    patterns: [/자가용|차로|차\s*타고|운전|내비|고속도로/],
+  },
   {
     intent: 'info.directions', label: '오시는 길',
     reply: '오시는 길로 이동할게요',
-    patterns: [/오시는\s*길|오는\s*길|가는\s*길|찾아\s*가|위치|어디\s*(에|야|있)|주소|지하철|버스|교통/],
+    patterns: [
+      /오시는\s*길|오는\s*길|가는\s*길|찾아\s*(가|오)|위치|어디\s*(에|야|있)|주소|교통/,
+      /어떻게\s*(가|와|오)|(가는|오는)\s*방법|(가|오)려면|길\s*(좀)?\s*알려/,
+    ],
   },
   {
     intent: 'faq.hours', label: '진료 시간',
