@@ -76,7 +76,8 @@ export default function App() {
       setEcho({ question, tone: 'normal', reply: `'${r.label}' 서비스는 준비중입니다.` });
       return;
     }
-    setEcho({ question, tone: 'normal', reply: r.reply });
+    // 이동한 화면 상단에 입력 내용이 표시되므로 말풍선은 닫는다 (이동하지 않는 경우에만 말풍선 안내)
+    setEcho(null);
     setView('home');
     setPage({ url, title: r.label, query: { text: question, topic: r.topic } });
   };
