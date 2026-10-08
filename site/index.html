@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>우리팀 챗봇 POC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#073684; --navy-d:#0b2350; --brown:#8b6b57; --brown-l:#997865;
+  --gray-bg:#f9f9f9; --blue-bg:#eff5ff; --text:#111; --sub:#555; --line:#e3e3e3;
+  --header-h:126px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{font-family:Poppins,'Noto Sans KR',sans-serif;color:var(--text);background:#fff;font-weight:500}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wsize{max-width:1400px;margin:0 auto;padding:0 30px}
+.snap{scroll-snap-align:start;min-height:100vh;padding-top:var(--header-h);display:flex;align-items:center}
+.snap > .wsize{width:100%}
+
+/* ---------- Header ---------- */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.top_head{height:40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee}
+.top_head .left{display:flex}
+.top_head .left a{font-size:14px;color:#444;padding:0 18px;border-left:1px solid #ddd}
+.top_head .left li:first-child a{padding-left:0;border:0}
+.top_head .right{display:flex;gap:10px;align-items:center}
+.sns-dot{width:18px;height:18px;border-radius:4px;display:inline-block}
+.lang{background:var(--navy);color:#fff;font-size:11px;padding:5px 12px;border-radius:3px;font-weight:600}
+.menuwrap{height:85px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .mark{width:46px;height:52px;background:var(--navy);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.logo .name small{display:block;font-size:12px;color:#333}
+.logo .name b{font-size:22px;font-weight:900;color:var(--navy-d);letter-spacing:-.5px}
+.logo .name em{display:block;font-style:normal;font-size:9px;color:#888;letter-spacing:.3px}
+.gnb{display:flex;gap:110px}
+.gnb a{font-size:18px;font-weight:700}
+.gnb a:hover{color:var(--navy)}
+.util{display:flex;gap:22px;align-items:center}
+.util button{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;font-size:11px;font-family:inherit}
+.util svg{width:26px;height:26px;stroke:#222;fill:none;stroke-width:2}
+
+/* ---------- Hero ---------- */
+#hero{padding-top:var(--header-h);flex-direction:column;align-items:stretch;padding-bottom:0}
+.visual{position:relative;flex:1;min-height:520px;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s;display:flex;align-items:center}
+.slide.on{opacity:1}
+.slide .txt{position:relative;padding-left:60px;color:#fff;max-width:760px}
+.slide .btit{font-size:26px;font-weight:500;margin-bottom:18px}
+.slide .btit strong{font-weight:700;border-bottom:2px solid #fff}
+.slide .tit{font-size:58px;font-weight:900;line-height:1.2;margin-bottom:26px;letter-spacing:-1px}
+.slide .tit .hl{color:#ffe14d}
+.slide .desc{font-size:19px;line-height:1.6;opacity:.92;margin-bottom:28px}
+.slide .chips{display:flex;flex-wrap:wrap;gap:14px;max-width:620px;margin-bottom:30px}
+.slide .chips span{width:190px;padding:14px 0;text-align:center;border:1px solid rgba(255,255,255,.5);border-radius:40px;font-size:18px;backdrop-filter:blur(4px);background:rgba(255,255,255,.08)}
+.btn-more{display:inline-block;width:130px;height:40px;line-height:38px;text-align:center;border:1px solid currentColor;border-radius:5px;font-size:16px}
+.slide.s1{background:linear-gradient(110deg,#1d3b3c 0%,#2d494a 45%,#6d8a86 100%)}
+.slide.s2{background:linear-gradient(110deg,#ffe7cc 0%,#ffecd4 50%,#e9c7a3 100%)}
+.slide.s2 .txt{color:#111}
+.slide.s2 .tit{color:var(--navy)}
+.slide.s2 .desc{color:#444}
+.slide.s3{background:linear-gradient(110deg,#0d1d4a 0%,#1e2c5a 50%,#3b5ea8 100%)}
+.circle{position:absolute;right:-90px;top:-40px;width:134px;height:134px;border-radius:50%;background:#b36638;color:#fff;display:grid;place-items:center;text-align:center;font-size:20px;font-weight:700;line-height:1.3}
+.deco{position:absolute;right:8%;bottom:0;width:38%;height:85%;border-radius:200px 200px 0 0;background:rgba(255,255,255,.12)}
+.deco::after{content:"";position:absolute;left:50%;top:18%;width:42%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:rgba(255,255,255,.18)}
+.slide.s2 .deco{background:rgba(7,54,132,.08)}
+.slide.s2 .deco::after{background:rgba(7,54,132,.1)}
+.vctrl{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;z-index:2}
+.vctrl i{width:10px;height:10px;border-radius:10px;background:rgba(255,255,255,.5);cursor:pointer;transition:.3s}
+.vctrl i.on{width:30px;background:#fff}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;background:none;border:0;color:#fff;font-size:40px;cursor:pointer;padding:10px 20px;opacity:.8}
+.arrow.prev{left:0}.arrow.next{right:0}
+
+.quick{background:#fff;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;padding:28px 60px 30px;border-top:1px solid var(--line)}
+.quick h3{font-size:18px;font-weight:700;line-height:1.35;display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.quick h3 .ico{width:42px;height:42px;border-radius:10px;background:#f1f3f7;display:grid;place-items:center;font-size:22px}
+.qform{display:flex;gap:6px;min-width:0}
+.qform input{width:0}
+.qform input{flex:1;min-width:0;height:44px;border:0;background:#f4f4f4;border-radius:5px;padding:0 12px;font-family:inherit;font-size:14px}
+.qform input:first-child{flex:.6}
+.qform button{width:64px;border:0;border-radius:5px;background:var(--brown);color:#fff;font-weight:700;cursor:pointer;font-family:inherit}
+.qbtns{display:grid;gap:8px}
+.qbtns a{display:block;height:40px;line-height:38px;text-align:center;border:1px solid #333;border-radius:6px;font-size:14px}
+.qbtns a.fill{background:#f6f6f6;border-color:#ccc}
+.qbtns a:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ---------- Common section title ---------- */
+.eyebrow{font-size:15px;font-weight:700;margin-bottom:8px;letter-spacing:.3px}
+.stitle{font-size:32px;font-weight:700;letter-spacing:-.5px}
+.ssub{font-size:17px;color:#333;margin-top:12px;line-height:1.5}
+.allview{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;margin-top:22px;border-bottom:1px solid #111;padding-bottom:2px}
+.tag{display:inline-block;font-size:12px;font-weight:700;color:var(--brown);margin-right:8px}
+.badge{font-size:11px;color:#777;border:1px solid #ddd;border-radius:20px;padding:2px 8px}
+.ph{background:linear-gradient(135deg,#c9d3e2,#9fb0c8);position:relative}
+.ph::after{content:"IMAGE";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.75);font-size:13px;letter-spacing:3px}
+
+/* ---------- Section: News ---------- */
+#news{background:var(--gray-bg)}
+.news_grid{display:grid;grid-template-columns:240px 1fr 280px;gap:30px;align-items:start}
+.masonry{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.mcol{display:flex;flex-direction:column;gap:22px}
+.mcol:nth-child(1){margin-top:130px}
+.card{display:block;background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+.card .cont{padding:22px 20px}
+.card .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.card .title{font-size:19px;font-weight:700;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .date{font-size:13px;color:#999;margin-top:16px}
+.card .ph{height:190px}
+.icon_grid{display:grid;grid-template-columns:1fr 1fr;background:#fff;border-radius:15px;overflow:hidden;margin-bottom:20px}
+.icon_grid a{height:108px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:400;border:1px solid #f0f0f0}
+.icon_grid a span{font-size:26px}
+.icon_grid a:hover{background:var(--blue-bg)}
+.letter{display:block;background:var(--brown-l);color:#fff;border-radius:15px;padding:24px 22px;height:340px;position:relative;overflow:hidden}
+.letter b{font-size:22px;display:block}
+.letter small{font-size:14px;opacity:.85}
+.letter .book{position:absolute;right:30px;bottom:-10px;width:150px;height:200px;background:#fff;border-radius:4px;transform:rotate(6deg);box-shadow:0 10px 20px rgba(0,0,0,.25);padding:14px}
+.letter .book::before{content:"";display:block;height:60%;border-radius:2px;background:linear-gradient(135deg,#d6c3b4,#a68b77)}
+.letter .book::after{content:"NEWSLETTER";display:block;margin-top:10px;font-size:11px;color:#8b6b57;font-weight:700}
+
+/* ---------- Section: Media ---------- */
+.media_head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+.media_head .allview{margin-top:0}
+.video_list{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.video .thumb{height:260px;border-radius:15px;overflow:hidden;position:relative}
+.video .thumb .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.55);z-index:1;display:grid;place-items:center}
+.video .thumb .play::after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.video .title{font-size:18px;font-weight:700;margin-top:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.video .desc{font-size:14px;color:var(--sub);margin-top:8px;line-height:1.5}
+.video:nth-child(1) .ph{background:linear-gradient(135deg,#9db7d9,#46669b)}
+.video:nth-child(2) .ph{background:linear-gradient(135deg,#b4d3c4,#4f8a72)}
+.video:nth-child(3) .ph{background:linear-gradient(135deg,#e2c6a8,#a3764f)}
+
+/* ---------- Section: Board ---------- */
+#board{background:var(--blue-bg)}
+.board_head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+.tabs{display:flex;gap:8px}
+.btab{height:32px;padding:0 18px;border-radius:30px;border:1px solid #ddd;background:#fff;color:#555;font-size:14px;cursor:pointer;font-family:inherit}
+.btab.on{background:#000;border-color:#000;color:#fff;font-weight:700}
+.board_list{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.board_list .card .cont{height:280px;display:flex;flex-direction:column;padding:28px 22px}
+.board_list .card .stxt{font-size:14px;color:var(--sub);line-height:1.5;margin-top:12px;flex:1}
+.board_list .card .date{margin-top:auto}
+.board_list .card.hide{display:none}
+
+/* ---------- Section: SNS ---------- */
+#sns{background:var(--gray-bg)}
+.sns_grid{display:grid;grid-template-columns:210px repeat(3,1fr);gap:30px}
+.sns_grid .stitle span{display:block;font-weight:400}
+.sns_icons{display:flex;gap:10px;margin-top:30px}
+.sns_icons a{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700}
+.feed{background:#fff;border-radius:15px;padding:24px 22px;height:560px;overflow:hidden}
+.feed .sns_tit{font-size:16px;font-weight:600;margin-bottom:14px;text-transform:lowercase}
+.feed li a{display:block;padding:14px 0;border-bottom:1px solid #f0f0f0}
+.feed li .d{font-size:12px;color:#999}
+.feed li .t{font-size:15px;line-height:1.4;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.feed li a:hover .t{color:var(--navy)}
+.insta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.insta div{aspect-ratio:1;border-radius:8px}
+
+/* ---------- Footer ---------- */
+footer{scroll-snap-align:end;background:#24272d;color:#cfd2d8;font-size:14px}
+.fmenu{border-bottom:1px solid #3a3e45}
+.fmenu .wsize{display:flex;justify-content:space-between;align-items:center;height:50px}
+.fmenu .links{display:flex;gap:26px}
+.fmenu .links a{color:#fff;font-size:15px}
+.fmenu .links a.privacy{color:#ffeba7}
+.fsite{background:#33363c;width:270px;height:50px;line-height:50px;padding:0 20px;color:#fff;display:flex;justify-content:space-between}
+.finfo{padding:30px 0 36px}
+.finfo .wsize{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.finfo p{line-height:1.8}
+.finfo .copy{margin-top:10px;color:#888;font-size:13px}
+.award{display:flex;gap:16px}
+.award span{border:1px solid #444;border-radius:6px;padding:8px 14px;font-size:13px;line-height:1.5;height:fit-content}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1200px){
+  .gnb{gap:50px}
+  .news_grid{grid-template-columns:1fr}
+  .board_list{grid-template-columns:repeat(2,1fr)}
+  .sns_grid{grid-template-columns:repeat(3,1fr)}
+  .sns_grid > div:first-child{grid-column:1/-1}
+}
+@media (max-width:900px){
+  :root{--header-h:64px}
+  html{scroll-snap-type:none}
+  .snap{min-height:auto;padding-top:70px;padding-bottom:70px}
+  #hero{padding-bottom:0}
+  .top_head,.gnb{display:none}
+  .menuwrap{height:64px}
+  .wsize{padding:0 16px}
+  .visual{min-height:560px}
+  .slide .txt{padding:0 16px}
+  .slide .tit{font-size:36px}
+  .slide .btit{font-size:18px}
+  .slide .chips span{width:calc(50% - 7px);font-size:15px}
+  .circle{right:0;top:-150px;width:100px;height:100px;font-size:15px}
+  .quick{grid-template-columns:1fr;gap:26px;padding:24px 16px}
+  .masonry{grid-template-columns:1fr}
+  .mcol:nth-child(1){margin-top:0}
+  .video_list,.board_list,.sns_grid{grid-template-columns:1fr}
+  .board_head,.media_head{flex-direction:column;align-items:flex-start;gap:20px}
+  .tabs{flex-wrap:wrap}
+  .feed{height:auto}
+  .fmenu .wsize{flex-direction:column;height:auto;padding:16px;gap:14px;align-items:flex-start}
+  .fmenu .links{flex-wrap:wrap;gap:12px 18px}
+}
+
+/* ---------- Chatbot widget ---------- */
+.chat-fab{position:fixed;right:28px;bottom:28px;z-index:100;height:60px;padding:0 24px 0 18px;border:0;border-radius:30px;background:var(--navy);color:#fff;font-family:inherit;font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 8px 24px rgba(7,54,132,.35);transition:transform .2s}
+.chat-fab:hover{transform:translateY(-3px)}
+.chat-fab svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2}
+.chat-panel{position:fixed;right:28px;bottom:104px;z-index:100;width:420px;height:min(680px,calc(100vh - 140px));background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.22);display:flex;flex-direction:column;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .25s,transform .25s}
+.chat-panel.open{opacity:1;transform:none;pointer-events:auto}
+.chat-panel .bar{height:50px;flex:none;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 18px;font-weight:700;font-size:15px}
+.chat-panel .bar div{display:flex;gap:4px}
+.chat-panel .bar a,.chat-panel .bar button{background:none;border:0;color:#fff;font-size:13px;cursor:pointer;padding:6px 10px;border-radius:6px;font-family:inherit}
+.chat-panel .bar a:hover,.chat-panel .bar button:hover{background:rgba(255,255,255,.15)}
+.chat-panel iframe{flex:1;width:100%;border:0}
+/* 바를 잡고 끌어서 이동 (PC 전용) */
+.chat-panel .bar{cursor:move;touch-action:none;user-select:none}
+.chat-panel .bar a,.chat-panel .bar button{cursor:pointer}
+.chat-panel .bar .grip{display:inline-block;margin-right:8px;opacity:.6;letter-spacing:-2px}
+.chat-panel.dragging{transition:none;box-shadow:0 22px 56px rgba(0,0,0,.3)}
+.chat-panel.dragging iframe{pointer-events:none}
+@media (max-width:900px){
+  .chat-fab{right:16px;bottom:16px}
+  .chat-panel{inset:0;width:auto;height:auto;border-radius:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wsize top_head">
+    <ul class="left">
+      <li><a href="#">병원소개</a></li>
+      <li><a href="#">전문센터</a></li>
+      <li><a href="#">건강검진센터</a></li>
+      <li><a href="#">진료협력센터</a></li>
+    </ul>
+    <div class="right">
+      <span class="sns-dot" style="background:#19ce60" title="블로그"></span>
+      <span class="sns-dot" style="background:#ff2a2a" title="유튜브"></span>
+      <span class="sns-dot" style="background:linear-gradient(45deg,#f9a03f,#d6249f,#285aeb)" title="인스타그램"></span>
+      <span class="lang">LANGUAGE ▾</span>
+    </div>
+  </div>
+  <div class="wsize menuwrap">
+    <a class="logo" href="#">
+      <div class="mark">3팀</div>
+      <div class="name"><small>3팀</small><b>우리팀 챗봇 POC</b><em>TEAM 3 CHATBOT POC</em></div>
+    </a>
+    <nav class="gnb">
+      <a href="#">진료ㆍ예약</a>
+      <a href="#">사랑ㆍ건강ㆍ소통</a>
+      <a href="#">병원안내</a>
+      <a href="#">나의 차트</a>
+    </nav>
+    <div class="util">
+      <button aria-label="로그인"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>로그인</button>
+      <button aria-label="검색"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+      <button aria-label="전체메뉴"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 1. Hero ===== -->
+<section id="hero" class="snap">
+  <div class="visual">
+    <div class="slide s1 on">
+      <div class="deco"></div>
+      <div class="txt">
+        <p class="btit">지역 주민이 가장 많이 찾는 <strong>5대 질환</strong></p>
+        <p class="tit">적정성 평가<br><span class="hl">최우수</span> 등급</p>
+        <div class="chips"><span>위암</span><span>대장암</span><span>폐렴</span><span>뇌졸중</span><span>심혈관질환</span></div>
+      </div>
+    </div>
+    <div class="slide s2">
+      <div class="deco"></div>
+      <div class="txt">
+        <div style="position:relative">
+          <p class="tit">로봇수술 센터<br>새롭게 문을 엽니다</p>
+          <p class="circle">11.1<br>진료개시</p>
+        </div>
+        <p class="desc">최신 장비와 전문 의료진이 함께하는<br>정밀하고 안전한 수술 환경</p>
+        <a class="btn-more" href="#">자세히보기</a>
+      </div>
+    </div>
+    <div class="slide s3">
+      <div class="deco"></div>
+      <div class="txt">
+        <p class="btit">응급의료센터</p>
+        <p class="tit">24시간 365일,<br><span class="hl">골든타임</span>을 지킵니다</p>
+        <p class="desc">뇌·심혈관 응급 환자를 위한 신속 대응 시스템</p>
+        <a class="btn-more" href="#">자세히보기</a>
+      </div>
+    </div>
+    <button class="arrow prev" aria-label="이전">‹</button>
+    <button class="arrow next" aria-label="다음">›</button>
+    <div class="vctrl"></div>
+  </div>
+
+  <div class="quick">
+    <div>
+      <h3><span class="ico">📝</span>협력기관<br>상담 예약</h3>
+      <form class="qform" onsubmit="return false"><input placeholder="이름"><input placeholder="010-0000-0000"><button>예약</button></form>
+    </div>
+    <div>
+      <h3><span class="ico">👩‍⚕️</span>첫 진료 고객<br>상담 예약</h3>
+      <form class="qform" onsubmit="return false"><input placeholder="이름"><input placeholder="010-0000-0000"><button>예약</button></form>
+    </div>
+    <div>
+      <h3>진료예약</h3>
+      <div class="qbtns"><a href="#">인터넷 진료예약</a><a class="fill" href="#">전화예약 0000-0000</a></div>
+    </div>
+    <div>
+      <h3>건강검진</h3>
+      <div class="qbtns"><a href="#">종합 · 국가 · 특수검진</a><a class="fill" href="#">전화예약 / 상담</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. News ===== -->
+<section id="news" class="snap">
+  <div class="wsize news_grid">
+    <div>
+      <p class="stitle">사랑ㆍ건강ㆍ소통</p>
+      <p class="ssub">나눔과 섬김의 병원 이야기</p>
+      <a class="allview" href="#">전체보기 →</a>
+    </div>
+    <div class="masonry">
+      <div class="mcol">
+        <a class="card" href="#"><div class="cont"><div class="head"><span class="tag">소식/공지</span><span class="badge">소식</span></div><p class="title">세계 심장의 날 맞아 지역 주민 혈압 관리 캠페인 진행</p><p class="date">26-10-02</p></div><div class="ph"></div></a>
+      </div>
+      <div class="mcol">
+        <a class="card" href="#"><div class="cont"><div class="head"><span class="tag">소식/공지</span><span class="badge">소식</span></div><p class="title">해외 의료기관과 디지털 헬스케어 협력 협약 체결</p><p class="date">26-10-02</p></div><div class="ph"></div></a>
+        <a class="card" href="#"><div class="cont"><div class="head"><span class="tag">언론보도</span><span class="badge">기사</span></div><p class="title">척추 MRI 대규모 분석 연구 결과 국제 학술지 게재</p><p class="date">26-09-30</p></div></a>
+      </div>
+      <div class="mcol">
+        <a class="card" href="#"><div class="cont"><div class="head"><span class="tag">언론보도</span><span class="badge">기사</span></div><p class="title">심혈관질환 환자 대상 가정용 혈압계 지원 사업</p><p class="date">26-09-29</p></div></a>
+        <a class="card" href="#"><div class="cont"><div class="head"><span class="tag">언론보도</span><span class="badge">기사</span></div><p class="title">국제환자 이송 체계 구축으로 글로벌 진료 확대</p><p class="date">26-09-28</p></div><div class="ph"></div></a>
+      </div>
+    </div>
+    <div>
+      <div class="icon_grid">
+        <a href="#"><span>🤝</span>자원봉사</a>
+        <a href="#"><span>🕊️</span>호스피스</a>
+        <a href="#"><span>💙</span>건강나눔</a>
+        <a href="#"><span>📖</span>건강정보</a>
+      </div>
+      <a class="letter" href="#"><b>병원소식지</b><small>vol.12 바로보기 →</small><div class="book"></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3. Media ===== -->
+<section id="media" class="snap">
+  <div class="wsize">
+    <div class="media_head">
+      <div><p class="eyebrow">MEDIA CENTER</p><p class="stitle">메디컬 TV</p></div>
+      <a class="allview" href="#">전체보기 →</a>
+    </div>
+    <div class="video_list">
+      <a class="video" href="#"><div class="thumb ph"><span class="play"></span></div><p class="title">환자안전 주간 행사 현장 스케치</p><p class="desc">환자와 직원이 함께 만든 안전한 병원 문화</p></a>
+      <a class="video" href="#"><div class="thumb ph"><span class="play"></span></div><p class="title">혈관 질환은 전신 질환이다? 전문의가 알려드립니다</p><p class="desc">신경외과 전문의의 건강 강좌</p></a>
+      <a class="video" href="#"><div class="thumb ph"><span class="play"></span></div><p class="title">해외 의료인 연수 프로그램 수료식</p><p class="desc">선진 의료 기술을 나누는 글로벌 교육 현장</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. Board ===== -->
+<section id="board" class="snap">
+  <div class="wsize">
+    <div class="board_head">
+      <div><p class="stitle">새로운 소식</p><p class="ssub">다양한 소식과 정보를 확인해보세요</p></div>
+      <div class="tabs">
+        <button class="btab on" data-f="all">#전체</button>
+        <button class="btab" data-f="news">#소식ㆍ공지</button>
+        <button class="btab" data-f="job">#인재채용</button>
+        <button class="btab" data-f="bid">#입찰공고</button>
+      </div>
+    </div>
+    <div class="board_list">
+      <a class="card" data-c="bid" href="#"><div class="cont"><span class="tag">입찰공고</span><p class="title" style="margin-top:12px">의료폐기물 위탁처리 용역 입찰 재공고</p><p class="stxt">시설관리팀 제2026-01호</p><p class="date">26-10-06</p></div></a>
+      <a class="card" data-c="job" href="#"><div class="cont"><span class="tag">인재채용</span><p class="title" style="margin-top:12px">간호부 (계약직) 외래간호사 모집</p><p class="stxt">접수기간 내 온라인 지원</p><p class="date">26-10-06</p></div></a>
+      <a class="card" data-c="news" href="#"><div class="cont"><span class="tag">소식ㆍ공지</span><p class="title" style="margin-top:12px">추석 연휴 응급실 24시간 정상 운영 안내</p><p class="stxt">외래 진료 일정은 홈페이지를 확인해주세요</p><p class="date">26-10-02</p></div></a>
+      <a class="card" data-c="bid" href="#"><div class="cont"><span class="tag">입찰공고</span><p class="title" style="margin-top:12px">초음파 장비 외 5종 의료장비 구매 입찰 공고</p><p class="stxt">구매팀</p><p class="date">26-10-01</p></div></a>
+      <a class="card hide" data-c="job" href="#"><div class="cont"><span class="tag">인재채용</span><p class="title" style="margin-top:12px">간호부 (정규직) 경력간호사 모집</p><p class="stxt">경력 2년 이상</p><p class="date">26-09-30</p></div></a>
+      <a class="card hide" data-c="news" href="#"><div class="cont"><span class="tag">소식ㆍ공지</span><p class="title" style="margin-top:12px">주차장 확장 공사에 따른 이용 안내</p><p class="stxt">공사 기간 중 임시 주차장 운영</p><p class="date">26-09-27</p></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. SNS ===== -->
+<section id="sns" class="snap">
+  <div class="wsize sns_grid">
+    <div>
+      <p class="stitle"><span>우리팀</span>SNS</p>
+      <p class="ssub">친구가 되어 다양한 소식을 들어보세요.</p>
+      <div class="sns_icons">
+        <a href="#" style="background:#19ce60">B</a>
+        <a href="#" style="background:#ff2a2a">▶</a>
+        <a href="#" style="background:linear-gradient(45deg,#f9a03f,#d6249f,#285aeb)">IG</a>
+      </div>
+    </div>
+    <div class="feed">
+      <p class="sns_tit" style="color:#19ce60">blog</p>
+      <ul>
+        <li><a href="#"><span class="d">2026-10-02</span><p class="t">나이 들수록 허리가 굽는 이유, 척추 건강 지키는 생활 습관</p></a></li>
+        <li><a href="#"><span class="d">2026-10-02</span><p class="t">가을철 환절기 면역력 관리법</p></a></li>
+        <li><a href="#"><span class="d">2026-09-29</span><p class="t">지역 의료취약계층 대상 나눔 행사 개최</p></a></li>
+        <li><a href="#"><span class="d">2026-09-29</span><p class="t">환자안전 주간 행사 이모저모</p></a></li>
+        <li><a href="#"><span class="d">2026-09-21</span><p class="t">갑상선 로봇수술 100례 달성 소식</p></a></li>
+      </ul>
+    </div>
+    <div class="feed">
+      <p class="sns_tit" style="color:#ff2a2a">youtube</p>
+      <ul>
+        <li><a href="#"><div class="ph" style="height:150px;border-radius:10px"></div><p class="t">[건강강좌] 혈관 건강 지키는 5가지 방법</p></a></li>
+        <li><a href="#"><div class="ph" style="height:150px;border-radius:10px"></div><p class="t">로봇수술, 무엇이 다를까?</p></a></li>
+      </ul>
+    </div>
+    <div class="feed">
+      <p class="sns_tit" style="background:linear-gradient(45deg,#f9a03f,#d6249f);-webkit-background-clip:text;color:transparent">instagram</p>
+      <div class="insta">
+        <div class="ph"></div><div class="ph" style="background:linear-gradient(135deg,#f3d1c4,#d48a75)"></div>
+        <div class="ph" style="background:linear-gradient(135deg,#cfe3d6,#6fa483)"></div><div class="ph"></div>
+        <div class="ph" style="background:linear-gradient(135deg,#e8dcc4,#b59a6b)"></div><div class="ph" style="background:linear-gradient(135deg,#d9d2ef,#8a7bc4)"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fmenu"><div class="wsize">
+    <div class="links">
+      <a class="privacy" href="#">개인정보처리방침</a><a href="#">이용약관</a><a href="#">비급여진료비</a><a href="#">이메일주소무단수집거부</a><a href="#">인재채용</a><a href="#">입찰공고</a><a class="privacy" href="#">증명서발급안내</a>
+    </div>
+    <a class="fsite" href="#">관련사이트 바로가기 <span>+</span></a>
+  </div></div>
+  <div class="finfo"><div class="wsize">
+    <div>
+      <p>대표번호 : 0000-0000 &nbsp;|&nbsp; English : +82-00-000-0000</p>
+      <p>(00000) 샘플시 샘플구 샘플로 123 우리팀 챗봇 POC</p>
+      <p class="copy">© TEAM 3 CHATBOT POC. All rights reserved. (디자인 연습용 샘플 페이지)</p>
+    </div>
+    <div class="award"><span>의료기관 인증<br>2026.01 ~ 2030.01</span><span>환자안전<br>우수기관</span></div>
+  </div></div>
+</footer>
+
+<button class="chat-fab" aria-label="AI 상담 열기"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h.01M12 10h.01M16 10h.01" stroke-linecap="round" stroke-width="3"/></svg>AI 상담</button>
+<div class="chat-panel" role="dialog" aria-label="AI 상담">
+  <div class="bar" title="끌어서 이동 · 더블클릭하면 원래 위치로">
+    <span><span class="grip" aria-hidden="true">⋮⋮</span>우리팀 챗봇 POC</span>
+    <div>
+      <a class="chat-newtab" target="_blank" rel="noopener">새 창 ↗</a>
+      <button class="chat-close" aria-label="닫기">✕</button>
+    </div>
+  </div>
+  <iframe title="AI 상담 챗봇"></iframe>
+</div>
+
+<script>
+// Chatbot widget: iframe is loaded on first open
+// 로컬 개발 서버(npm run dev)가 켜져 있으면 그쪽을, 아니면 배포본을 사용
+(() => {
+  const CHATBOT_URL = 'https://ephemeral-parfait-e65ef8.netlify.app/chat/';
+  const LOCAL_CHATBOT_URL = 'http://localhost:5173/';
+  const fab = document.querySelector('.chat-fab');
+  const panel = document.querySelector('.chat-panel');
+  const frame = panel.querySelector('iframe');
+  const newTab = panel.querySelector('.chat-newtab');
+  newTab.href = CHATBOT_URL;
+
+  // 배포된 사이트에서는 같은 사이트의 chat/ (메인+챗봇 묶음 배포)
+  // 내 PC(localhost·파일)에서는 개발 서버 → 없으면 기존 배포본
+  const isLocalPage = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+  const resolveUrl = () => {
+    if (!isLocalPage) return Promise.resolve(new URL('chat/', location.href).href);
+    return fetch(LOCAL_CHATBOT_URL, { mode: 'no-cors', signal: AbortSignal.timeout(800) })
+      .then(() => LOCAL_CHATBOT_URL)
+      .catch(() => CHATBOT_URL);
+  };
+
+  const toggle = async open => {
+    panel.classList.toggle('open', open);
+    if (open && !frame.src) {
+      const url = await resolveUrl();
+      frame.src = url;
+      newTab.href = url;
+    }
+  };
+  fab.onclick = () => toggle(!panel.classList.contains('open'));
+  panel.querySelector('.chat-close').onclick = () => toggle(false);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+  document.querySelectorAll('[data-chat]').forEach(a => a.onclick = e => { e.preventDefault(); toggle(true); });
+
+  // 창 이동: 위쪽 바를 잡고 끌기 (PC 전용 — 모바일은 전체 화면이라 이동 없음)
+  // 옮긴 위치는 이 브라우저에 기억, 바를 더블클릭하면 원래 위치로
+  const bar = panel.querySelector('.bar');
+  const mobile = matchMedia('(max-width: 900px)');
+  const POS_KEY = 'chatpoc.panelPos';
+  const GAP = 8;
+  let drag = null;
+
+  const place = (x, y) => {
+    const r = panel.getBoundingClientRect();
+    const left = Math.min(Math.max(GAP, x), Math.max(GAP, innerWidth - r.width - GAP));
+    const top = Math.min(Math.max(GAP, y), Math.max(GAP, innerHeight - r.height - GAP));
+    Object.assign(panel.style, { left: `${left}px`, top: `${top}px`, right: 'auto', bottom: 'auto' });
+    return { x: left, y: top };
+  };
+  const resetPos = () => {
+    panel.style.left = panel.style.top = panel.style.right = panel.style.bottom = '';
+  };
+  const savePos = pos => {
+    try { localStorage.setItem(POS_KEY, JSON.stringify(pos)); }
+    catch (err) { console.warn('챗봇 창 위치를 저장하지 못했습니다', err); }
+  };
+  const restorePos = () => {
+    if (mobile.matches) return resetPos();
+    try {
+      const p = JSON.parse(localStorage.getItem(POS_KEY) || 'null');
+      if (p && Number.isFinite(p.x) && Number.isFinite(p.y)) place(p.x, p.y);
+    } catch (err) { console.warn('챗봇 창 위치를 불러오지 못했습니다', err); }
+  };
+
+  bar.addEventListener('pointerdown', e => {
+    if (mobile.matches || e.button !== 0 || e.target.closest('a, button')) return;
+    e.preventDefault();
+    const r = panel.getBoundingClientRect();
+    drag = { dx: e.clientX - r.left, dy: e.clientY - r.top, pos: null };
+    bar.setPointerCapture(e.pointerId);
+    panel.classList.add('dragging');
+  });
+  bar.addEventListener('pointermove', e => {
+    if (drag) drag.pos = place(e.clientX - drag.dx, e.clientY - drag.dy);
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    if (drag.pos) savePos(drag.pos);
+    drag = null;
+    panel.classList.remove('dragging');
+  };
+  bar.addEventListener('pointerup', endDrag);
+  bar.addEventListener('pointercancel', endDrag);
+  bar.addEventListener('dblclick', e => {
+    if (mobile.matches || e.target.closest('a, button')) return;
+    resetPos();
+    try { localStorage.removeItem(POS_KEY); }
+    catch (err) { console.warn('챗봇 창 위치를 지우지 못했습니다', err); }
+  });
+  // 창 크기가 바뀌면 화면 안으로 다시 맞추고, 모바일 폭이면 전체 화면 배치로 되돌림
+  addEventListener('resize', () => {
+    if (mobile.matches) return resetPos();
+    if (panel.style.left) place(parseFloat(panel.style.left), parseFloat(panel.style.top));
+  });
+  restorePos();
+})();
+
+// Hero slider
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const ctrl = document.querySelector('.vctrl');
+  let idx = 0, timer;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('i');
+    dot.onclick = () => go(i);
+    ctrl.appendChild(dot);
+  });
+  const dots = [...ctrl.children];
+  function go(i) {
+    idx = (i + slides.length) % slides.length;
+    slides.forEach((s, k) => s.classList.toggle('on', k === idx));
+    dots.forEach((d, k) => d.classList.toggle('on', k === idx));
+    clearInterval(timer);
+    timer = setInterval(() => go(idx + 1), 5000);
+  }
+  document.querySelector('.arrow.prev').onclick = () => go(idx - 1);
+  document.querySelector('.arrow.next').onclick = () => go(idx + 1);
+  go(0);
+})();
+
+// Board tabs
+(() => {
+  const tabs = document.querySelectorAll('.btab');
+  const cards = [...document.querySelectorAll('.board_list .card')];
+  tabs.forEach(t => t.onclick = () => {
+    tabs.forEach(x => x.classList.toggle('on', x === t));
+    const f = t.dataset.f;
+    let shown = 0;
+    cards.forEach(c => {
+      const ok = (f === 'all' || c.dataset.c === f) && shown < 4;
+      c.classList.toggle('hide', !ok);
+      if (ok) shown++;
+    });
+  });
+})();
+</script>
+</body>
+</html>
