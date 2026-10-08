@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>증상별 진료 안내</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* 챗봇 메인 화면과 같은 디자인 토큰 */
+:root {
+  --accent: #1F4E8C;
+  --accent-soft: #E3ECF7;
+  --ink: #152238;
+  --ink-sub: #4A5668;
+  --line: #DDE3EB;
+  --line-strong: #C9D3E0;
+  --ground: #F4F6F9;
+  --danger: #B42318;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--ground); color: var(--ink);
+  font-family: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 480px; margin: 0 auto; padding: 16px 20px 28px; display: flex; flex-direction: column; gap: 14px; }
+
+.intro h1 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.5px; }
+.intro p { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-sub); }
+/* 챗봇 안에서 열리면 상단 바에 제목이 있으므로 본문 제목 숨김 */
+.embedded .intro h1 { display: none; }
+.embedded .intro p { margin: 0; }
+
+.card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.card h2 { margin: 0 0 10px; font-size: 14px; color: var(--accent); }
+
+/* 추천 진료과 */
+.dept { display: flex; gap: 12px; align-items: center; }
+.ico { width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; }
+.dept strong { display: block; font-size: 18px; letter-spacing: -0.3px; }
+.dept span { display: block; font-size: 13px; color: var(--ink-sub); margin-top: 2px; }
+.also { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.chip { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
+
+/* 진료 전 확인 */
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.list li { position: relative; padding-left: 16px; font-size: 13.5px; line-height: 1.5; }
+.list li::before { content: ""; position: absolute; left: 3px; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* 응급 신호 */
+.er { background: #FDECEA; border-color: #F1B8B2; }
+.er h2 { color: #8F1B12; }
+.er .list li { color: #7A2A22; }
+.er .list li::before { background: var(--danger); }
+.er a {
+  display: inline-flex; align-items: center; height: 40px; margin-top: 12px; padding: 0 16px;
+  border-radius: 20px; background: var(--danger); color: #fff; font-size: 13px; font-weight: 700; text-decoration: none;
+}
+
+.btn {
+  height: 46px; border-radius: 12px; border: 1.5px solid var(--accent); background: #fff; color: var(--accent);
+  font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; text-decoration: none;
+}
+.foot { text-align: center; font-size: 11.5px; color: #8592A3; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>증상별 진료 안내</h1>
+    <p id="lead">말씀하신 증상에 맞는 진료과를 안내해 드려요</p>
+  </div>
+
+  <section class="card" aria-label="추천 진료과">
+    <h2>추천 진료과</h2>
+    <div class="dept">
+      <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v3a4 4 0 0 0 8 0v-2"/><circle cx="18" cy="12" r="2"/></svg></span>
+      <div>
+        <strong id="dept">가정의학과</strong>
+        <span id="deptDesc">증상을 먼저 살펴보고 필요한 진료과로 안내해 드려요</span>
+      </div>
+    </div>
+    <div class="also" id="also"></div>
+  </section>
+
+  <section class="card" aria-label="진료 전 확인">
+    <h2>진료 전에 확인해 주세요</h2>
+    <ul class="list" id="check"></ul>
+  </section>
+
+  <section class="card er" aria-label="응급 신호">
+    <h2>이런 경우에는 바로 응급실로 가세요</h2>
+    <ul class="list" id="redflags"></ul>
+    <a href="tel:119">119 전화</a>
+  </section>
+
+  <a class="btn" href="tel:0000-0000">진료 예약 전화 0000-0000</a>
+
+  <p class="foot">샘플 화면 · AI 안내는 참고용이며 진단이 아닙니다<br>정확한 진단은 의료진 상담을 받으세요</p>
+</div>
+
+<script>
+  if (window.self !== window.top) document.documentElement.classList.add('embedded');
+
+  // 증상 주제별 안내 (샘플 데이터 — 실제 운영 전 의료진 검수 필요)
+  const GUIDE = {
+    digestive: {
+      lead: '소화기 증상으로 보여요',
+      dept: '소화기내과', desc: '복통 · 속쓰림 · 설사 · 소화불량',
+      also: ['가정의학과', '외과 (복통이 점점 심해질 때)'],
+      check: ['언제부터, 배의 어느 부위가 아픈지', '식사와 관련이 있는지 (식후 · 공복)', '구토 · 설사 · 발열이 함께 있는지', '복용 중인 약'],
+      redflags: ['피가 섞인 변이나 검은 변', '배가 딱딱해지며 통증이 점점 심해짐', '구토가 멈추지 않거나 고열이 함께 있음'],
+    },
+    headache: {
+      lead: '두통 증상으로 보여요',
+      dept: '신경과', desc: '두통 · 편두통 · 어지럼증',
+      also: ['가정의학과', '이비인후과 (어지럼증이 심할 때)'],
+      check: ['처음 생긴 두통인지, 자주 반복되는지', '아픈 부위와 통증의 양상', '메스꺼움 · 시야 이상이 함께 있는지', '복용 중인 진통제'],
+      redflags: ['갑자기 생긴 극심한 두통', '말이 어눌하거나 한쪽 팔다리에 힘이 빠짐', '의식이 흐려지거나 경련이 있음'],
+    },
+    respiratory: {
+      lead: '호흡기 증상으로 보여요',
+      dept: '호흡기내과', desc: '기침 · 가래 · 발열 · 인후통',
+      also: ['이비인후과 (목 · 코 증상)', '가정의학과'],
+      check: ['기침 · 발열이 언제부터 있었는지', '가래의 색과 양', '최근 감기 환자와 접촉했는지', '기저질환 (천식 등)'],
+      redflags: ['숨쉬기가 힘들거나 입술이 파래짐', '39도 이상의 고열이 계속됨', '피가 섞인 가래'],
+    },
+  };
+  const GENERAL = {
+    lead: '말씀하신 증상에 맞는 진료과를 안내해 드려요',
+    dept: '가정의학과', desc: '증상을 먼저 살펴보고 필요한 진료과로 안내해 드려요',
+    also: [],
+    check: ['증상이 언제부터 있었는지', '함께 나타나는 다른 증상', '복용 중인 약과 기저질환'],
+    redflags: ['가슴 통증이나 숨이 찬 증상', '의식이 흐려지거나 쓰러짐', '심한 출혈이 멈추지 않음'],
+  };
+
+  const fill = (id, items, cls) => {
+    const el = document.getElementById(id);
+    el.replaceChildren(...items.map((t) => {
+      const n = document.createElement(cls ? 'span' : 'li');
+      if (cls) n.className = cls;
+      n.textContent = t;
+      return n;
+    }));
+  };
+
+  const render = (g) => {
+    document.getElementById('lead').textContent = g.lead;
+    document.getElementById('dept').textContent = g.dept;
+    document.getElementById('deptDesc').textContent = g.desc;
+    fill('also', g.also, 'chip');
+    fill('check', g.check);
+    fill('redflags', g.redflags);
+  };
+
+  render(GENERAL);
+
+  // 챗봇이 보내는 입력 문구·주제 수신 — 같은 사이트의 부모 창에서 온 메시지만 받음
+  window.addEventListener('message', (e) => {
+    if (e.origin !== location.origin || e.source !== window.parent) return;
+    const d = e.data;
+    if (!d || d.type !== 'chatpoc:query') return;
+    render(Object.hasOwn(GUIDE, d.topic) ? GUIDE[d.topic] : GENERAL);
+  });
+</script>
+</body>
+</html>
