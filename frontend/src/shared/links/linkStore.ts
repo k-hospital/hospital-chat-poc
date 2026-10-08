@@ -12,6 +12,8 @@ const STORAGE_KEY = 'chatpoc.links.v1';
 export const DEFAULT_LINKS: LinkMap = {
   'info.directions': '/pages/directions.html',
   'symptom.guide': '/pages/symptom.html',
+  // 주차 안내는 오시는 길의 자가용 탭(주차 안내 포함)으로 연결
+  'faq.parking': '/pages/directions.html#car',
 };
 
 export function loadLinks(): LinkMap {

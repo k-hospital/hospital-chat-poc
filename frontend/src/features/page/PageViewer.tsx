@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Icon } from '../../shared/ui/icons';
 import styles from './PageViewer.module.css';
 
@@ -14,6 +14,7 @@ export function PageViewer({ url, title, query, onBack }: {
   url: string; title: string; query?: PageQuery; onBack: () => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
+  const loaded = useRef(false);
 
   // 입력 문구는 주소(?q=)에 넣지 않고 페이지가 열린 뒤 메시지로 전달 — 건강 정보가 주소·로그에 남지 않게.
   // 같은 사이트의 페이지에만 보내고, 외부 사이트에는 보내지 않는다.
@@ -24,6 +25,11 @@ export function PageViewer({ url, title, query, onBack }: {
     if (origin !== location.origin) return;
     target.postMessage({ type: 'chatpoc:query', text: query.text, topic: query.topic }, origin);
   };
+
+  // 이미 열린 페이지에 새 질문이 오면 다시 전달 (처음 열릴 때는 onLoad에서 전달)
+  useEffect(() => {
+    if (loaded.current) deliver();
+  }, [query]);
 
   return (
     <div className={styles.screen}>
@@ -37,7 +43,7 @@ export function PageViewer({ url, title, query, onBack }: {
       {query && (
         <p className={styles.query}><span>입력하신 내용</span>{query.text}</p>
       )}
-      <iframe ref={frame} className={styles.frame} src={url} title={title} onLoad={deliver} />
+      <iframe ref={frame} className={styles.frame} src={url} title={title} onLoad={() => { loaded.current = true; deliver(); }} />
     </div>
   );
 }

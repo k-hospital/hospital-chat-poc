@@ -220,10 +220,25 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
     toast.timer = setTimeout(() => t.classList.remove('on'), 1800);
   };
 
-  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
-    document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
-    document.querySelectorAll('.panel').forEach((p) => p.classList.toggle('on', p.id === b.dataset.t));
-  }));
+  const TABS = ['subway', 'bus', 'car'];
+  const selectTab = (t) => {
+    if (!TABS.includes(t)) return false;
+    document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-selected', String(x.dataset.t === t)));
+    document.querySelectorAll('.panel').forEach((p) => p.classList.toggle('on', p.id === t));
+    return true;
+  };
+  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => selectTab(b.dataset.t)));
+
+  // 주소 뒤 #car 처럼 탭을 지정해 열 수 있음 (예: 주차 안내 → 자가용 탭)
+  if (selectTab(location.hash.slice(1))) document.querySelector('.seg').scrollIntoView({ block: 'start' });
+
+  // 챗봇이 보내는 질문 주제로 탭 전환 (예: "버스 노선 알려주세요" → 버스 탭) — 같은 사이트 부모 창의 메시지만 받음
+  window.addEventListener('message', (e) => {
+    if (e.origin !== location.origin || e.source !== window.parent) return;
+    const d = e.data;
+    if (!d || d.type !== 'chatpoc:query') return;
+    if (selectTab(d.topic)) document.querySelector('.seg').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   document.getElementById('copy').addEventListener('click', async () => {
     const text = document.getElementById('addr').textContent;

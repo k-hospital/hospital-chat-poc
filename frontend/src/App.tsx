@@ -6,6 +6,7 @@ import { PageViewer, type PageQuery } from './features/page/PageViewer';
 import { SettingsScreen } from './features/settings/SettingsScreen';
 import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './shared/links/linkStore';
 import { routeQuestion } from './shared/chat/intentRouter';
+import { HOME_SCREEN, visibleSuggestions } from './shared/chat/suggestions';
 import { ChatInputBar, type ChatEcho } from './shared/ui/ChatInputBar';
 import styles from './App.module.css';
 
@@ -16,7 +17,8 @@ export default function App() {
   const [config, setConfig] = useState<ChatConfig | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [view, setView] = useState<'home' | 'settings'>('home');
-  const [page, setPage] = useState<{ url: string; title: string; query?: PageQuery } | null>(null);
+  // screen: 지금 화면의 기능(intent) — 화면별 추천 질문 목록을 고르는 데 사용
+  const [page, setPage] = useState<{ url: string; title: string; screen: string; query?: PageQuery } | null>(null);
   const [links, setLinks] = useState<LinkMap>(loadLinks);
   const [echo, setEcho] = useState<ChatEcho | null>(null);
 
@@ -46,7 +48,7 @@ export default function App() {
       return;
     }
     setEcho(null);
-    setPage({ url, title: label });
+    setPage({ url, title: label, screen: key });
   };
 
   // 질문 입력: 판별 결과에 따라 응급 안내 / 해당 화면 이동 / 추천 메뉴
@@ -79,7 +81,7 @@ export default function App() {
     // 이동한 화면 상단에 입력 내용이 표시되므로 말풍선은 닫는다 (이동하지 않는 경우에만 말풍선 안내)
     setEcho(null);
     setView('home');
-    setPage({ url, title: r.label, query: { text: question, topic: r.topic } });
+    setPage({ url, title: r.label, screen: r.intent, query: { text: question, topic: r.topic } });
   };
 
   const save = (next: LinkMap) => {
@@ -91,13 +93,14 @@ export default function App() {
   if (!config) return null;
 
   const inSettings = !page && view === 'settings';
+  const suggestions = visibleSuggestions(page?.screen ?? HOME_SCREEN, isLinked);
 
   return (
     <div className={styles.shell}>
       <div className={styles.content}>
         {page ? (
-          // 같은 화면으로 다른 질문이 오면 새로 불러와 입력 문구를 다시 전달
-          <PageViewer key={`${page.url}|${page.query?.text ?? ''}`} url={page.url} title={page.title}
+          // 같은 화면에 다른 질문이 오면 새로 불러오지 않고 입력 문구만 다시 전달 (예: 오시는 길 탭 전환)
+          <PageViewer key={page.url} url={page.url} title={page.title}
             query={page.query} onBack={() => { setPage(null); setEcho(null); }} />
         ) : inSettings ? (
           <SettingsScreen config={config} links={links} onSave={save} onBack={() => setView('home')} />
@@ -116,7 +119,7 @@ export default function App() {
       </div>
       {/* 설정 화면은 하단 저장 버튼과 겹치므로 입력 바를 숨긴다 */}
       {!inSettings && (
-        <ChatInputBar disclaimer={config.disclaimer} echo={echo} onSend={ask} onCloseEcho={() => setEcho(null)} />
+        <ChatInputBar disclaimer={config.disclaimer} echo={echo} suggestions={suggestions} onSend={ask} onCloseEcho={() => setEcho(null)} />
       )}
       {notice && (
         <div role="status" style={{
