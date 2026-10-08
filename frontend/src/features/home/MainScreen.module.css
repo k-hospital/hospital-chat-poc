@@ -11,7 +11,7 @@
   --danger: #B42318;
 
   display: flex; flex-direction: column;
-  height: 100dvh; max-width: 480px; margin: 0 auto;
+  height: 100%;
   background: var(--ground); color: var(--ink);
   font-family: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   padding-top: env(safe-area-inset-top, 0px);
@@ -106,22 +106,6 @@
   border-radius: 20px; background: var(--danger); color: #fff; font-size: 13px; font-weight: 700; text-decoration: none;
 }
 
-.footer {
-  display: flex; flex-direction: column; gap: 8px; padding: 10px 16px calc(16px + env(safe-area-inset-bottom, 0px));
-  background: #fff; border-top: 1px solid #E3E8EF;
-}
-.disclaimer { margin: 0; display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 11.5px; color: #5B6575; }
-.inputRow {
-  display: flex; align-items: center; gap: 8px; height: 52px; padding: 0 6px 0 16px;
-  border: 1.5px solid var(--line-strong); border-radius: 26px; background: #F8FAFC;
-}
-.inputRow:focus-within { border-color: var(--accent); }
-.inputRow input { flex: 1; min-width: 0; border: none; background: transparent; font: inherit; font-size: 14px; color: var(--ink); outline: none; }
-.micBtn, .sendBtn { width: 40px; height: 40px; border: none; border-radius: 20px; display: flex; align-items: center; justify-content: center; }
-.micBtn { background: transparent; color: var(--ink-sub); }
-.sendBtn { background: var(--accent); color: #fff; }
-.sendBtn:disabled { opacity: .45; cursor: default; }
-.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 /* 연결 주소 미등록 기능: 아이콘을 회색으로 */
 .muted .tileIcon { background: #EEF0F3; color: #A3ACB9; }

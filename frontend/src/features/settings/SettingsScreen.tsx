@@ -2,6 +2,7 @@ import { useMemo, useState, type FormEvent } from 'react';
 import { Icon } from '../../shared/ui/icons';
 import type { ChatConfig } from '../../shared/types/config';
 import { AGENT_KEY, CALLBACK_KEY, isValidUrl, type LinkMap } from '../../shared/links/linkStore';
+import { QUESTION_TARGETS } from '../../shared/chat/intentRouter';
 import styles from './SettingsScreen.module.css';
 
 interface Row { key: string; label: string; hint: string }
@@ -30,6 +31,10 @@ export function SettingsScreen({ config, links, onSave, onBack }: {
     {
       title: '자주 찾는 질문',
       rows: byOrder(config.faqs).map((f) => ({ key: f.intent, label: f.label, hint: f.requiresAuth ? '인증 필요' : '질문 칩' })),
+    },
+    {
+      title: '질문으로 여는 화면',
+      rows: QUESTION_TARGETS.map((q) => ({ key: q.intent, label: q.label, hint: '질문 입력' })),
     },
     {
       title: '상담',

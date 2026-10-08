@@ -1,0 +1,7 @@
+/* 앱 틀: 위쪽은 바뀌는 화면, 아래쪽은 공통 질문 입력 바 */
+.shell {
+  display: flex; flex-direction: column;
+  height: 100dvh; max-width: 480px; margin: 0 auto;
+  background: #F4F6F9;
+}
+.content { flex: 1; min-height: 0; }

@@ -32,7 +32,6 @@ export interface ChatConfig {
 
 export interface MainScreenHandlers {
   onAction: (item: { intent: string; label: string; requiresAuth: boolean }) => void;
-  onSendText: (text: string) => void;
   onAgent: () => void;     // 주간: 상담원 연결
   onCallback: () => void;  // 야간: 콜백 요청
   onSettings: () => void;  // 기능별 연결 주소 설정 화면

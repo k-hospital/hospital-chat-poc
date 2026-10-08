@@ -11,6 +11,7 @@ const STORAGE_KEY = 'chatpoc.links.v1';
 // 한 번이라도 설정을 저장하면 저장한 값이 우선한다 (기본값을 지운 것도 유지).
 export const DEFAULT_LINKS: LinkMap = {
   'info.directions': '/pages/directions.html',
+  'symptom.guide': '/pages/symptom.html',
 };
 
 export function loadLinks(): LinkMap {
