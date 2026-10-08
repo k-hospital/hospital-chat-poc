@@ -146,3 +146,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 *.pyc
+
+# 메인+챗봇 묶음 배포 폴더 (npm run build:site 결과물)
+/deploy/
