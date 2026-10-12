@@ -16,6 +16,7 @@
 - `src/App.tsx` — 화면 전환(메인 / 연결 페이지 / 설정), 질문 처리(`ask`), 메뉴 이동(`openLink`)
 - `src/shared/ui/ChatInputBar.tsx` — 모든 화면 하단에 고정되는 공통 질문 입력 바
 - `src/shared/chat/intentRouter.ts` — 질문 → 기능(intent) 키워드 판별. 응급 신호를 가장 먼저 검사
+- `src/shared/chat/suggestions.ts` — 입력창 화면별 추천 질문 목록. 모든 질문이 판별에 성공해야 한다(테스트로 보장)
 - `src/shared/links/linkStore.ts` — 기능별 연결 주소(localStorage) + 기본값(`DEFAULT_LINKS`)
 - `src/features/page/PageViewer.tsx` — 연결 페이지를 챗봇 안 iframe으로 표시, 입력 문구는 postMessage로 같은 사이트에만 전달
 
@@ -47,4 +48,5 @@ Netlify는 GitHub에 연결되어 있지 않다(조직 비공개 저장소 연�
 - 연결 페이지·메인 화면 데이터(병원명·주소·전화·노선)는 모두 가상 데이터다. 실제 기관 정보·로고를 넣지 않는다.
 - Windows Git Bash에서 `vite build --base /chat/`처럼 `/`로 시작하는 인자는 경로로 변환되어 빌드가 깨진다 → `build:site` 스크립트(Vite API 직접 호출)를 쓴다.
 - PowerShell 실행 정책 때문에 `npm`(npm.ps1)이 막히면 `npm.cmd` 또는 `node node_modules/...`로 직접 실행한다.
+- 배포 폴더를 zip으로 보낼 때 PowerShell 5.1 `Compress-Archive`는 경로를 `\`로 저장해 Netlify에서 깨진다 → .NET `ZipArchive`로 `/` 경로를 써서 만든다.
 - 저장소 루트의 `backend.zip`(node_modules 포함 스냅숏)과 `deploy/`는 커밋하지 않는다.
