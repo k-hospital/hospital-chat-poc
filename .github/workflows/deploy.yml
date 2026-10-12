@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # 1. 깃허브 저장소 구조에 맞게 다시 원상복구 (chaGitHub 제외)
+        # 명령어 실행 위치: 깃허브 최상위에 있는 frontend 폴더
         working-directory: ./frontend
         
     steps:
@@ -42,7 +42,7 @@ jobs:
       - name: 빌드된 폴더 업로드
         uses: actions/upload-pages-artifact@v3
         with:
-          # 2. 결과물 업로드 위치: 넷리파이 대신 깃허브가 인식할 빌드 폴더명
+          # 결과물 업로드 위치: 최상위 경로의 production-site 폴더
           path: 'production-site'
 
   deploy:
