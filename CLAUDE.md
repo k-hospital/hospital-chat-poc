@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-병원 AI 상담 챗봇 POC. 메인 화면(병원 홈페이지형 샘플) + 챗봇을 한 사이트로 묶어 Netlify에 배포한다.
+병원 AI 상담 챗봇 POC. 메인 화면(병원 홈페이지형 샘플) + 챗봇을 한 사이트로 묶어 GitHub Pages에 배포한다.
 작업 이력·기능 설명·해야 할 일은 [docs/작업정리.md](docs/작업정리.md)에 있다.
 
 ## 구조
@@ -36,7 +36,7 @@ npm run build:site -- --out <폴더>           # 다른 위치에 생성
 SITE_BASE=/hospital-chat-poc/ npm run build:site   # 하위 경로(GitHub Pages)용 — 챗봇이 /hospital-chat-poc/chat/ 기준으로 빌드됨
 ```
 
-`SITE_BASE`를 비우면 도메인 루트(`/chat/`, Netlify)로 빌드된다. GitHub Pages는 `.github/workflows/deploy.yml`이 `SITE_BASE`를 지정해 `main` push 때 자동 빌드·배포한다 (저장소 Settings → Pages → Source를 **GitHub Actions**로 설정해야 함).
+`SITE_BASE`를 비우면 도메인 루트(`/chat/`)로 빌드된다 (로컬 확인이나 다른 호스팅용). 운영(GitHub Pages)은 `.github/workflows/deploy.yml`이 `SITE_BASE=/hospital-chat-poc/`로 빌드하며, 저장소 이름을 바꾸면 이 값도 함께 바꾼다.
 
 ## 추천 질문 편집 방법
 
@@ -50,10 +50,12 @@ SITE_BASE=/hospital-chat-poc/ npm run build:site   # 하위 경로(GitHub Pages)
 
 1. 새 브랜치에서 작업 → 테스트·타입검사 통과 확인 → 커밋·push
 2. PR 생성 → 검토 → `main`에 머지
-3. 최신 `main`에서 `npm run build:site` → 생성된 폴더를 Netlify 사이트 `ephemeral-parfait-e65ef8`의 **배포(Deploys)** 화면에 끌어다 놓기
-4. 실제 주소 https://ephemeral-parfait-e65ef8.netlify.app 에서 확인
+3. `main`에 머지되면 GitHub Actions(`Deploy to GitHub Pages`)가 테스트 → `sync:suggestions` → `build:site` → 배포를 자동 실행한다. 손으로 빌드·업로드하지 않는다
+4. 저장소 **Actions** 탭에서 build·deploy가 모두 초록색인지 확인하고, 실제 주소 https://k-hospital.github.io/hospital-chat-poc/ 에서 확인
 
-Netlify는 GitHub에 연결되어 있지 않다(조직 비공개 저장소 연결은 유료). **머지만으로는 운영 주소가 바뀌지 않는다.**
+- 테스트가 실패하면 배포되지 않는다. 수동 재실행은 Actions → Deploy to GitHub Pages → Run workflow
+- 되돌리기: 문제가 된 PR을 Revert하는 PR을 만들어 머지하면 이전 상태로 다시 배포된다
+- 이전 Netlify 사이트(`ephemeral-parfait-e65ef8`)는 더 이상 갱신하지 않는다
 
 ## 주의
 
@@ -63,5 +65,6 @@ Netlify는 GitHub에 연결되어 있지 않다(조직 비공개 저장소 연�
 - 연결 페이지·메인 화면 데이터(병원명·주소·전화·노선)는 모두 가상 데이터다. 실제 기관 정보·로고를 넣지 않는다.
 - Windows Git Bash에서 `vite build --base /chat/`처럼 `/`로 시작하는 인자는 경로로 변환되어 빌드가 깨진다 → `build:site` 스크립트(Vite API 직접 호출)를 쓴다.
 - PowerShell 실행 정책 때문에 `npm`(npm.ps1)이 막히면 `npm.cmd` 또는 `node node_modules/...`로 직접 실행한다.
-- 배포 폴더를 zip으로 보낼 때 PowerShell 5.1 `Compress-Archive`는 경로를 `\`로 저장해 Netlify에서 깨진다 → .NET `ZipArchive`로 `/` 경로를 써서 만든다.
-- 저장소 루트의 `backend.zip`(node_modules 포함 스냅숏)과 `deploy/`는 커밋하지 않는다.
+- 저장소는 **공개(Public)** 이다(무료 플랜에서 Pages를 쓰기 위해 전환). 비밀 값·API 키·실제 기관 정보·개인 연락처를 커밋하지 않는다. 한 번 올라간 기록은 지워도 남는다.
+- 저장소 루트의 `backend.zip`(node_modules 포함 스냅숏), `deploy/`, `production-site/`는 커밋하지 않는다.
+- 연결 페이지 기본 주소(`DEFAULT_LINKS`)는 빌드된 base 기준으로 계산된다. ⚙ 설정에서 이미 저장한 브라우저는 저장값이 우선하므로, 배포 주소가 바뀌면 설정을 비워야 새 기본값이 적용된다.
