@@ -149,3 +149,8 @@ vite.config.ts.timestamp-*
 
 # 메인+챗봇 묶음 배포 폴더 (npm run build:site 결과물)
 /deploy/
+# GitHub Pages 워크플로가 만드는 배포 폴더
+/production-site/
+
+# 편집 중 남는 백업 파일
+*.bak

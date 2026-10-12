@@ -9,11 +9,16 @@ const STORAGE_KEY = 'chatpoc.links.v1';
 
 // 처음 여는 브라우저(저장된 설정 없음)에 적용되는 기본 연결 주소.
 // 한 번이라도 설정을 저장하면 저장한 값이 우선한다 (기본값을 지운 것도 유지).
+// 연결 페이지는 챗봇(<사이트 경로>/chat/)과 같은 사이트의 /pages/ 아래에 있다.
+// 사이트가 하위 경로(예: GitHub Pages /hospital-chat-poc/)에 올라가도 맞도록 빌드된 base에서 사이트 경로를 구한다.
+// 개발 서버·테스트에서는 BASE_URL이 '/'라서 그대로 '/pages/...'가 된다.
+const SITE_ROOT = import.meta.env.BASE_URL.replace(/chat\/$/, '');
+
 export const DEFAULT_LINKS: LinkMap = {
-  'info.directions': '/pages/directions.html',
-  'symptom.guide': '/pages/symptom.html',
+  'info.directions': `${SITE_ROOT}pages/directions.html`,
+  'symptom.guide': `${SITE_ROOT}pages/symptom.html`,
   // 주차 안내는 오시는 길의 자가용 탭(주차 안내 포함)으로 연결
-  'faq.parking': '/pages/directions.html#car',
+  'faq.parking': `${SITE_ROOT}pages/directions.html#car`,
 };
 
 export function loadLinks(): LinkMap {
