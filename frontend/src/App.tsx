@@ -5,8 +5,8 @@ import type { ChatConfig } from './shared/types/config';
 import { PageViewer, type PageQuery } from './features/page/PageViewer';
 import { SettingsScreen } from './features/settings/SettingsScreen';
 import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './shared/links/linkStore';
-import { routeQuestion } from './shared/chat/intentRouter';
-import { HOME_SCREEN, visibleSuggestions } from './shared/chat/suggestions';
+import { routeQuestion, routeSuggestion } from './shared/chat/intentRouter';
+import { HOME_SCREEN, visibleSuggestions, type Suggestion } from './shared/chat/suggestions';
 import { ChatInputBar, type ChatEcho } from './shared/ui/ChatInputBar';
 import styles from './App.module.css';
 
@@ -52,9 +52,10 @@ export default function App() {
   };
 
   // 질문 입력: 판별 결과에 따라 응급 안내 / 해당 화면 이동 / 추천 메뉴
-  const ask = (question: string) => {
+  // 추천 질문을 골랐다면(suggestion) 엑셀에서 정한 기능으로 이동한다 — 응급 검사만 먼저 한다
+  const ask = (question: string, suggestion?: Suggestion) => {
     if (!config) return;
-    const r = routeQuestion(question);
+    const r = suggestion ? routeSuggestion(question, suggestion.intent, suggestion.label) : routeQuestion(question);
     if (r.kind === 'emergency') {
       setEcho({
         question, tone: 'danger', call119: true,
