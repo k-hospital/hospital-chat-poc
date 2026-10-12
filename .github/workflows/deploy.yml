@@ -21,8 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # 1. 빌드 작업이 실행될 위치: chaGitHub 폴더 안의 frontend 폴더
-        working-directory: ./chaGitHub/frontend
+        # 1. 깃허브 저장소 구조에 맞게 다시 원상복구 (chaGitHub 제외)
+        working-directory: ./frontend
         
     steps:
       - name: 저장소 코드 가져오기
@@ -42,7 +42,7 @@ jobs:
       - name: 빌드된 폴더 업로드
         uses: actions/upload-pages-artifact@v3
         with:
-          # 2. 결과물 업로드 위치: chaGitHub와 동일한 위치(최상위)에 있는 production-site 폴더
+          # 2. 결과물 업로드 위치: 넷리파이 대신 깃허브가 인식할 빌드 폴더명
           path: 'production-site'
 
   deploy:
