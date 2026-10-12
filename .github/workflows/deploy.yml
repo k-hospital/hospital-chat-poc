@@ -42,8 +42,8 @@ jobs:
       - name: 빌드된 폴더 업로드
         uses: actions/upload-pages-artifact@v3
         with:
-          # 업로드할 대상 폴더 경로
-          path: './frontend/dist'
+          # 업로드할 대상 폴더 경로 (./ 를 제거하여 오류 수정)
+          path: 'frontend/dist'
 
   deploy:
     environment:
