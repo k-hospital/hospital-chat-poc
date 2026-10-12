@@ -135,3 +135,14 @@ export function routeQuestion(text: string): RouteResult {
   const { intent, label, reply, topic } = rule;
   return topic ? { kind: 'intent', intent, label, reply, topic } : { kind: 'intent', intent, label, reply };
 }
+
+// 추천 질문을 눌렀을 때: 엑셀에서 정한 기능(intent)이 우선이다. 키워드 판별기가 못 알아보는 질문
+// (예: "상담원연결")도 정해 둔 기능으로 이동한다. 응급 신호는 이 경우에도 가장 먼저 검사한다.
+export function routeSuggestion(text: string, intent: string, label: string): RouteResult {
+  const q = text.trim();
+  if (EMERGENCY.some((p) => p.test(q))) return { kind: 'emergency' };
+  const routed = routeQuestion(q);
+  // 판별기도 같은 기능으로 봤다면 그쪽의 안내 문구와 주제(topic: 지하철·소화기 등)를 그대로 쓴다
+  if (routed.kind === 'intent' && routed.intent === intent) return routed;
+  return { kind: 'intent', intent, label, reply: `${label}(으)로 이동할게요` };
+}

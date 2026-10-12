@@ -21,7 +21,8 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
   disclaimer?: string;
   echo: ChatEcho | null;
   suggestions: Suggestion[];
-  onSend: (text: string) => void;
+  // 추천 질문을 골랐다면 suggestion(연결 기능 포함)을 함께 넘긴다
+  onSend: (text: string, suggestion?: Suggestion) => void;
   onCloseEcho: () => void;
 }) {
   const [text, setText] = useState('');
@@ -35,8 +36,8 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
 
   const close = () => { setOpen(false); setActive(-1); };
 
-  const send = (t: string) => {
-    onSend(t);
+  const send = (t: string, suggestion?: Suggestion) => {
+    onSend(t, suggestion);
     setText('');
     close();
   };
@@ -44,7 +45,9 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
   const submit = (e: FormEvent) => {
     e.preventDefault();
     const t = text.trim();
-    if (t) send(t);
+    // 추천 질문과 똑같이 직접 입력해도 같은 기능으로 이동 (띄어쓰기 차이는 무시)
+    const squash = (s: string) => s.replace(/\s+/g, '');
+    if (t) send(t, suggestions.find((s) => squash(s.text) === squash(t)));
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -56,7 +59,7 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
       setActive((i) => (i + step + items.length) % items.length);
     } else if (e.key === 'Enter' && active >= 0 && active < items.length) {
       e.preventDefault();
-      send(items[active].text);
+      send(items[active].text, items[active]);
     }
   };
 
@@ -70,7 +73,7 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
               <li key={s.text} id={`${LIST_ID}-${i}`} role="option" aria-selected={i === active}
                 className={`${styles.suggestItem} ${i === active ? styles.suggestActive : ''}`}
                 // 목록을 누르는 동안 입력창이 포커스를 잃어 목록이 닫히지 않도록
-                onMouseDown={(e) => { e.preventDefault(); send(s.text); }}
+                onMouseDown={(e) => { e.preventDefault(); send(s.text, s); }}
                 onMouseEnter={() => setActive(i)}>
                 <span className={styles.suggestIcon}><Icon name={s.icon} size={16} /></span>
                 {s.text}

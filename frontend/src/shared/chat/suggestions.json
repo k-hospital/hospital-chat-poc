@@ -1,0 +1,40 @@
+{
+  "screens": {
+    "home": [
+      {
+        "text": "병원 오시는길",
+        "intent": "info.directions",
+        "label": "오시는 길"
+      },
+      {
+        "text": "진료과 안내",
+        "intent": "info.outpatient",
+        "label": "외래 안내"
+      },
+      {
+        "text": "예약 / 예약 취소",
+        "intent": "booking.lookup",
+        "label": "예약 조회"
+      },
+      {
+        "text": "상담원연결",
+        "intent": "action.agent",
+        "label": "상담원 연결"
+      }
+    ],
+    "info.directions": [
+      {
+        "text": "지하철로 가는 방법",
+        "intent": "info.directions",
+        "label": "오시는 길"
+      }
+    ],
+    "symptom.guide": [
+      {
+        "text": "두통이 심해요",
+        "intent": "symptom.guide",
+        "label": "증상 안내"
+      }
+    ]
+  }
+}
