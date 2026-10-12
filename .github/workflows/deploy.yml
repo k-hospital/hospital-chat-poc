@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+# main 브랜치에 코드가 푸시될 때마다 자동 실행됩니다.
+on:
+  push:
+    branches: ["main"]
+
+# GitHub Pages 배포를 위해 필요한 권한 부여
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 여러 배포가 동시에 실행되지 않도록 방지
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # 모든 명령어는 frontend 폴더 안에서 실행되도록 지정
+    defaults:
+      run:
+        working-directory: ./frontend
+        
+    steps:
+      - name: 저장소 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 환경 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 패키지 설치
+        run: npm install
+
+      - name: 프로젝트 빌드 (추천질문 동기화 및 사이트 빌드)
+        run: npm run sync:suggestions && npm run build:site
+
+      - name: 빌드된 폴더 업로드
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 업로드할 대상 폴더 경로
+          path: './frontend/dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: GitHub Pages로 배포 실행
+        id: deployment
+        uses: actions/deploy-pages@v4
