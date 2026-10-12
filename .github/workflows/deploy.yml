@@ -1,9 +1,10 @@
 name: Deploy to GitHub Pages
 
-# main 브랜치에 코드가 푸시될 때마다 자동 실행됩니다.
+# main 브랜치에 코드가 푸시될 때 자동 실행되고, Actions 탭에서 수동으로도 실행할 수 있다.
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 # GitHub Pages 배포를 위해 필요한 권한 부여
 permissions:
@@ -21,9 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # 명령어(npm install, npm run build)는 frontend 폴더 안에서 실행
+        # run 단계의 명령어(npm ...)는 frontend 폴더 안에서 실행
+        # (uses 단계의 path는 이 설정과 상관없이 저장소 루트 기준)
         working-directory: ./frontend
-        
+
     steps:
       - name: 저장소 코드 가져오기
         uses: actions/checkout@v4
@@ -32,19 +34,28 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
 
-      - name: 패키지 설치
-        run: npm install
+      - name: 패키지 설치 (package-lock.json 그대로)
+        run: npm ci
 
-      - name: 프로젝트 빌드 (추천질문 동기화 및 사이트 빌드)
-        run: npm run sync:suggestions && npm run build:site
+      - name: 테스트
+        run: npm test
+
+      - name: 추천 질문 동기화 및 사이트 빌드
+        env:
+          # GitHub Pages 프로젝트 사이트는 https://<조직>.github.io/<저장소 이름>/ 아래에 올라간다.
+          # 저장소 이름을 바꾸면 이 값도 함께 바꾼다.
+          SITE_BASE: /hospital-chat-poc/
+        # 결과물은 저장소 루트의 production-site 폴더 (.gitignore 대상)
+        run: npm run sync:suggestions && npm run build:site -- --out ../production-site
 
       - name: 빌드된 폴더 업로드
         uses: actions/upload-pages-artifact@v3
         with:
-          # 업로드 플러그인은 최상위 경로에서 폴더를 찾습니다.
-          # 방금 vite.config.ts에서 설정한 상위 폴더 이름과 정확히 일치시킵니다.
-          path: 'production-site'
+          # 저장소 루트 기준 경로 — 위 --out 과 같은 폴더여야 한다.
+          path: production-site
 
   deploy:
     environment:

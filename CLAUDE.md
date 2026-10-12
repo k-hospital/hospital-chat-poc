@@ -33,7 +33,10 @@ npm run sync:suggestions -- <엑셀 경로>       # 다른 위치의 엑셀로 �
 npm run build                                # tsc -b + vite build
 npm run build:site                           # 메인+챗봇 묶음 → <저장소>/deploy
 npm run build:site -- --out <폴더>           # 다른 위치에 생성
+SITE_BASE=/hospital-chat-poc/ npm run build:site   # 하위 경로(GitHub Pages)용 — 챗봇이 /hospital-chat-poc/chat/ 기준으로 빌드됨
 ```
+
+`SITE_BASE`를 비우면 도메인 루트(`/chat/`, Netlify)로 빌드된다. GitHub Pages는 `.github/workflows/deploy.yml`이 `SITE_BASE`를 지정해 `main` push 때 자동 빌드·배포한다 (저장소 Settings → Pages → Source를 **GitHub Actions**로 설정해야 함).
 
 ## 추천 질문 편집 방법
 
