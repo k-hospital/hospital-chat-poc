@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # 명령어 실행 위치: 깃허브 최상위에 있는 frontend 폴더
+        # 명령어(npm install, npm run build)는 frontend 폴더 안에서 실행
         working-directory: ./frontend
         
     steps:
@@ -42,7 +42,8 @@ jobs:
       - name: 빌드된 폴더 업로드
         uses: actions/upload-pages-artifact@v3
         with:
-          # 결과물 업로드 위치: 최상위 경로의 production-site 폴더
+          # 업로드 플러그인은 최상위 경로에서 폴더를 찾습니다.
+          # 방금 vite.config.ts에서 설정한 상위 폴더 이름과 정확히 일치시킵니다.
           path: 'production-site'
 
   deploy:
