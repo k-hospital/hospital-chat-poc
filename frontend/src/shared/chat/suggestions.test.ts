@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { mockConfig } from '../../features/home/mockConfig';
 import { AGENT_KEY, CALLBACK_KEY } from '../links/linkStore';
 import { QUESTION_TARGETS, routeQuestion, routeSuggestion } from './intentRouter';
-import { HOME_SCREEN, matchesQuery, SUGGESTIONS, suggestionsFor, visibleSuggestions } from './suggestions';
+import { HOME_SCREEN, matchesQuery, screenSuggestions, SUGGESTIONS, suggestionsFor } from './suggestions';
 
 // 챗봇이 연결 주소를 받을 수 있는 기능 키 — 엑셀 '목록' 시트의 내부 키가 오타 나면 여기서 걸린다
 const KNOWN_INTENTS = new Set([
@@ -32,12 +32,11 @@ describe('suggestions (엑셀에서 만든 목록)', () => {
     expect(suggestionsFor('faq.hours')).toEqual(SUGGESTIONS[HOME_SCREEN]);
   });
 
-  it('연결 주소가 없는 기능의 질문은 숨기고, 보이는 질문은 정해 둔 기능을 그대로 가짐', () => {
-    const onlyDirections = (intent: string) => intent === 'info.directions';
-    const shown = visibleSuggestions(HOME_SCREEN, onlyDirections);
-    expect(shown.length).toBeGreaterThan(0);
-    expect(shown.every((s) => s.intent === 'info.directions')).toBe(true);
-    expect(visibleSuggestions(HOME_SCREEN, () => false)).toEqual([]);
+  it('연결 주소가 있든 없든 엑셀에서 사용으로 둔 질문을 모두 보여 주고, 정해 둔 기능을 그대로 가짐', () => {
+    const shown = screenSuggestions(HOME_SCREEN);
+    expect(shown.map((s) => s.text)).toEqual(SUGGESTIONS[HOME_SCREEN].map((s) => s.text));
+    expect(shown.map((s) => s.intent)).toEqual(SUGGESTIONS[HOME_SCREEN].map((s) => s.intent));
+    expect(shown.every((s) => Boolean(s.icon))).toBe(true);
   });
 
   it('화면 안에서 같은 질문이 중복되지 않음', () => {

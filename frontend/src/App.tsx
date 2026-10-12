@@ -6,7 +6,7 @@ import { PageViewer, type PageQuery } from './features/page/PageViewer';
 import { SettingsScreen } from './features/settings/SettingsScreen';
 import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './shared/links/linkStore';
 import { routeQuestion, routeSuggestion } from './shared/chat/intentRouter';
-import { HOME_SCREEN, visibleSuggestions, type Suggestion } from './shared/chat/suggestions';
+import { HOME_SCREEN, screenSuggestions, type Suggestion } from './shared/chat/suggestions';
 import { ChatInputBar, type ChatEcho } from './shared/ui/ChatInputBar';
 import styles from './App.module.css';
 
@@ -94,7 +94,7 @@ export default function App() {
   if (!config) return null;
 
   const inSettings = !page && view === 'settings';
-  const suggestions = visibleSuggestions(page?.screen ?? HOME_SCREEN, isLinked);
+  const suggestions = screenSuggestions(page?.screen ?? HOME_SCREEN);
 
   return (
     <div className={styles.shell}>

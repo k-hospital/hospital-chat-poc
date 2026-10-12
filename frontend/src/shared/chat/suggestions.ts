@@ -48,9 +48,8 @@ export function suggestionsFor(screen: string): SuggestionDef[] {
   return SUGGESTIONS[screen] ?? SUGGESTIONS[HOME_SCREEN] ?? [];
 }
 
-// 연결 주소가 없는 기능의 질문은 숨긴다 (누르면 "준비중"만 뜨는 헛걸음 방지)
-export function visibleSuggestions(screen: string, isLinked: (intent: string) => boolean): Suggestion[] {
-  return suggestionsFor(screen)
-    .filter((s) => isLinked(s.intent))
-    .map((s) => ({ ...s, icon: ICONS[s.intent] ?? 'clipboard' }));
+// 연결 주소(⚙ 설정)가 없는 기능의 질문도 그대로 보여 준다. 누르면 "준비중입니다" 안내가 나온다
+// (App.tsx의 ask). 엑셀에서 '사용'으로 둔 질문이 연결 여부 때문에 사라져 헷갈리는 일을 막기 위함.
+export function screenSuggestions(screen: string): Suggestion[] {
+  return suggestionsFor(screen).map((s) => ({ ...s, icon: ICONS[s.intent] ?? 'clipboard' }));
 }
