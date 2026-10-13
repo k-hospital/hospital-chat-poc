@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MainScreen } from './features/home/MainScreen';
 import { mockConfig } from './features/home/mockConfig';
 import type { ChatConfig } from './shared/types/config';
 import { PageViewer, type PageQuery } from './features/page/PageViewer';
 import { SettingsScreen } from './features/settings/SettingsScreen';
 import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './shared/links/linkStore';
-import { routeQuestion, routeSuggestion } from './shared/chat/intentRouter';
+import { routeQuestion, routeSuggestion, type RouteResult } from './shared/chat/intentRouter';
+import { classifyWithServer, type RoutedIntent } from './shared/chat/llmRouter';
 import { HOME_SCREEN, screenSuggestions, type Suggestion } from './shared/chat/suggestions';
 import { ChatInputBar, type ChatEcho } from './shared/ui/ChatInputBar';
 import styles from './App.module.css';
@@ -51,11 +52,27 @@ export default function App() {
     setPage({ url, title: label, screen: key });
   };
 
-  // 질문 입력: 판별 결과에 따라 응급 안내 / 해당 화면 이동 / 추천 메뉴
-  // 추천 질문을 골랐다면(suggestion) 엑셀에서 정한 기능으로 이동한다 — 응급 검사만 먼저 한다
-  const ask = (question: string, suggestion?: Suggestion) => {
+  // 한 기능으로 이동한다. 질문에 요청이 여러 개였다면 남은 기능은 입력 바 위 칩으로 이어서 열 수 있다
+  // (연결 페이지는 챗봇 안 화면 하나라서 한 번에 하나만 연다)
+  const goTo = (item: RoutedIntent, rest: RoutedIntent[], question: string) => {
+    const chips = rest.map((r, i) => ({
+      label: r.label,
+      onClick: () => goTo(r, rest.filter((_, j) => j !== i), question),
+    }));
+    const url = links[item.intent];
+    if (!url) {
+      setEcho({ question, tone: 'normal', reply: `'${item.label}' 서비스는 준비중입니다.`, chips });
+      return;
+    }
+    setView('home');
+    setPage({ url, title: item.label, screen: item.intent, query: { text: question, topic: item.topic } });
+    // 이동한 화면 상단에 입력 내용이 표시되므로 말풍선은 닫는다 (이어서 볼 기능이 있을 때만 칩 안내)
+    setEcho(rest.length > 0 ? { question, tone: 'normal', reply: '이어서 궁금하신 내용도 볼 수 있어요.', chips } : null);
+  };
+
+  // 판별 결과 표시: 응급 안내 / 해당 화면 이동 / 추천 메뉴. rest 는 이어서 열 수 있는 나머지 기능
+  const showResult = (question: string, r: RouteResult, rest: RoutedIntent[] = []) => {
     if (!config) return;
-    const r = suggestion ? routeSuggestion(question, suggestion.intent, suggestion.label) : routeQuestion(question);
     if (r.kind === 'emergency') {
       setEcho({
         question, tone: 'danger', call119: true,
@@ -74,15 +91,33 @@ export default function App() {
       });
       return;
     }
-    const url = links[r.intent];
-    if (!url) {
-      setEcho({ question, tone: 'normal', reply: `'${r.label}' 서비스는 준비중입니다.` });
-      return;
-    }
-    // 이동한 화면 상단에 입력 내용이 표시되므로 말풍선은 닫는다 (이동하지 않는 경우에만 말풍선 안내)
-    setEcho(null);
-    setView('home');
-    setPage({ url, title: r.label, screen: r.intent, query: { text: question, topic: r.topic } });
+    goTo({ intent: r.intent, label: r.label, topic: r.topic }, rest, question);
+  };
+
+  // 질문 입력
+  // - 추천 질문을 골랐다면(suggestion) 엑셀에서 정한 기능으로 이동한다 (응급 검사만 먼저)
+  // - 직접 입력은 응급 규칙을 먼저 보고, 서버(LLM)가 있으면 서버로 분류한다.
+  //   서버가 없거나 실패하면 키워드 규칙 결과를 쓴다
+  const latestAsk = useRef(0);
+  const ask = (question: string, suggestion?: Suggestion) => {
+    if (!config) return;
+    latestAsk.current += 1;
+    const id = latestAsk.current;
+    if (suggestion) return showResult(question, routeSuggestion(question, suggestion.intent, suggestion.label));
+
+    const byRules = routeQuestion(question);
+    if (byRules.kind === 'emergency' || !config.llmRouting) return showResult(question, byRules);
+
+    setEcho({ question, tone: 'normal', reply: '질문을 확인하고 있어요…' });
+    void classifyWithServer(question, API_BASE).then((items) => {
+      if (id !== latestAsk.current) return; // 기다리는 동안 다른 질문을 보냈다면 이전 결과는 버린다
+      if (!items) return showResult(question, byRules);
+      const [first, ...rest] = items;
+      if (first.intent === 'emergency') return showResult(question, { kind: 'emergency' });
+      if (first.intent === 'unknown') return showResult(question, { kind: 'unknown' });
+      const more = rest.filter((r) => r.intent !== 'emergency' && r.intent !== 'unknown');
+      goTo(first, more, question);
+    });
   };
 
   const save = (next: LinkMap) => {

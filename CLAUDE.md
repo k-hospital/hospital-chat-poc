@@ -10,12 +10,15 @@
 | `site/index.html` | 메인 화면 (정적 HTML 한 파일). AI 상담 위젯이 챗봇을 iframe으로 연다 |
 | `frontend/` | 챗봇 (React 18 + TypeScript + Vite) |
 | `frontend/public/pages/` | 챗봇 안에서 여는 연결 페이지 (오시는 길, 증상별 진료 안내) |
-| `backend/` | FastAPI (`/v1/config`). 아직 배포되지 않음 → 프론트는 목업(`mockConfig.ts`)으로 동작 |
+| `backend/` | FastAPI — `/v1/config`(설정), `POST /v1/chat/messages`(질문을 사내 LLM으로 분류, 최대 3개 기능). 사내 PC에서 실행(README "사내 서버 실행"), GitHub Pages에는 없음 → 프론트는 목업(`mockConfig.ts`)과 키워드 규칙으로 동작 |
 
 프론트 주요 파일
 - `src/App.tsx` — 화면 전환(메인 / 연결 페이지 / 설정), 질문 처리(`ask`), 메뉴 이동(`openLink`)
 - `src/shared/ui/ChatInputBar.tsx` — 모든 화면 하단에 고정되는 공통 질문 입력 바
 - `src/shared/chat/intentRouter.ts` — 질문 → 기능(intent) 키워드 판별. 응급 신호를 가장 먼저 검사
+- `src/shared/chat/llmRouter.ts` — 직접 입력한 질문을 서버(`/v1/chat/messages`)로 분류. 실패하면 null → `App.ask`가 키워드 규칙으로 대체. 응급은 서버를 기다리지 않고 규칙이 먼저 처리한다
+- `backend/app/features/chat/` — `intent_prompt.txt`·`intent_schema.json`(프롬프트와 출력 형식, 평가 스크립트도 같은 파일을 읽음), `service.py`(LLM 호출·검증·응급 우선·최대 3개), 질문 문장은 로그에 남기지 않는다
+- `scripts/llm-eval/` — 모델 비교 평가(`npx vite-node scripts/llm-eval/run.ts`). 문항은 `cases.json`, 서버 주소는 `models.local.json`(예시: `models.example.json`). 프롬프트·모델을 바꾸면 다시 돌려 정확도를 확인한다
 - `src/shared/chat/suggestions.ts` — 입력창 화면별 추천 질문. 목록 데이터는 `suggestions.json`(엑셀에서 생성)이고, 질문마다 연결 기능(intent)이 정해져 있어 누르면 키워드 판별기보다 그 기능이 우선한다(`routeSuggestion`). 응급 검사는 그대로 먼저 실행
 - `src/shared/chat/suggestions.json` — **직접 수정하지 않는다.** `data/suggestions.xlsx`를 고친 뒤 `npm run sync:suggestions`로 다시 만든다
 - `data/suggestions.xlsx` — 추천 질문 편집 원본. '추천질문' 시트(질문·화면·연결 기능·순서·사용)와 '목록' 시트(화면/연결 기능 선택지·내부 키). 형식·검증 규칙은 `scripts/suggestionsFromRows.mjs`
@@ -66,5 +69,6 @@ SITE_BASE=/hospital-chat-poc/ npm run build:site   # 하위 경로(GitHub Pages)
 - Windows Git Bash에서 `vite build --base /chat/`처럼 `/`로 시작하는 인자는 경로로 변환되어 빌드가 깨진다 → `build:site` 스크립트(Vite API 직접 호출)를 쓴다.
 - PowerShell 실행 정책 때문에 `npm`(npm.ps1)이 막히면 `npm.cmd` 또는 `node node_modules/...`로 직접 실행한다.
 - 저장소는 **공개(Public)** 이다(무료 플랜에서 Pages를 쓰기 위해 전환). 비밀 값·API 키·실제 기관 정보·개인 연락처를 커밋하지 않는다. 한 번 올라간 기록은 지워도 남는다.
+- **사내 서버 주소(IP)·모델 이름도 커밋하지 않는다.** 코드에는 기본값을 두지 않고 환경변수(`LLM_BASE_URL` 등)나 `*.local.ps1`/`*.local.json`(`.gitignore` 대상)으로만 받는다. push 전에 `git grep -nE "([0-9]{1,3}\.){3}[0-9]{1,3}:[0-9]{2,5}"`로 주소가 남았는지 확인한다.
 - 저장소 루트의 `backend.zip`(node_modules 포함 스냅숏), `deploy/`, `production-site/`는 커밋하지 않는다.
 - 연결 페이지 기본 주소(`DEFAULT_LINKS`)는 빌드된 base 기준으로 계산된다. ⚙ 설정에서 이미 저장한 브라우저는 저장값이 우선하므로, 배포 주소가 바뀌면 설정을 비워야 새 기본값이 적용된다.
