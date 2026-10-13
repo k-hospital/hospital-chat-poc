@@ -7,7 +7,7 @@
 
 | 경로 | 내용 |
 |---|---|
-| `site/index.html` | 메인 화면 (정적 HTML 한 파일). AI 상담 위젯이 챗봇을 iframe으로 연다 |
+| `site/index.html` | 메인 화면 (정적 HTML 한 파일). AI 상담 위젯이 챗봇을 iframe으로 연다. 배포 사이트에서는 같은 사이트의 `chat/`, 내 PC에서는 개발 서버, 개발 서버가 없으면 위젯 폴백(로컬용 대체 주소 `CHATBOT_URL`) |
 | `frontend/` | 챗봇 (React 18 + TypeScript + Vite) |
 | `frontend/public/pages/` | 챗봇 안에서 여는 연결 페이지 (오시는 길, 증상별 진료 안내) |
 | `backend/` | FastAPI — `/v1/config`(설정), `POST /v1/chat/messages`(질문을 사내 LLM으로 분류, 최대 3개 기능). 사내 PC에서 실행(README "사내 서버 실행"), GitHub Pages에는 없음 → 프론트는 목업(`mockConfig.ts`)과 키워드 규칙으로 동작 |
