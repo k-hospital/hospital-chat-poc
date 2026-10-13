@@ -37,3 +37,5 @@ class ChatConfig(CamelModel):
     tiles: list[MenuItem]
     faqs: list[MenuItem]
     disclaimer: str
+    # 질문을 LLM으로 분류할 수 있는 서버인지 (false/없음이면 프론트는 키워드 규칙만 사용)
+    llm_routing: bool = False

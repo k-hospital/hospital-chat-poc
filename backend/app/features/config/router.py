@@ -3,6 +3,7 @@ from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter
 
+from app.features.chat.router import get_settings
 from app.features.config.schemas import ChatConfig, HeroConfig, MenuItem
 
 router = APIRouter(prefix="/v1", tags=["config"])
@@ -48,4 +49,5 @@ async def get_config() -> ChatConfig:
         ],
         # 면책 문구는 삭제 불가: 비어 있으면 기본 문구
         disclaimer=disclaimer.strip() or DEFAULT_DISCLAIMER,
+        llm_routing=get_settings().enabled,
     )

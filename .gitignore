@@ -154,3 +154,10 @@ vite.config.ts.timestamp-*
 
 # 편집 중 남는 백업 파일
 *.bak
+
+# LLM 평가 결과 (로컬 확인용)
+frontend/scripts/llm-eval/results/
+
+# 사내 서버 주소가 들어가는 로컬 전용 설정 (공개 저장소에 올리지 않는다)
+*.local.ps1
+*.local.json
