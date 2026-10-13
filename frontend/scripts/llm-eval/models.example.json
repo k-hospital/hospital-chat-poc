@@ -1,0 +1,5 @@
+{
+  "modelA": { "label": "모델 A", "base": "http://<LLM 서버 주소>:<포트>/v1", "model": "<모델 이름>", "noThink": false },
+  "modelB": { "label": "모델 B", "base": "http://<LLM 서버 주소>:<포트>/v1", "model": "<모델 이름>", "noThink": true },
+  "modelC": { "label": "모델 C (기본 평가에서 제외)", "base": "http://<LLM 서버 주소>:<포트>/v1", "model": "<모델 이름>", "noThink": false, "skipByDefault": true }
+}
