@@ -1,13 +1,13 @@
 # CLAUDE.md
 
 병원 AI 상담 챗봇 POC. 메인 화면(병원 홈페이지형 샘플) + 챗봇을 한 사이트로 묶어 GitHub Pages에 배포한다.
-작업 이력·기능 설명·해야 할 일은 [docs/작업정리.md](docs/작업정리.md)에 있다.
+만든 기능·사용한 스킬·설계 이유·겪은 문제는 [docs/작업정리.md](docs/작업정리.md), 앞으로 해야 할 일은 [docs/작업목록.md](docs/작업목록.md)에 있다 (일을 끝내면 작업목록을 갱신한다).
 
 ## 구조
 
 | 경로 | 내용 |
 |---|---|
-| `site/index.html` | 메인 화면 (정적 HTML 한 파일). AI 상담 위젯이 챗봇을 iframe으로 연다 |
+| `site/index.html` | 메인 화면 (정적 HTML 한 파일). AI 상담 위젯이 챗봇을 iframe으로 연다. 배포 사이트에서는 같은 사이트의 `chat/`, 내 PC에서는 개발 서버, 개발 서버가 없으면 위젯 폴백(로컬용 대체 주소 `CHATBOT_URL`) |
 | `frontend/` | 챗봇 (React 18 + TypeScript + Vite) |
 | `frontend/public/pages/` | 챗봇 안에서 여는 연결 페이지 (오시는 길, 증상별 진료 안내) |
 | `docker/chatpoc/` | 사내 서버 Docker 배포(독립 compose 프로젝트 `chatpoc`, 컨테이너 1개). 설정·계정은 서버의 `.env`에만. 절차는 그 폴더의 README |

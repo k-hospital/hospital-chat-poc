@@ -466,8 +466,10 @@ footer{scroll-snap-align:end;background:#24272d;color:#cfd2d8;font-size:14px}
 
 <script>
 // Chatbot widget: iframe is loaded on first open
-// 로컬 개발 서버(npm run dev)가 켜져 있으면 그쪽을, 아니면 배포본을 사용
+// 로컬 개발 서버(npm run dev)가 켜져 있으면 그쪽을, 아니면 배포본(위젯 폴백)을 사용
 (() => {
+  // 위젯 폴백(로컬용 대체 주소): 내 PC에서 열었는데 개발 서버가 없을 때 쓰는 배포된 챗봇 주소.
+  // "새 탭에서 열기" 링크도 이 주소를 가리킨다. 저장소 이름을 바꾸면 함께 바꾼다.
   const CHATBOT_URL = 'https://k-hospital.github.io/hospital-chat-poc/chat/';
   const LOCAL_CHATBOT_URL = 'http://localhost:5173/';
   const fab = document.querySelector('.chat-fab');
@@ -477,7 +479,7 @@ footer{scroll-snap-align:end;background:#24272d;color:#cfd2d8;font-size:14px}
   newTab.href = CHATBOT_URL;
 
   // 배포된 사이트에서는 같은 사이트의 chat/ (메인+챗봇 묶음 배포)
-  // 내 PC(localhost·파일)에서는 개발 서버 → 없으면 기존 배포본
+  // 내 PC(localhost·파일)에서는 개발 서버 → 없으면 위젯 폴백(CHATBOT_URL, 배포된 챗봇)
   const isLocalPage = ['localhost', '127.0.0.1', ''].includes(location.hostname);
   const resolveUrl = () => {
     if (!isLocalPage) return Promise.resolve(new URL('chat/', location.href).href);
