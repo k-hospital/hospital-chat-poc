@@ -120,7 +120,9 @@ class IntentClassifier:
         # Qwen 계열은 기본이 "생각하는 모드"라 분류에는 끈다 (빠르고 형식이 안정적)
         if "qwen" in ep.model.lower():
             body["chat_template_kwargs"] = {"enable_thinking": False}
-        res = await self.client.post(f"{ep.base_url}/chat/completions", json=body, timeout=self.settings.timeout_seconds)
+        headers = {"Authorization": f"Bearer {self.settings.api_key}"} if self.settings.api_key else {}
+        res = await self.client.post(f"{ep.base_url}/chat/completions", json=body, headers=headers,
+                                     timeout=self.settings.timeout_seconds)
         res.raise_for_status()
         try:
             content = res.json()["choices"][0]["message"]["content"]

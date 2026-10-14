@@ -24,6 +24,7 @@ class LlmSettings:
     enabled: bool
     endpoints: tuple[LlmEndpoint, ...]  # 앞에서부터 시도하고, 실패하면 다음으로 넘어간다
     timeout_seconds: float
+    api_key: str | None = None  # LLM 서버가 키를 요구할 때만 (Authorization: Bearer)
 
 
 def _endpoint(url_var: str, model_var: str) -> LlmEndpoint | None:
@@ -42,4 +43,5 @@ def load_settings() -> LlmSettings:
         enabled=switched_on and bool(endpoints),
         endpoints=tuple(endpoints),
         timeout_seconds=float(os.getenv("LLM_TIMEOUT_SECONDS", str(DEFAULT_TIMEOUT_SECONDS))),
+        api_key=os.getenv("LLM_API_KEY", "").strip() or None,
     )

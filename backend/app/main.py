@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from app.access import BasicAuthMiddleware
 from app.features.chat.router import router as chat_router
 from app.features.config.router import router as config_router
 
@@ -16,6 +17,9 @@ app = FastAPI(title="Hospital Chat POC")
 # 프론트를 다른 도메인(Vercel 등)에 배포할 때 허용할 주소, 쉼표로 구분
 origins = [o for o in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",") if o]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["*"], allow_headers=["*"])
+
+# CHATBOT_BASIC_USER / CHATBOT_BASIC_PASSWORD 가 설정된 경우에만 화면·API에 아이디/비밀번호를 요구한다
+app.add_middleware(BasicAuthMiddleware)
 
 app.include_router(config_router)
 app.include_router(chat_router)
