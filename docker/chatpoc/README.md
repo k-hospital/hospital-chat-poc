@@ -25,6 +25,21 @@ docker/chatpoc/
 | 기존 compose 설정을 확인한 뒤 필요한 서비스만 추가 | 0단계에서 기존 설정을 **읽기만** 한다. 추가하는 서비스는 `chatbot` 하나 |
 | 영향이 있는 변경은 먼저 확인 | 아래 "먼저 확인받을 것"에 해당하면 **작업을 멈추고** 확인받는다 |
 
+### 허용 범위: 챗봇에 대해서만
+
+이 서버에서 허용된 작업은 **POC 챗봇에 한정**된다. 아래 대상만 만들고·바꾸고·멈추고·지울 수 있고, 그 밖의 모든 대상은 **읽기(조회)만** 한다.
+
+| 허용 (챗봇) | 읽기만 (그 외) |
+|---|---|
+| compose 프로젝트 `chatpoc`, 서비스 `chatbot` | 기존 compose 프로젝트·서비스·파일 |
+| 컨테이너 `chatpoc-chatbot` | 기존 컨테이너 |
+| 이미지 `chatpoc/chatbot` | 기존 이미지 |
+| 네트워크 `chatpoc_net` | 기존 네트워크, 볼륨 |
+| 코드 위치 `/opt/chatpoc`(저장소)와 그 안의 `docker/chatpoc/.env` | 기존 서비스 폴더·설정, 호스트 설정 |
+
+- 챗봇 대상의 빌드·기동·중지·재시작·제거는 허용 범위 안의 작업이다.
+- 대상이 챗봇인지 불분명하면 **챗봇이 아닌 것으로 보고** 건드리지 않는다.
+
 ### 먼저 확인받을 것 (임의로 진행하지 않는다)
 - 포트가 겹쳐서 기존 서비스의 포트를 바꿔야 하는 경우 (바꾸는 쪽은 항상 **새 서비스**의 `CHATPOC_PORT`다)
 - 기존 compose 파일·기존 `.env`·기존 네트워크·기존 리버스 프록시(nginx 등) 설정을 수정해야 하는 경우
@@ -140,11 +155,14 @@ docker compose up -d --no-deps chatbot     # .env 가 바뀌었으면 챗봇 컨
 docker compose stop chatbot                # 챗봇만 잠시 중지 (다시 시작: docker compose start chatbot)
 ```
 
-### 이 서비스만 제거해야 할 때 (먼저 확인받는다)
+### 챗봇을 제거해야 할 때 (허용 범위 안의 작업)
 ```bash
 docker compose rm -sf chatbot              # chatpoc-chatbot 컨테이너 하나만 제거
+docker image rm chatpoc/chatbot:latest     # (필요하면) 챗봇 이미지만 제거
 ```
-- `docker compose down`은 쓰지 않는다. 이 서비스를 더 이상 쓰지 않을 때만, 확인을 받은 뒤 위 명령을 쓴다.
+- 제거 대상은 **챗봇(`chatbot` 서비스, `chatpoc/chatbot` 이미지)** 뿐이다. 챗봇은 허용 범위이므로 별도 확인 없이 할 수 있다.
+- `docker compose down`은 쓰지 않는다(이 폴더에서도 마찬가지). 네트워크(`chatpoc_net`)는 챗봇이 없어지면 비어 있게 되며, 남겨 두어도 영향이 없다.
+- 이 명령은 챗봇 외 대상에는 절대 쓰지 않는다. 이름을 한 번 더 확인한 뒤 실행한다.
 
 ### 하지 말 것
 - `docker compose down` (옵션 무관), `docker compose down --remove-orphans`
