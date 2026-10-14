@@ -123,6 +123,19 @@ def test_bad_format_from_first_server_also_tries_next():
     assert res.json()["intents"][0]["intent"] == "faq.parking"
 
 
+def test_sends_api_key_only_when_configured():
+    seen: list[str | None] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(request.headers.get("authorization"))
+        return httpx.Response(200, json=llm_reply(("faq.hours", "none")))
+
+    with_key = LlmSettings(enabled=True, endpoints=(PRIMARY,), timeout_seconds=2, api_key="k-test")
+    make_client(handler, with_key).post("/v1/chat/messages", json={"text": "몇 시까지"})
+    make_client(handler).post("/v1/chat/messages", json={"text": "몇 시까지"})
+    assert seen == ["Bearer k-test", None]
+
+
 def test_503_when_every_server_fails():
     res = make_client(lambda request: httpx.Response(503, text="down")).post("/v1/chat/messages", json={"text": "주차"})
     assert res.status_code == 503

@@ -10,6 +10,7 @@
 | `site/index.html` | 메인 화면 (정적 HTML 한 파일). AI 상담 위젯이 챗봇을 iframe으로 연다 |
 | `frontend/` | 챗봇 (React 18 + TypeScript + Vite) |
 | `frontend/public/pages/` | 챗봇 안에서 여는 연결 페이지 (오시는 길, 증상별 진료 안내) |
+| `docker/chatpoc/` | 사내 서버 Docker 배포(독립 compose 프로젝트 `chatpoc`, 컨테이너 1개). 설정·계정은 서버의 `.env`에만. 절차는 그 폴더의 README |
 | `backend/` | FastAPI — `/v1/config`(설정), `POST /v1/chat/messages`(질문을 사내 LLM으로 분류, 최대 3개 기능). 사내 PC에서 실행(README "사내 서버 실행"), GitHub Pages에는 없음 → 프론트는 목업(`mockConfig.ts`)과 키워드 규칙으로 동작 |
 
 프론트 주요 파일
@@ -70,5 +71,6 @@ SITE_BASE=/hospital-chat-poc/ npm run build:site   # 하위 경로(GitHub Pages)
 - PowerShell 실행 정책 때문에 `npm`(npm.ps1)이 막히면 `npm.cmd` 또는 `node node_modules/...`로 직접 실행한다.
 - 저장소는 **공개(Public)** 이다(무료 플랜에서 Pages를 쓰기 위해 전환). 비밀 값·API 키·실제 기관 정보·개인 연락처를 커밋하지 않는다. 한 번 올라간 기록은 지워도 남는다.
 - **사내 서버 주소(IP)·모델 이름도 커밋하지 않는다.** 코드에는 기본값을 두지 않고 환경변수(`LLM_BASE_URL` 등)나 `*.local.ps1`/`*.local.json`(`.gitignore` 대상)으로만 받는다. push 전에 `git grep -nE "([0-9]{1,3}\.){3}[0-9]{1,3}:[0-9]{2,5}"`로 주소가 남았는지 확인한다.
-- 저장소 루트의 `backend.zip`(node_modules 포함 스냅숏), `deploy/`, `production-site/`는 커밋하지 않는다.
+- 저장소 루트의 `backend.zip`(node_modules 포함 스냅숏), `deploy/`, `production-site/`는 커밋하지 않는다. **`deploy/`는 `build:site`의 기본 출력 폴더라 실행할 때마다 통째로 지워진다 — 배포·운영 파일을 그 안에 두지 않는다.**
+- **사내 서버 작업 원칙 (AI 에이전트 포함, 반드시 지킨다):** 허용된 작업 범위는 **POC 챗봇에 한정**이고 그 밖의 대상은 읽기만 한다(대상이 불분명하면 챗봇이 아닌 것으로 본다). 기존 서비스는 절대 중지·삭제·재생성하지 않는다. `docker compose down`과 서비스 이름 없는 전체 `docker compose up -d` 등은 쓰지 않는다. 새 서비스가 필요하면 기존 compose 설정을 **읽기만** 해서 확인한 뒤 필요한 서비스만 추가하고 그 서비스만 기동한다(`docker compose up -d --no-deps chatbot`). 기존 서비스의 설정이나 컨테이너에 영향을 주는 변경이 필요하면 **반드시 먼저 확인받는다.** 상세는 `docker/chatpoc/README.md`의 "서버 작업 원칙". 계정·주소는 서버의 `.env`에만 적는다.
 - 연결 페이지 기본 주소(`DEFAULT_LINKS`)는 빌드된 base 기준으로 계산된다. ⚙ 설정에서 이미 저장한 브라우저는 저장값이 우선하므로, 배포 주소가 바뀌면 설정을 비워야 새 기본값이 적용된다.

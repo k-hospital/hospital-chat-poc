@@ -1,0 +1,21 @@
+# Docker 빌드 컨텍스트(저장소 루트)에서 제외한다. 특히 사내 주소·계정이 든 로컬 파일이 이미지에 들어가지 않게 한다.
+.git
+.github
+**/node_modules
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/*.tsbuildinfo
+frontend/dist
+frontend/scripts/llm-eval/results
+backend.zip
+**/*.bak
+
+# 사내 서버 주소·계정이 들어가는 로컬 전용 파일
+**/*.local.*
+**/.env
+**/.env.*
+
+# 이미지에 필요 없는 것
+docker
+docs
