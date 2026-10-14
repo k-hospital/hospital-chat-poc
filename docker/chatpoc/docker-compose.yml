@@ -7,8 +7,10 @@
 #   - 호스트 포트    : CHATPOC_PORT (기본 18080) — 서버에서 이미 쓰는 포트와 겹치면 .env 에서 바꾼다
 #   - 볼륨           : 없음 (저장하는 데이터가 없다)
 #
-# 반드시 이 폴더(docker/chatpoc)에서 실행한다:  docker compose up -d --build
-# 다른 폴더의 compose 파일, `--remove-orphans`, `docker system prune` 은 쓰지 않는다.
+# 반드시 이 폴더(docker/chatpoc)에서, 서비스 이름을 지정해 실행한다:
+#   docker compose up -d --build --no-deps chatbot
+# 서비스 이름 없는 `docker compose up -d`, `docker compose down`(옵션 무관), `--remove-orphans`,
+# `docker system prune` 은 쓰지 않는다. 기존 서비스에 영향이 있는 변경은 먼저 확인받는다. (README 참고)
 name: chatpoc
 
 services:
