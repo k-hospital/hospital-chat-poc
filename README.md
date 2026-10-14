@@ -20,6 +20,9 @@ uvicorn app.main:app --reload   # http://localhost:8000/docs
 - 프론트 개발 서버는 /v1 요청을 8000번으로 자동 전달합니다.
 - 테스트: `pip install -r requirements-dev.txt` 후 `python -m pytest` (사내 LLM 서버에는 요청을 보내지 않습니다)
 
+## 사내 서버에 Docker로 배포
+기존 컨테이너를 건드리지 않고 POC 챗봇 컨테이너 하나만 추가하는 compose 구성이 `docker/chatpoc/`에 있습니다. 서버 주소와 아이디/비밀번호는 서버의 `docker/chatpoc/.env`에만 적습니다. 절차는 [docker/chatpoc/README.md](docker/chatpoc/README.md)를 보세요.
+
 ## 사내 서버 실행 (질문을 LLM으로 분류 + 챗봇 화면 함께 제공)
 사내 AI 서버(OpenAI 호환 API)에 닿는 PC 한 대에서 백엔드를 띄우면, 같은 주소로 챗봇 화면과 API를 함께 제공합니다. 직접 입력한 질문은 사내 LLM이 분류하고(여러 요청이면 최대 3개를 순서대로), 서버가 없거나 응답이 없으면 키워드 규칙으로 대체됩니다.
 

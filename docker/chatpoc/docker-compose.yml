@@ -1,0 +1,50 @@
+# 사내 서버에 "POC 챗봇만" 새로 추가하는 compose 파일.
+#
+# 기존 컨테이너·compose 프로젝트를 건드리지 않도록 아래를 모두 분리해 두었다.
+#   - 프로젝트 이름  : chatpoc            (기존 프로젝트와 다른 이름 → 기존 컨테이너를 "고아"로 보지 않음)
+#   - 컨테이너 이름  : chatpoc-chatbot
+#   - 네트워크       : chatpoc_net        (새로 만들며 기존 네트워크에 붙지 않음)
+#   - 호스트 포트    : CHATPOC_PORT (기본 18080) — 서버에서 이미 쓰는 포트와 겹치면 .env 에서 바꾼다
+#   - 볼륨           : 없음 (저장하는 데이터가 없다)
+#
+# 반드시 이 폴더(docker/chatpoc)에서 실행한다:  docker compose up -d --build
+# 다른 폴더의 compose 파일, `--remove-orphans`, `docker system prune` 은 쓰지 않는다.
+name: chatpoc
+
+services:
+  chatbot:
+    container_name: chatpoc-chatbot
+    image: chatpoc/chatbot:${CHATPOC_VERSION:-latest}
+    build:
+      context: ../..
+      dockerfile: docker/chatpoc/Dockerfile
+      args:
+        NPM_REGISTRY: ${NPM_REGISTRY:-}
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-}
+    restart: unless-stopped
+    # 서버 주소·모델·아이디/비밀번호는 .env 에서만 설정한다 (.env.example 참고, 저장소에는 올라가지 않음)
+    env_file:
+      - .env
+    ports:
+      - "${CHATPOC_BIND:-0.0.0.0}:${CHATPOC_PORT:-18080}:8000"
+    networks:
+      - chatpoc
+    # 권한 최소화: 파일 쓰기 금지, 불필요한 권한 제거
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    pids_limit: 256
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  chatpoc:
+    name: chatpoc_net
