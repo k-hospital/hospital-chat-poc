@@ -4,11 +4,11 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 
 from app.access import BasicAuthMiddleware
 from app.features.chat.router import router as chat_router
 from app.features.config.router import router as config_router
+from app.static_site import CachedStaticFiles
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 
@@ -37,4 +37,4 @@ if _site_dir:
     _site_path = Path(_site_dir)
     if not _site_path.is_dir():
         raise RuntimeError(f"SITE_DIR 폴더가 없습니다: {_site_path}")
-    app.mount("/", StaticFiles(directory=_site_path, html=True), name="site")
+    app.mount("/", CachedStaticFiles(directory=_site_path, html=True), name="site")
