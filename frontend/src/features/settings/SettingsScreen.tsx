@@ -86,41 +86,10 @@ export function SettingsScreen({ config, links, onSave, hours, onSaveHours, onBa
         <button type="button" className={styles.backBtn} onClick={onBack} aria-label="뒤로">
           <Icon name="back" size={20} strokeWidth={2.2} />
         </button>
-        <h1>기능별 연결 주소</h1>
+        <h1>설정</h1>
       </header>
 
       <form className={styles.form} onSubmit={submit} noValidate>
-        <p className={styles.intro}>
-          버튼을 눌렀을 때 챗봇 안에서 열릴 주소를 등록하세요. 비워 두면 '준비중'으로 표시됩니다.
-        </p>
-
-        {groups.map((g) => (
-          <section key={g.title} className={styles.group}>
-            <h2>{g.title}</h2>
-            {g.rows.map((r) => {
-              const id = `link-${r.key}`;
-              const value = draft[r.key] ?? '';
-              return (
-                <div key={r.key} className={styles.row}>
-                  <label htmlFor={id} className={styles.rowHead}>
-                    <span className={styles.label}>{r.label}</span>
-                    <span className={styles.hint}>{r.hint} · {r.key}</span>
-                  </label>
-                  <div className={styles.inputWrap}>
-                    <input id={id} type="text" inputMode="url" placeholder="https:// 또는 /pages/..."
-                      value={value} onChange={(e) => change(r.key, e.target.value)}
-                      aria-invalid={errors[r.key] ? true : undefined} autoComplete="off" />
-                    {value && (
-                      <button type="button" className={styles.clearBtn} onClick={() => change(r.key, '')} aria-label={`${r.label} 주소 지우기`}>✕</button>
-                    )}
-                  </div>
-                  {errors[r.key] && <p className={styles.error}>https:// 주소 또는 / 로 시작하는 경로를 입력하세요</p>}
-                </div>
-              );
-            })}
-          </section>
-        ))}
-
         <section className={styles.group} aria-label="상담 운영시간">
           <h2>상담 운영시간</h2>
           <div className={styles.row}>
@@ -159,6 +128,38 @@ export function SettingsScreen({ config, links, onSave, hours, onSaveHours, onBa
             )}
           </div>
         </section>
+
+        <h2 className={styles.pageSection}>기능별 연결 주소</h2>
+        <p className={styles.intro}>
+          버튼을 눌렀을 때 챗봇 안에서 열릴 주소를 등록하세요. 비워 두면 '준비중'으로 표시됩니다.
+        </p>
+
+        {groups.map((g) => (
+          <section key={g.title} className={styles.group}>
+            <h2>{g.title}</h2>
+            {g.rows.map((r) => {
+              const id = `link-${r.key}`;
+              const value = draft[r.key] ?? '';
+              return (
+                <div key={r.key} className={styles.row}>
+                  <label htmlFor={id} className={styles.rowHead}>
+                    <span className={styles.label}>{r.label}</span>
+                    <span className={styles.hint}>{r.hint} · {r.key}</span>
+                  </label>
+                  <div className={styles.inputWrap}>
+                    <input id={id} type="text" inputMode="url" placeholder="https:// 또는 /pages/..."
+                      value={value} onChange={(e) => change(r.key, e.target.value)}
+                      aria-invalid={errors[r.key] ? true : undefined} autoComplete="off" />
+                    {value && (
+                      <button type="button" className={styles.clearBtn} onClick={() => change(r.key, '')} aria-label={`${r.label} 주소 지우기`}>✕</button>
+                    )}
+                  </div>
+                  {errors[r.key] && <p className={styles.error}>https:// 주소 또는 / 로 시작하는 경로를 입력하세요</p>}
+                </div>
+              );
+            })}
+          </section>
+        ))}
 
         <div className={styles.actions}>
           {saved === 'ok' && <span className={styles.savedMsg} role="status">저장되었습니다</span>}
