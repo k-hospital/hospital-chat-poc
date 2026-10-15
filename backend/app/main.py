@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.access import BasicAuthMiddleware
+from app.ai_proxy import router_from_env
 from app.features.chat.router import router as chat_router
 from app.features.config.router import router as config_router
 from app.static_site import CachedStaticFiles
@@ -23,6 +24,12 @@ app.add_middleware(BasicAuthMiddleware)
 
 app.include_router(config_router)
 app.include_router(chat_router)
+
+# AI_BACKEND_URL 이 있을 때만: 음성인식·외국어 답변·상담원 연결(ai-backend)로 해당 /v1 경로를 넘긴다.
+# 정적 화면 연결보다 먼저 등록해야 한다.
+_ai_router = router_from_env()
+if _ai_router is not None:
+    app.include_router(_ai_router)
 
 
 @app.get("/health")

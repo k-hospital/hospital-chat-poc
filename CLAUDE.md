@@ -22,6 +22,7 @@
 - 음성·외국어·상담원 연결 (ai-backend와 짝): `src/shared/speech/useVoiceInput.ts`(녹음→`/v1/stt`), `src/features/chat/ChatView.tsx`(외국어 AI 답변 화면), `src/features/handoff/HandoffView.tsx`(상담원 대기·대화·콜백), `src/agent/AgentApp.tsx`(상담원 화면 `…/agent` 또는 `?agent`). `App.ask`는 **한글이 없는 질문만** `/v1/chat`으로 보내고 한국어는 기존 흐름 그대로
 - `src/shared/chat/llmRouter.ts` — 직접 입력한 질문을 서버(`/v1/chat/messages`)로 분류. 실패하면 null → `App.ask`가 키워드 규칙으로 대체. 응급은 서버를 기다리지 않고 규칙이 먼저 처리한다
 - `backend/app/static_site.py` — 서버가 화면(`SITE_DIR`)을 줄 때의 캐시 규칙. 화면·페이지는 `no-cache`(매번 변경 여부만 확인), 해시가 붙은 `assets/…-<해시>.js|css`만 1년 캐시. 서버를 갱신해도 브라우저가 예전 화면을 붙들고 있는 일을 막는다
+- `backend/app/ai_proxy.py` — `AI_BACKEND_URL`이 있을 때만 켜지는 프록시. `ai-backend/`의 `/v1/stt`·`/v1/chat`·`/v1/handoff*`·`/v1/agent*`·`/v1/callbacks`(WebSocket 포함)를 같은 주소로 넘긴다. 목록에 있는 경로만 넘기며 팀 backend 경로는 건드리지 않는다. 배포는 `docker/chatpoc/AI_BACKEND.md`(compose profile `ai`, 기본은 꺼짐)
 - `backend/app/features/chat/` — `intent_prompt.txt`·`intent_schema.json`(프롬프트와 출력 형식, 평가 스크립트도 같은 파일을 읽음), `service.py`(LLM 호출·검증·응급 우선·최대 3개), 질문 문장은 로그에 남기지 않는다
 - `scripts/llm-eval/` — 모델 비교 평가(`npx vite-node scripts/llm-eval/run.ts`). 문항은 `cases.json`, 서버 주소는 `models.local.json`(예시: `models.example.json`). 프롬프트·모델을 바꾸면 다시 돌려 정확도를 확인한다
 - `src/shared/chat/suggestions.ts` — 입력창 화면별 추천 질문. 목록 데이터는 `suggestions.json`(엑셀에서 생성)이고, 질문마다 연결 기능(intent)이 정해져 있어 누르면 키워드 판별기보다 그 기능이 우선한다(`routeSuggestion`). 응급 검사는 그대로 먼저 실행
