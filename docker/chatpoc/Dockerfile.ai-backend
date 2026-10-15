@@ -1,0 +1,35 @@
+# syntax=docker/dockerfile:1
+# ai-backend(음성인식 · 외국어 답변 · 상담원 연결) 이미지.
+# 팀 backend 컨테이너(chatbot)가 /v1/stt, /v1/chat, /v1/handoff … 경로를 이 컨테이너로 넘긴다 (AI_BACKEND_URL).
+# 빌드 컨텍스트는 저장소 루트다 (docker/chatpoc/docker-compose.yml 의 ai-backend.build.context).
+#
+# ⚠ 이 서비스는 compose profile "ai" 로 분리되어 있어 기본 명령(서비스 이름 chatbot)에는 영향이 없다.
+#   켜기 전에 docker/chatpoc/AI_BACKEND.md 의 "결정 사항"을 먼저 확인받는다.
+
+ARG PYTHON_IMAGE=python:3.12-slim
+FROM ${PYTHON_IMAGE}
+
+# 사내 PyPI 미러가 필요하면 PIP_INDEX_URL 로 지정한다
+ARG PIP_INDEX_URL=
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    CALLBACK_DB=/data/callbacks.db
+WORKDIR /app
+
+COPY ai-backend/requirements.txt .
+RUN pip install --no-cache-dir ${PIP_INDEX_URL:+--index-url "$PIP_INDEX_URL"} -r requirements.txt
+
+# 앱 코드만 복사한다 (tests/ 의 대용량 측정 데이터와 .env 는 넣지 않는다)
+COPY ai-backend/app.py ai-backend/callbacks.py ai-backend/config.py ai-backend/handoff.py \
+     ai-backend/prompts.py ai-backend/rag.py ai-backend/stt.py ai-backend/translate.py ./
+
+# root 로 실행하지 않는다. 콜백(전화번호) SQLite 는 /data (compose 의 이름 있는 볼륨) 에만 쓴다
+RUN useradd --system --no-create-home --uid 10002 aibackend \
+ && mkdir -p /data && chown aibackend /data
+USER aibackend
+
+EXPOSE 8100
+HEALTHCHECK --interval=30s --timeout=3s --start-period=20s --retries=3 \
+  CMD python -c "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8100/v1/health', timeout=2).status == 200 else 1)"
+# 상담 대기열·대화는 프로세스 메모리에 있으므로 작업자(worker)는 반드시 1개다
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8100", "--workers", "1"]
