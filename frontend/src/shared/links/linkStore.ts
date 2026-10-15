@@ -22,17 +22,53 @@ export const DEFAULT_LINKS: LinkMap = {
   'faq.parking': `${SITE_ROOT}pages/directions.html#car`,
 };
 
+// 이미 적용해 본 기본 연결의 키 목록. 설정을 저장한 브라우저에도 "나중에 추가된" 기본 연결은
+// 한 번 채워 주되, 사용자가 지운 것은 다시 채우지 않기 위해 둔다.
+const SEEN_KEY = 'chatpoc.links.defaults.v1';
+// 이 목록을 기록하기 전부터 있던 기본 연결 — 기록이 없는 브라우저는 이미 본 것으로 취급한다
+// (그 전에 사용자가 비워 둔 값을 되살리지 않기 위해).
+const LEGACY_DEFAULT_KEYS = ['info.directions', 'symptom.guide', 'faq.parking'];
+
+function readSeen(): string[] {
+  try {
+    const raw = localStorage.getItem(SEEN_KEY);
+    if (raw === null) return LEGACY_DEFAULT_KEYS;
+    const parsed: unknown = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((k): k is string => typeof k === 'string') : LEGACY_DEFAULT_KEYS;
+  } catch {
+    return LEGACY_DEFAULT_KEYS;
+  }
+}
+
 export function loadLinks(): LinkMap {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw === null) return { ...DEFAULT_LINKS };
+    if (raw === null) {
+      localStorage.setItem(SEEN_KEY, JSON.stringify(Object.keys(DEFAULT_LINKS)));
+      return { ...DEFAULT_LINKS };
+    }
     const parsed: unknown = JSON.parse(raw);
     if (!parsed || typeof parsed !== 'object') return {};
-    return Object.fromEntries(
+    const stored: LinkMap = Object.fromEntries(
       Object.entries(parsed as Record<string, unknown>).filter(
         (e): e is [string, string] => typeof e[1] === 'string' && e[1].trim() !== '',
       ),
     );
+
+    // 설정을 저장한 뒤에 추가된 기본 연결(예: 건강검진 안내)은 한 번만 채워 준다
+    const seen = readSeen();
+    const added = Object.keys(DEFAULT_LINKS).filter((k) => !seen.includes(k) && !(k in stored));
+    if (added.length > 0) {
+      const merged: LinkMap = { ...stored };
+      for (const k of added) merged[k] = DEFAULT_LINKS[k]!;
+      saveLinks(merged);
+      localStorage.setItem(SEEN_KEY, JSON.stringify(Object.keys(DEFAULT_LINKS)));
+      return merged;
+    }
+    if (Object.keys(DEFAULT_LINKS).some((k) => !seen.includes(k))) {
+      localStorage.setItem(SEEN_KEY, JSON.stringify(Object.keys(DEFAULT_LINKS)));
+    }
+    return stored;
   } catch (err) {
     console.warn('연결 주소를 불러오지 못했습니다', err);
     return { ...DEFAULT_LINKS };
