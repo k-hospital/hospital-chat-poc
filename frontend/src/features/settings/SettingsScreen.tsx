@@ -3,6 +3,7 @@ import { Icon } from '../../shared/ui/icons';
 import type { ChatConfig } from '../../shared/types/config';
 import { AGENT_KEY, CALLBACK_KEY, isValidUrl, type LinkMap } from '../../shared/links/linkStore';
 import { QUESTION_TARGETS } from '../../shared/chat/intentRouter';
+import { DEFAULT_HOURS, hoursError, hoursText, type OperatingHours } from '../../shared/hours/hoursStore';
 import styles from './SettingsScreen.module.css';
 
 interface Row { key: string; label: string; hint: string }
@@ -10,13 +11,23 @@ interface Group { title: string; rows: Row[] }
 
 const byOrder = <T extends { order: number }>(items: T[]) => [...items].sort((a, b) => a.order - b.order);
 
-export function SettingsScreen({ config, links, onSave, onBack }: {
+export function SettingsScreen({ config, links, onSave, hours, onSaveHours, onBack }: {
   config: ChatConfig;
   links: LinkMap;
   onSave: (links: LinkMap) => boolean;
+  hours: OperatingHours | null;                          // 저장된 운영시간 (없으면 서버 기준)
+  onSaveHours: (hours: OperatingHours | null) => boolean; // null 이면 서버 기준으로 되돌림
   onBack: () => void;
 }) {
   const [draft, setDraft] = useState<LinkMap>(links);
+  const [draftHours, setDraftHours] = useState<OperatingHours | null>(hours);
+  const shownHours = draftHours ?? DEFAULT_HOURS;
+  const hoursProblem = draftHours ? hoursError(draftHours) : null;
+  const changeHours = (patch: Partial<OperatingHours>) => {
+    setDraftHours({ ...shownHours, ...patch });
+    setTouched(true);
+    setSaved(null);
+  };
   const [touched, setTouched] = useState(false);
   const [saved, setSaved] = useState<'ok' | 'fail' | null>(null);
 
@@ -48,7 +59,7 @@ export function SettingsScreen({ config, links, onSave, onBack }: {
   const errors = Object.fromEntries(
     Object.entries(draft).filter(([, v]) => v.trim() && !isValidUrl(v.trim())).map(([k]) => [k, true]),
   );
-  const hasError = Object.keys(errors).length > 0;
+  const hasError = Object.keys(errors).length > 0 || hoursProblem !== null;
 
   const change = (key: string, value: string) => {
     setDraft((d) => ({ ...d, [key]: value }));
@@ -62,7 +73,9 @@ export function SettingsScreen({ config, links, onSave, onBack }: {
     const clean = Object.fromEntries(
       Object.entries(draft).map(([k, v]) => [k, v.trim()] as const).filter(([, v]) => v),
     );
-    const ok = onSave(clean);
+    const linksOk = onSave(clean);
+    const hoursOk = onSaveHours(draftHours);
+    const ok = linksOk && hoursOk;
     setSaved(ok ? 'ok' : 'fail');
     if (ok) setTouched(false);
   };
@@ -107,6 +120,45 @@ export function SettingsScreen({ config, links, onSave, onBack }: {
             })}
           </section>
         ))}
+
+        <section className={styles.group} aria-label="상담 운영시간">
+          <h2>상담 운영시간</h2>
+          <div className={styles.row}>
+            <div className={styles.rowHead}>
+              <span className={styles.label}>운영 시간</span>
+              <span className={styles.hint}>{draftHours ? hoursText(draftHours) : `서버 기준 · ${config.operatingHoursText}`}</span>
+            </div>
+            <div className={styles.timeRow}>
+              <label className={styles.timeField}>
+                <span>시작</span>
+                <input type="time" value={shownHours.start} step={60} required
+                  onChange={(e) => changeHours({ start: e.target.value })}
+                  aria-invalid={hoursProblem ? true : undefined} />
+              </label>
+              <label className={styles.timeField}>
+                <span>종료</span>
+                <input type="time" value={shownHours.end} step={60} required
+                  onChange={(e) => changeHours({ end: e.target.value })}
+                  aria-invalid={hoursProblem ? true : undefined} />
+              </label>
+            </div>
+            <label className={styles.check}>
+              <input type="checkbox" checked={shownHours.weekdaysOnly}
+                onChange={(e) => changeHours({ weekdaysOnly: e.target.checked })} />
+              평일만 운영 (주말은 야간 화면)
+            </label>
+            {hoursProblem && <p className={styles.error} role="alert">{hoursProblem}</p>}
+            <p className={styles.note}>
+              이 시간 밖에는 상담원 대신 콜백 요청 안내가 나옵니다. 이 기기의 시간 기준이며, 이 브라우저에만 저장됩니다.
+            </p>
+            {draftHours && (
+              <button type="button" className={styles.resetBtn}
+                onClick={() => { setDraftHours(null); setTouched(true); setSaved(null); }}>
+                서버 기준으로 되돌리기
+              </button>
+            )}
+          </div>
+        </section>
 
         <div className={styles.actions}>
           {saved === 'ok' && <span className={styles.savedMsg} role="status">저장되었습니다</span>}

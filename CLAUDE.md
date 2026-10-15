@@ -27,6 +27,7 @@
 - `src/shared/chat/suggestions.json` — **직접 수정하지 않는다.** `data/suggestions.xlsx`를 고친 뒤 `npm run sync:suggestions`로 다시 만든다
 - `data/suggestions.xlsx` — 추천 질문 편집 원본. '추천질문' 시트(질문·화면·연결 기능·순서·사용)와 '목록' 시트(화면/연결 기능 선택지·내부 키). 형식·검증 규칙은 `scripts/suggestionsFromRows.mjs`
 - `src/shared/links/linkStore.ts` — 기능별 연결 주소(localStorage) + 기본값(`DEFAULT_LINKS`)
+- `src/shared/hours/hoursStore.ts` — ⚙ 설정의 "상담 운영시간"(시작·종료·평일만, localStorage `chatpoc.hours.v1`). 저장하면 서버가 알려 주는 운영시간 대신 이 값으로 야간 화면 여부를 판단하고(`App.tsx`), 지우면(null) 서버 기준으로 돌아간다. `?night=1` 데모는 설정보다 우선한다. 시각은 이 기기의 현지 시간 기준
 - `src/features/page/PageViewer.tsx` — 연결 페이지를 챗봇 안 iframe으로 표시, 입력 문구는 postMessage로 같은 사이트에만 전달
 
 ## 명령어 (frontend/)
