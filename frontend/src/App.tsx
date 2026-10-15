@@ -5,6 +5,7 @@ import type { ChatConfig } from './shared/types/config';
 import { PageViewer, type PageQuery } from './features/page/PageViewer';
 import { SettingsScreen } from './features/settings/SettingsScreen';
 import { AGENT_KEY, CALLBACK_KEY, loadLinks, saveLinks, type LinkMap } from './shared/links/linkStore';
+import { hoursText, isWithinHours, loadHours, saveHours, type OperatingHours } from './shared/hours/hoursStore';
 import { routeQuestion, routeSuggestion, type RouteResult } from './shared/chat/intentRouter';
 import { classifyWithServer, type RoutedIntent } from './shared/chat/llmRouter';
 import { HOME_SCREEN, screenSuggestions, type Suggestion } from './shared/chat/suggestions';
@@ -22,8 +23,27 @@ import styles from './App.module.css';
 // 백엔드 주소: 배포 시 VITE_API_BASE 환경변수로 지정 (비우면 같은 도메인의 /v1)
 const API_BASE = import.meta.env.VITE_API_BASE ?? '';
 
+// 데모용: ?night=1 이면 설정과 관계없이 야간 화면
+const FORCE_NIGHT = new URLSearchParams(location.search).get('night') === '1';
+
 export default function App() {
-  const [config, setConfig] = useState<ChatConfig | null>(null);
+  const [serverConfig, setConfig] = useState<ChatConfig | null>(null);
+  // ⚙ 설정에서 정한 상담 운영시간. 없으면(null) 서버가 알려 주는 운영시간을 쓴다
+  const [hours, setHours] = useState<OperatingHours | null>(loadHours);
+  // 운영 시간 경계를 넘으면 화면이 바뀌도록 분 단위로 시각을 갱신한다
+  const [minute, setMinute] = useState(() => Math.floor(Date.now() / 60000));
+  useEffect(() => {
+    const t = window.setInterval(() => setMinute(Math.floor(Date.now() / 60000)), 15000);
+    return () => window.clearInterval(t);
+  }, []);
+  const config = useMemo<ChatConfig | null>(() => {
+    if (!serverConfig || !hours || FORCE_NIGHT) return serverConfig;
+    return {
+      ...serverConfig,
+      isOperatingHours: isWithinHours(hours, new Date(minute * 60000)),
+      operatingHoursText: hoursText(hours),
+    };
+  }, [serverConfig, hours, minute]);
   const [notice, setNotice] = useState<string | null>(null);
   const [view, setView] = useState<'home' | 'settings' | 'chat' | 'handoff'>('home');
   const [turns, setTurns] = useState<ChatTurn[]>([]);
@@ -34,14 +54,11 @@ export default function App() {
   const [echo, setEcho] = useState<ChatEcho | null>(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const forceNight = params.get('night') === '1'; // 데모용: ?night=1 이면 야간 화면
-
     fetch(`${API_BASE}/v1/config`)
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((c: ChatConfig) => setConfig(forceNight ? { ...c, isOperatingHours: false } : c))
+      .then((c: ChatConfig) => setConfig(FORCE_NIGHT ? { ...c, isOperatingHours: false } : c))
       // 백엔드가 없으면 목업으로 화면 표시 (프론트만 배포해도 데모 가능)
-      .catch(() => setConfig({ ...mockConfig, isOperatingHours: !forceNight }));
+      .catch(() => setConfig({ ...mockConfig, isOperatingHours: !FORCE_NIGHT }));
   }, []);
 
   const show = (msg: string) => {
@@ -170,6 +187,13 @@ export default function App() {
     return ok;
   };
 
+  // null 이면 설정을 지우고 서버 기준 운영시간으로 되돌린다
+  const saveOperatingHours = (next: OperatingHours | null) => {
+    const ok = saveHours(next);
+    if (ok) setHours(next);
+    return ok;
+  };
+
   if (!config) return null;
 
   const inSettings = !page && view === 'settings';
@@ -189,7 +213,9 @@ export default function App() {
           <ChatView turns={turns} onBack={() => setView('home')}
             onAgent={lastLang === 'ko' ? () => openHandoff(config.isOperatingHours ? 'agent' : 'callback') : undefined} />
         ) : inSettings ? (
-          <SettingsScreen config={config} links={links} onSave={save} onBack={() => setView('home')} />
+          // 설정 화면에는 서버 기준 값을 넘긴다 ("서버 기준" 운영시간 문구가 설정값에 덮이지 않게)
+          <SettingsScreen config={serverConfig ?? config} links={links} onSave={save}
+            hours={hours} onSaveHours={saveOperatingHours} onBack={() => setView('home')} />
         ) : (
           <MainScreen
             config={config}
