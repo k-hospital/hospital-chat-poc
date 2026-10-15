@@ -37,7 +37,7 @@ LABELS = {
     "faq.certificate": "증명서 발급",
     "doctor.search": "의료진 찾기",
     "info.outpatient": "외래 안내",
-    "info.health": "건강 정보",
+    "info.health": "건강검진 안내",
     "action.agent": "상담원 연결",
     "action.callback": "콜백 요청",
     "emergency": "응급",

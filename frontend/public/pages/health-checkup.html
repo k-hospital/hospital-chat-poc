@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>건강검진 안내</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* 챗봇 메인 화면과 같은 디자인 토큰 */
+:root {
+  --accent: #1F4E8C;
+  --accent-soft: #E3ECF7;
+  --ink: #152238;
+  --ink-sub: #4A5668;
+  --line: #DDE3EB;
+  --line-strong: #C9D3E0;
+  --ground: #F4F6F9;
+  --warn-bg: #FFF6E5;
+  --warn-line: #F0D9A8;
+  --warn-ink: #7A5200;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--ground); color: var(--ink);
+  font-family: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 480px; margin: 0 auto; padding: 16px 20px 28px; display: flex; flex-direction: column; gap: 14px; }
+
+.intro h1 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.5px; }
+.intro p { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-sub); line-height: 1.5; }
+/* 챗봇 안에서 열리면 상단 바에 제목이 있으므로 본문 제목 숨김 */
+.embedded .intro h1 { display: none; }
+.embedded .intro p { margin: 0; }
+
+/* 검진 종류 카드 (종합 / 국가 / 특수) */
+.kind { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.kind[open] { border-color: var(--line-strong); }
+.kind summary {
+  list-style: none; cursor: pointer; display: flex; gap: 12px; align-items: center; padding: 14px 16px;
+}
+.kind summary::-webkit-details-marker { display: none; }
+.ico { width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; }
+.kind .head { flex: 1; min-width: 0; }
+.kind .head strong { display: block; font-size: 17px; letter-spacing: -0.3px; }
+.kind .head span { display: block; font-size: 13px; color: var(--ink-sub); margin-top: 2px; }
+.chev { flex-shrink: 0; color: var(--ink-sub); transition: transform .15s; }
+.kind[open] .chev { transform: rotate(180deg); }
+
+.items { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+.item { background: var(--ground); border-radius: 12px; padding: 12px 14px; }
+.item h3 { margin: 0 0 6px; font-size: 14px; color: var(--accent); }
+.item dl { margin: 0; display: grid; grid-template-columns: 52px 1fr; gap: 4px 8px; font-size: 13px; line-height: 1.5; }
+.item dt { color: var(--ink-sub); }
+.item dd { margin: 0; }
+
+/* 준비사항 */
+.card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.card h2 { margin: 0 0 10px; font-size: 14px; color: var(--accent); }
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.list li { position: relative; padding-left: 16px; font-size: 13.5px; line-height: 1.5; }
+.list li::before { content: ""; position: absolute; left: 3px; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.note { margin: 10px 0 0; font-size: 12px; color: var(--ink-sub); line-height: 1.5; }
+
+.notice { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 12px; padding: 10px 14px; font-size: 12.5px; line-height: 1.5; color: var(--warn-ink); }
+
+.btn {
+  height: 46px; border-radius: 12px; border: 1.5px solid var(--accent); background: #fff; color: var(--accent);
+  font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; text-decoration: none;
+}
+.foot { text-align: center; font-size: 11.5px; color: #8592A3; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="intro">
+    <h1>건강검진 안내</h1>
+    <p id="lead">검진 종류를 눌러 대상과 구성을 확인해 보세요</p>
+  </div>
+
+  <details class="kind" id="general" open>
+    <summary>
+      <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+      <span class="head"><strong>종합검진</strong><span>개인검진 · 기업검진</span></span>
+      <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </summary>
+    <div class="items">
+      <section class="item" aria-label="개인검진">
+        <h3>개인검진</h3>
+        <dl>
+          <dt>대상</dt><dd>건강 상태를 정기적으로 확인하고 싶은 분</dd>
+          <dt>구성</dt><dd>기본 계측 · 혈액 · 소변 검사, 영상 검사 등 (패키지별로 다름)</dd>
+          <dt>선택</dt><dd>내시경 · 심장 · 뇌 검사 등을 추가할 수 있어요</dd>
+        </dl>
+      </section>
+      <section class="item" aria-label="기업검진">
+        <h3>기업검진</h3>
+        <dl>
+          <dt>대상</dt><dd>소속 직원이 함께 받는 단체 검진</dd>
+          <dt>구성</dt><dd>항목과 일정은 기관 담당자와 협의해서 정해요</dd>
+          <dt>결과</dt><dd>개인별 결과 안내 방식도 미리 협의해요</dd>
+        </dl>
+      </section>
+    </div>
+  </details>
+
+  <details class="kind" id="national">
+    <summary>
+      <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.2 7.8 8 9 4.8-1.2 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <span class="head"><strong>국가검진</strong><span>공단검진 · 암검진</span></span>
+      <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </summary>
+    <div class="items">
+      <section class="item" aria-label="공단검진">
+        <h3>공단검진</h3>
+        <dl>
+          <dt>대상</dt><dd>건강보험 가입자 중 해당 연도 검진 대상자</dd>
+          <dt>확인</dt><dd>대상 여부와 검진 항목은 검진 안내문이나 건강보험공단에서 확인해요</dd>
+          <dt>지참</dt><dd>신분증, 검진 안내문(있는 경우)</dd>
+        </dl>
+      </section>
+      <section class="item" aria-label="암검진">
+        <h3>암검진</h3>
+        <dl>
+          <dt>대상</dt><dd>나이와 성별에 따라 대상 암종이 정해져 있어요</dd>
+          <dt>주기</dt><dd>암종별로 검진 주기가 달라요</dd>
+          <dt>확인</dt><dd>본인의 대상 여부는 공단 안내를 함께 확인해 주세요</dd>
+        </dl>
+      </section>
+    </div>
+  </details>
+
+  <details class="kind" id="special">
+    <summary>
+      <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></span>
+      <span class="head"><strong>특수검진</strong><span>유해인자 · 야간작업</span></span>
+      <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </summary>
+    <div class="items">
+      <section class="item" aria-label="유해인자 검진">
+        <h3>유해인자 검진</h3>
+        <dl>
+          <dt>대상</dt><dd>소음 · 분진 · 화학물질 등 유해 요인에 노출되는 업무를 하는 분</dd>
+          <dt>구성</dt><dd>노출되는 유해 요인에 따라 검사 항목이 달라요</dd>
+          <dt>안내</dt><dd>사업장 담당자와 함께 대상과 항목을 확인해요</dd>
+        </dl>
+      </section>
+      <section class="item" aria-label="야간작업 검진">
+        <h3>야간작업 검진</h3>
+        <dl>
+          <dt>대상</dt><dd>야간 근무를 하는 분</dd>
+          <dt>주기</dt><dd>정해진 주기에 맞춰 받아요</dd>
+          <dt>안내</dt><dd>근무 형태에 따라 해당 여부가 달라질 수 있어요</dd>
+        </dl>
+      </section>
+    </div>
+  </details>
+
+  <section class="card" aria-label="검진 전 준비사항">
+    <h2>검진 전에 준비해 주세요</h2>
+    <ul class="list">
+      <li>검사 전 일정 시간 금식이 필요할 수 있어요 (검사에 따라 달라요)</li>
+      <li>복용 중인 약이 있다면 예약할 때 알려 주세요</li>
+      <li>신분증과 검진 안내문(있는 경우)을 챙겨 주세요</li>
+      <li>임신했거나 임신 가능성이 있으면 검사 전에 꼭 알려 주세요</li>
+      <li>편한 복장으로 오시고, 금속 장신구는 빼 주세요</li>
+    </ul>
+    <p class="note">검진 종류와 패키지에 따라 준비사항이 다를 수 있어요. 예약할 때 안내받은 내용이 우선이에요.</p>
+  </section>
+
+  <p class="notice">검진 항목·대상·비용은 병원과 연도에 따라 달라질 수 있어요. 정확한 내용은 예약 전에 병원에 확인해 주세요.</p>
+
+  <a class="btn" href="tel:0000-0000">검진 예약·문의 전화 0000-0000</a>
+
+  <p class="foot">샘플 화면 · AI 안내는 참고용이며 진단이 아닙니다<br>검진 결과의 해석은 의료진 상담을 받으세요</p>
+</div>
+
+<script>
+  if (window.self !== window.top) document.documentElement.classList.add('embedded');
+
+  const KINDS = ['general', 'national', 'special'];
+
+  // 챗봇이 알려 준 검진 종류의 카드만 펼친다 (나머지는 접음)
+  const openKind = (topic) => {
+    if (!KINDS.includes(topic)) return;
+    KINDS.forEach((id) => { document.getElementById(id).open = id === topic; });
+    document.getElementById(topic).scrollIntoView({ block: 'start', behavior: 'smooth' });
+  };
+
+  // 챗봇이 보내는 주제 수신 — 같은 사이트의 부모 창에서 온 메시지만 받음
+  window.addEventListener('message', (e) => {
+    if (e.origin !== location.origin || e.source !== window.parent) return;
+    const d = e.data;
+    if (!d || d.type !== 'chatpoc:query') return;
+    openKind(d.topic);
+  });
+</script>
+</body>
+</html>

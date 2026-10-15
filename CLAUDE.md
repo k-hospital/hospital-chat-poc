@@ -9,7 +9,7 @@
 |---|---|
 | `site/index.html` | 메인 화면 (정적 HTML 한 파일). AI 상담 위젯이 챗봇을 iframe으로 연다. 배포 사이트에서는 같은 사이트의 `chat/`, 내 PC에서는 개발 서버, 개발 서버가 없으면 위젯 폴백(로컬용 대체 주소 `CHATBOT_URL`) |
 | `frontend/` | 챗봇 (React 18 + TypeScript + Vite) |
-| `frontend/public/pages/` | 챗봇 안에서 여는 연결 페이지 (오시는 길, 증상별 진료 안내) |
+| `frontend/public/pages/` | 챗봇 안에서 여는 연결 페이지 (오시는 길, 증상별 진료 안내, 건강검진 안내). 건강검진 안내는 `info.health`(메뉴 "건강검진 안내")의 기본 연결이고, 질문에 검진 종류가 있으면 `topic`(general/national/special)으로 해당 카드를 펼친다 |
 | `docker/chatpoc/` | 사내 서버 Docker 배포(독립 compose 프로젝트 `chatpoc`, 컨테이너 1개). 설정·계정은 서버의 `.env`에만. 절차는 그 폴더의 README |
 | `ai-backend/` | FastAPI(별도 포트 8100) — **마이크·외국어 입력·상담원 연결 전용**: `/v1/stt`(사내 Whisper), `/v1/chat`(RAG 답변, 외국어는 그 언어로), `/v1/handoff`·`/v1/agent`(상담원 연결 WebSocket, 국내 전용, 대화 저장 안 함), `/v1/callbacks`(콜백, SQLite 7일 후 삭제). 비밀값은 `ai-backend/.env`(예시 `.env.example`). 실행·구조는 `ai-backend/README.md` |
 | `data-pipeline/` | 검색 데이터(Qdrant `hospital_chunks`) 청킹·적재 스크립트. 원본 데이터(json)는 저장소에 넣지 않음 — `docs/데이터_파이프라인.md` |

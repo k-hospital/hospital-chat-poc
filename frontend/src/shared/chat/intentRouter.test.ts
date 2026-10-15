@@ -108,6 +108,27 @@ describe('routeQuestion', () => {
     expect(intentOf('주차 요금은요?')).toBe('faq.parking');
   });
 
+  it.each(['건강검진 안내해 주세요', '검진 받고 싶어요', '종합검진 항목이 궁금해요', '건강 검진 어디서 받나요', '건강 정보 보고 싶어요'])(
+    '건강검진 안내 표현: %s', (text) => {
+      expect(routeQuestion(text)).toMatchObject({ kind: 'intent', intent: 'info.health', label: '건강검진 안내' });
+    },
+  );
+
+  it('검진 종류를 말하면 해당 검진 카드 주제로 판별', () => {
+    expect(routeQuestion('국가검진 대상이 궁금해요')).toMatchObject({ intent: 'info.health', topic: 'national' });
+    expect(routeQuestion('암검진 받으려면 어떻게 해요')).toMatchObject({ intent: 'info.health', topic: 'national' });
+    expect(routeQuestion('야간작업자 특수검진 안내')).toMatchObject({ intent: 'info.health', topic: 'special' });
+    expect(routeQuestion('기업검진 문의')).toMatchObject({ intent: 'info.health', topic: 'general' });
+  });
+
+  it('건강검진 예약 문의는 기존 예약 규칙을 따른다', () => {
+    expect(intentOf('건강검진 예약하고 싶어요')).toBe('booking.start');
+  });
+
+  it("'건강'이 들어가도 검진과 무관한 말은 건강검진 안내로 보지 않음", () => {
+    expect(intentOf('건강보험료 얼마 내야 해요')).toBe('unknown');
+  });
+
   it("'배'가 들어가도 증상이 아닌 말은 증상으로 보지 않음", () => {
     expect(intentOf('배송 문의')).toBe('unknown');
     expect(intentOf('배우고 싶어요')).toBe('unknown');

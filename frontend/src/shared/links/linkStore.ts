@@ -17,6 +17,7 @@ const SITE_ROOT = import.meta.env.BASE_URL.replace(/chat\/$/, '');
 export const DEFAULT_LINKS: LinkMap = {
   'info.directions': `${SITE_ROOT}pages/directions.html`,
   'symptom.guide': `${SITE_ROOT}pages/symptom.html`,
+  'info.health': `${SITE_ROOT}pages/health-checkup.html`,
   // 주차 안내는 오시는 길의 자가용 탭(주차 안내 포함)으로 연결
   'faq.parking': `${SITE_ROOT}pages/directions.html#car`,
 };
