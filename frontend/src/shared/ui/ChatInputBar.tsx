@@ -1,6 +1,7 @@
 import { useState, type FormEvent, type KeyboardEvent } from 'react';
 import { Icon } from './icons';
 import { matchesQuery, type Suggestion } from '../chat/suggestions';
+import { useVoiceInput, voiceSupported } from '../speech/useVoiceInput';
 import styles from './ChatInputBar.module.css';
 
 // 질문 직후 입력창 위에 보여 주는 한 번의 주고받기 (내 질문 + 안내)
@@ -17,12 +18,13 @@ const LIST_ID = 'chat-suggest';
 
 // 모든 화면 아래에 고정되는 공통 질문 입력 바 — 화면이 바뀌어도 입력 중인 글자 유지
 // 입력창을 누르면 지금 화면에 맞는 추천 질문 목록을 보여 주고, 고르면 바로 전송한다
-export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEcho }: {
+export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onVoice, onCloseEcho }: {
   disclaimer?: string;
   echo: ChatEcho | null;
   suggestions: Suggestion[];
   // 추천 질문을 골랐다면 suggestion(연결 기능 포함)을 함께 넘긴다
   onSend: (text: string, suggestion?: Suggestion) => void;
+  onVoice?: (text: string, lang: string | null) => void;   // 음성 인식 결과 (바로 전송, ai-backend /v1/stt)
   onCloseEcho: () => void;
 }) {
   const [text, setText] = useState('');
@@ -30,6 +32,14 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
   const [active, setActive] = useState(-1);
   // 면책 문구는 관리자가 비워도 기본 문구로 강제 노출
   const notice = disclaimer?.trim() || DEFAULT_DISCLAIMER;
+
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+  const voice = useVoiceInput({
+    onResult: (t, lang) => { setVoiceError(null); onVoice?.(t, lang); },
+    onError: setVoiceError,
+  });
+  const canVoice = Boolean(onVoice) && voiceSupported();
+  const mmss = `${Math.floor(voice.seconds / 60)}:${String(voice.seconds % 60).padStart(2, '0')}`;
 
   const items = suggestions.filter((s) => matchesQuery(s.text, text));
   const showList = open && items.length > 0;
@@ -99,7 +109,15 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
           )}
         </section>
       )}
-      <p className={styles.disclaimer}><Icon name="info" size={13} strokeWidth={2} /> {notice}</p>
+      {voice.state === 'recording' ? (
+        <p className={styles.voiceStatus} role="status"><span className={styles.dot} /> 듣고 있어요 {mmss} · 다 말씀하셨으면 마이크를 다시 눌러 주세요</p>
+      ) : voice.state === 'processing' ? (
+        <p className={styles.voiceStatus} role="status">말씀하신 내용을 확인하고 있어요…</p>
+      ) : voiceError ? (
+        <p className={`${styles.voiceStatus} ${styles.voiceError}`} role="alert">{voiceError}</p>
+      ) : (
+        <p className={styles.disclaimer}><Icon name="info" size={13} strokeWidth={2} /> {notice}</p>
+      )}
       <form className={styles.inputRow} onSubmit={submit}>
         <label htmlFor="chat-ask" className={styles.srOnly}>질문 입력</label>
         <input id="chat-ask" value={text} placeholder="증상이나 궁금한 점을 물어보세요" autoComplete="off"
@@ -107,7 +125,13 @@ export function ChatInputBar({ disclaimer, echo, suggestions, onSend, onCloseEch
           aria-activedescendant={showList && active >= 0 ? `${LIST_ID}-${active}` : undefined}
           onChange={(e) => { setText(e.target.value); setOpen(true); setActive(-1); }}
           onFocus={() => setOpen(true)} onBlur={close} onKeyDown={onKeyDown} />
-        <button type="button" className={styles.micBtn} aria-label="음성 입력"><Icon name="mic" /></button>
+        {canVoice && (
+          <button type="button" className={`${styles.micBtn} ${voice.state === 'recording' ? styles.micOn : ''}`}
+            aria-label={voice.state === 'recording' ? '녹음 끝내기' : '음성 입력'} aria-pressed={voice.state === 'recording'}
+            disabled={voice.state === 'processing'} onClick={() => { setVoiceError(null); voice.toggle(); }}>
+            <Icon name="mic" />
+          </button>
+        )}
         <button type="submit" className={styles.sendBtn} aria-label="보내기" disabled={!text.trim()}>
           <Icon name="send" size={18} strokeWidth={2.4} />
         </button>

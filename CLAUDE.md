@@ -11,12 +11,15 @@
 | `frontend/` | 챗봇 (React 18 + TypeScript + Vite) |
 | `frontend/public/pages/` | 챗봇 안에서 여는 연결 페이지 (오시는 길, 증상별 진료 안내) |
 | `docker/chatpoc/` | 사내 서버 Docker 배포(독립 compose 프로젝트 `chatpoc`, 컨테이너 1개). 설정·계정은 서버의 `.env`에만. 절차는 그 폴더의 README |
+| `ai-backend/` | FastAPI(별도 포트 8100) — **마이크·외국어 입력·상담원 연결 전용**: `/v1/stt`(사내 Whisper), `/v1/chat`(RAG 답변, 외국어는 그 언어로), `/v1/handoff`·`/v1/agent`(상담원 연결 WebSocket, 국내 전용, 대화 저장 안 함), `/v1/callbacks`(콜백, SQLite 7일 후 삭제). 비밀값은 `ai-backend/.env`(예시 `.env.example`). 실행·구조는 `ai-backend/README.md` |
+| `data-pipeline/` | 검색 데이터(Qdrant `hospital_chunks`) 청킹·적재 스크립트. 원본 데이터(json)는 저장소에 넣지 않음 — `docs/데이터_파이프라인.md` |
 | `backend/` | FastAPI — `/v1/config`(설정), `POST /v1/chat/messages`(질문을 사내 LLM으로 분류, 최대 3개 기능). 사내 PC에서 실행(README "사내 서버 실행"), GitHub Pages에는 없음 → 프론트는 목업(`mockConfig.ts`)과 키워드 규칙으로 동작 |
 
 프론트 주요 파일
 - `src/App.tsx` — 화면 전환(메인 / 연결 페이지 / 설정), 질문 처리(`ask`), 메뉴 이동(`openLink`)
 - `src/shared/ui/ChatInputBar.tsx` — 모든 화면 하단에 고정되는 공통 질문 입력 바
 - `src/shared/chat/intentRouter.ts` — 질문 → 기능(intent) 키워드 판별. 응급 신호를 가장 먼저 검사
+- 음성·외국어·상담원 연결 (ai-backend와 짝): `src/shared/speech/useVoiceInput.ts`(녹음→`/v1/stt`), `src/features/chat/ChatView.tsx`(외국어 AI 답변 화면), `src/features/handoff/HandoffView.tsx`(상담원 대기·대화·콜백), `src/agent/AgentApp.tsx`(상담원 화면 `…/agent` 또는 `?agent`). `App.ask`는 **한글이 없는 질문만** `/v1/chat`으로 보내고 한국어는 기존 흐름 그대로
 - `src/shared/chat/llmRouter.ts` — 직접 입력한 질문을 서버(`/v1/chat/messages`)로 분류. 실패하면 null → `App.ask`가 키워드 규칙으로 대체. 응급은 서버를 기다리지 않고 규칙이 먼저 처리한다
 - `backend/app/features/chat/` — `intent_prompt.txt`·`intent_schema.json`(프롬프트와 출력 형식, 평가 스크립트도 같은 파일을 읽음), `service.py`(LLM 호출·검증·응급 우선·최대 3개), 질문 문장은 로그에 남기지 않는다
 - `scripts/llm-eval/` — 모델 비교 평가(`npx vite-node scripts/llm-eval/run.ts`). 문항은 `cases.json`, 서버 주소는 `models.local.json`(예시: `models.example.json`). 프롬프트·모델을 바꾸면 다시 돌려 정확도를 확인한다
