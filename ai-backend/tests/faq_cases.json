@@ -1,0 +1,2743 @@
+[
+ {
+  "q": "병원장 인사말에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5568"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "센터개요에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5655"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "진료협력센터의 역할에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5655"
+  ],
+  "section": "진료협력센터의 역할",
+  "code": ""
+ },
+ {
+  "q": "안전보건경영방침에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5570"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "HI소개에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5571"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "심볼 로고조합(세로)에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5571"
+  ],
+  "section": "심볼 로고조합(세로)",
+  "code": ""
+ },
+ {
+  "q": "수련교육부 인사말에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5574"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "대외협력실장 인사말에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5656"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "대외진료협력팀에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5657"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "진료의뢰 프로세스에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5733"
+  ],
+  "section": "진료의뢰 프로세스",
+  "code": ""
+ },
+ {
+  "q": "협력네트워크 개요에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5658"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "CRC 협력의료기관에 드리는 혜택에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5658"
+  ],
+  "section": "CRC 협력의료기관에 드리는 혜택",
+  "code": ""
+ },
+ {
+  "q": "협력체결 절차에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5659"
+  ],
+  "section": "협력체결 절차",
+  "code": ""
+ },
+ {
+  "q": "병리팀에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5483"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "약제팀에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5489"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "영양팀에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5491"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "의료정보팀에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5683"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "의학도서실에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5484"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "인체로부에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5507"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원소식지에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5516"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "간섬유화검사실에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5512"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "검사 방법에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5512"
+  ],
+  "section": "검사 방법",
+  "code": ""
+ },
+ {
+  "q": "MRI 검사에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5495"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "사전 준비가 필요하지 않으며, 조영제 사용이 필요한 경우를 제외하고는 금식하지 않아도 됩니다.에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5495"
+  ],
+  "section": "사전 준비가 필요하지 않으며, 조영제 사용이 필요한 경우를 제외하고는 금식하지 않아도 됩니다.",
+  "code": ""
+ },
+ {
+  "q": "MRI 검사시 주의사항에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5495"
+  ],
+  "section": "MRI 검사시 주의사항",
+  "code": ""
+ },
+ {
+  "q": "MRI 관련 Q&A에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5495"
+  ],
+  "section": "MRI 관련 Q&A",
+  "code": ""
+ },
+ {
+  "q": "내시경검사 안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "위내시경 검사에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "위내시경 검사",
+  "code": ""
+ },
+ {
+  "q": "대장내시경 (CFS = Colonofiberscope) 검사에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "대장내시경 (CFS = Colonofiberscope) 검사",
+  "code": ""
+ },
+ {
+  "q": "대장내시경 적응증에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "대장내시경 적응증",
+  "code": ""
+ },
+ {
+  "q": "대장내시경 금기증에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "대장내시경 금기증",
+  "code": ""
+ },
+ {
+  "q": "초음파 내시경 (EUS = Endoscopic ultrasonography) 검사에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "초음파 내시경 (EUS = Endoscopic ultrasonography) 검사",
+  "code": ""
+ },
+ {
+  "q": "초음파 내시경 적응증에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "초음파 내시경 적응증",
+  "code": ""
+ },
+ {
+  "q": "역행성내시경적 췌∙담도조영술의 적응증에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "역행성내시경적 췌∙담도조영술의 적응증",
+  "code": ""
+ },
+ {
+  "q": "역행성내시경적 췌∙담도조영술의 금기증에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "역행성내시경적 췌∙담도조영술의 금기증",
+  "code": ""
+ },
+ {
+  "q": "진단방법에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "진단방법",
+  "code": ""
+ },
+ {
+  "q": "제균요법에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6299"
+  ],
+  "section": "제균요법",
+  "code": ""
+ },
+ {
+  "q": "운동치료실에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5502"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "치료방법에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5502"
+  ],
+  "section": "치료방법",
+  "code": ""
+ },
+ {
+  "q": "간호부에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5485"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "소개 및 심의절차에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5666"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "진료·접수 시간은 어떻게 돼요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5676"
+  ],
+  "section": "접수 및 진료시간",
+  "code": ""
+ },
+ {
+  "q": "자동차 보험(처리절차)에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5676"
+  ],
+  "section": "자동차 보험(처리절차)",
+  "code": ""
+ },
+ {
+  "q": "산업재해보상보험에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5676"
+  ],
+  "section": "산업재해보상보험",
+  "code": ""
+ },
+ {
+  "q": "유의사항에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5676"
+  ],
+  "section": "유의사항",
+  "code": ""
+ },
+ {
+  "q": "경우2에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5676"
+  ],
+  "section": "경우2",
+  "code": ""
+ },
+ {
+  "q": "대리처방이 가능한 보호자 등(대리수령자)의 범위에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5676"
+  ],
+  "section": "대리처방이 가능한 보호자 등(대리수령자)의 범위",
+  "code": ""
+ },
+ {
+  "q": "구비서류 : 다음의 서류를 모두 구비에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5676"
+  ],
+  "section": "구비서류 : 다음의 서류를 모두 구비",
+  "code": ""
+ },
+ {
+  "q": "진료절차에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5677",
+   "https://www.ish.or.kr/main/center/view.do?v_idx=48"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "진료비하이패스에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6283"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "입원안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5550"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "입원절차에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5550",
+   "https://www.ish.or.kr/main/center/view.do?v_idx=48"
+  ],
+  "section": "입원절차",
+  "code": ""
+ },
+ {
+  "q": "병실배정안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5550"
+  ],
+  "section": "병실배정안내",
+  "code": ""
+ },
+ {
+  "q": "병실배정 및 입원문의에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5550"
+  ],
+  "section": "병실배정 및 입원문의",
+  "code": ""
+ },
+ {
+  "q": "진료비 중간계산에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5550"
+  ],
+  "section": "진료비 중간계산",
+  "code": ""
+ },
+ {
+  "q": "퇴원 안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5551"
+  ],
+  "section": "퇴원 안내",
+  "code": ""
+ },
+ {
+  "q": "가퇴원에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5551"
+  ],
+  "section": "가퇴원",
+  "code": ""
+ },
+ {
+  "q": "입원확인서 및 진단서 발급을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5551"
+  ],
+  "section": "입원확인서 및 진단서 발급",
+  "code": ""
+ },
+ {
+  "q": "기간입원약정서에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6284"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "제증명/진단서을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5553"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "제증명 발급절차을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5553"
+  ],
+  "section": "제증명 발급절차",
+  "code": ""
+ },
+ {
+  "q": "진단서 발급시 구비서류을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5553"
+  ],
+  "section": "진단서 발급시 구비서류",
+  "code": ""
+ },
+ {
+  "q": "진단서 발급시 유의사항을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5553"
+  ],
+  "section": "진단서 발급시 유의사항",
+  "code": ""
+ },
+ {
+  "q": "다운로드 서식에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5553"
+  ],
+  "section": "다운로드 서식",
+  "code": ""
+ },
+ {
+  "q": "진료기록사본을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5554"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "구비서류 안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5554"
+  ],
+  "section": "구비서류 안내",
+  "code": ""
+ },
+ {
+  "q": "환자의 동의를 받을 수 없는 경우 사본 발급 요청 시 구비서류 (친족사본 발급 요청 시)을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5554"
+  ],
+  "section": "환자의 동의를 받을 수 없는 경우 사본 발급 요청 시 구비서류 (친족사본 발급 요청 시)",
+  "code": ""
+ },
+ {
+  "q": "환자의 동의를 받지 못하고 환자의 친족이 없는 경우 (형제/자매 사본발급 요청 시)을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5554"
+  ],
+  "section": "환자의 동의를 받지 못하고 환자의 친족이 없는 경우 (형제/자매 사본발급 요청 시)",
+  "code": ""
+ },
+ {
+  "q": "진료기록사본 발급 시 숙지사항을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5554"
+  ],
+  "section": "진료기록사본 발급 시 숙지사항",
+  "code": ""
+ },
+ {
+  "q": "진료기록사본 발급 수수료(진료과별/발행번호별 산정)을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5554"
+  ],
+  "section": "진료기록사본 발급 수수료(진료과별/발행번호별 산정)",
+  "code": ""
+ },
+ {
+  "q": "발급절차 안내을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5555"
+  ],
+  "section": "발급절차 안내",
+  "code": ""
+ },
+ {
+  "q": "발급가능한 자료을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5555"
+  ],
+  "section": "발급가능한 자료",
+  "code": ""
+ },
+ {
+  "q": "진료기록 사본 발급시 구비서류을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5555"
+  ],
+  "section": "진료기록 사본 발급시 구비서류",
+  "code": ""
+ },
+ {
+  "q": "환자 동의를 받을수 없는 경우에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5555"
+  ],
+  "section": "환자 동의를 받을수 없는 경우",
+  "code": ""
+ },
+ {
+  "q": "영상자료 발급비용 안내을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5555"
+  ],
+  "section": "영상자료 발급비용 안내",
+  "code": ""
+ },
+ {
+  "q": "납입확인서을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5556"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원을 방문하실 때에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5556"
+  ],
+  "section": "병원을 방문하실 때",
+  "code": ""
+ },
+ {
+  "q": "모바일 발급안내을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5557"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "발급 가능 증명서을(를) 발급받으려면 어떻게 해야 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5557"
+  ],
+  "section": "발급 가능 증명서",
+  "code": ""
+ },
+ {
+  "q": "간호·간병통합서비스에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6296"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "2. 입원수속에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6296"
+  ],
+  "section": "2. 입원수속",
+  "code": ""
+ },
+ {
+  "q": "환자 및 보호자 주의사항에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6296"
+  ],
+  "section": "환자 및 보호자 주의사항",
+  "code": ""
+ },
+ {
+  "q": "병원에 대중교통으로 오려면 어떻게 가나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5636"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원에 공항으로 오려면 어떻게 가나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5637"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원에 고속도로으로 오려면 어떻게 가나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5638"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원 주차는 어떻게 하나요? 요금도 궁금해요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5543"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원 주차 요금안내이(가) 어떻게 돼요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5543"
+  ],
+  "section": "주차 요금안내",
+  "code": ""
+ },
+ {
+  "q": "병원 전화번호를 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5545"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "원무팀에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5545"
+  ],
+  "section": "원무팀",
+  "code": ""
+ },
+ {
+  "q": "병문안안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5546"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병문안 시 감염관리 지침 준수에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5546"
+  ],
+  "section": "병문안 시 감염관리 지침 준수",
+  "code": ""
+ },
+ {
+  "q": "응급진료에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5540"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "응급증상안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5540"
+  ],
+  "section": "응급증상안내",
+  "code": ""
+ },
+ {
+  "q": "당직전문의 운영진료 안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5540"
+  ],
+  "section": "당직전문의 운영진료 안내",
+  "code": ""
+ },
+ {
+  "q": "가정간호에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5541"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "중환자실 소개에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6286"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "기본 간호 제공에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6286"
+  ],
+  "section": "기본 간호 제공",
+  "code": ""
+ },
+ {
+  "q": "중환자 간호 제공에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6286"
+  ],
+  "section": "중환자 간호 제공",
+  "code": ""
+ },
+ {
+  "q": "입실안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6287"
+  ],
+  "section": "입실안내",
+  "code": ""
+ },
+ {
+  "q": "입실 시 준비물품에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6287"
+  ],
+  "section": "입실 시 준비물품",
+  "code": ""
+ },
+ {
+  "q": "퇴실안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6287"
+  ],
+  "section": "퇴실안내",
+  "code": ""
+ },
+ {
+  "q": "입원한 가족을 면회 갈 때 안내사항이 뭐가요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6288"
+  ],
+  "section": "면회안내",
+  "code": ""
+ },
+ {
+  "q": "생활안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6288"
+  ],
+  "section": "생활안내",
+  "code": ""
+ },
+ {
+  "q": "회진에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6288"
+  ],
+  "section": "회진",
+  "code": ""
+ },
+ {
+  "q": "서류 신청에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6288"
+  ],
+  "section": "서류 신청",
+  "code": ""
+ },
+ {
+  "q": "환자의 권리와 의무에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6289"
+  ],
+  "section": "환자의 권리와 의무",
+  "code": ""
+ },
+ {
+  "q": "사생활 보호 안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6289"
+  ],
+  "section": "사생활 보호 안내",
+  "code": ""
+ },
+ {
+  "q": "환자 안전/윤리에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6289"
+  ],
+  "section": "환자 안전/윤리",
+  "code": ""
+ },
+ {
+  "q": "불만 및 고충 사항 상담 안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6289"
+  ],
+  "section": "불만 및 고충 사항 상담 안내",
+  "code": ""
+ },
+ {
+  "q": "중환자실치료가 왜 필요한가요?에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6290"
+  ],
+  "section": "중환자실치료가 왜 필요한가요?",
+  "code": ""
+ },
+ {
+  "q": "섬망이란 무엇인가요?에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6290"
+  ],
+  "section": "섬망이란 무엇인가요?",
+  "code": ""
+ },
+ {
+  "q": "신체 보호대는 어떤 경우에 하나요?에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6290"
+  ],
+  "section": "신체 보호대는 어떤 경우에 하나요?",
+  "code": ""
+ },
+ {
+  "q": "면담 신청은 어떻게 하나요?에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6290"
+  ],
+  "section": "면담 신청은 어떻게 하나요?",
+  "code": ""
+ },
+ {
+  "q": "일반병실로 또는 퇴원은 언제 하나요?에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6290"
+  ],
+  "section": "일반병실로 또는 퇴원은 언제 하나요?",
+  "code": ""
+ },
+ {
+  "q": "실천 소개에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5529",
+   "https://www.ish.or.kr/main/contents.do?idx=5710",
+   "https://www.ish.or.kr/main/contents.do?idx=5717"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "담당 주치의 또는 병동 간호사에게 요청하거나 직접 방문도 가능합니다.에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5529"
+  ],
+  "section": "담당 주치의 또는 병동 간호사에게 요청하거나 직접 방문도 가능합니다.",
+  "code": ""
+ },
+ {
+  "q": "활동업무에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5710"
+  ],
+  "section": "활동업무",
+  "code": ""
+ },
+ {
+  "q": "병원 자원봉사자의 자격에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5717"
+  ],
+  "section": "병원 자원봉사자의 자격",
+  "code": ""
+ },
+ {
+  "q": "기부후원에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5528"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "이념 및 철학에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=5699"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "미션ㆍ비전ㆍ핵심가치에 대해 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6292"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원 홍보 동영상을 볼 수 있나요?",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/contents.do?idx=6293"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "가정의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=4"
+  ],
+  "section": "가정의학과",
+  "code": ""
+ },
+ {
+  "q": "감염내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=5"
+  ],
+  "section": "감염내과",
+  "code": ""
+ },
+ {
+  "q": "내분비대사내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=49"
+  ],
+  "section": "내분비대사내과",
+  "code": ""
+ },
+ {
+  "q": "류마티스내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=50"
+  ],
+  "section": "류마티스내과",
+  "code": ""
+ },
+ {
+  "q": "마취통증의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=51"
+  ],
+  "section": "마취통증의학과",
+  "code": ""
+ },
+ {
+  "q": "방사선종양학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=52"
+  ],
+  "section": "방사선종양학과",
+  "code": ""
+ },
+ {
+  "q": "병리과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=53"
+  ],
+  "section": "병리과",
+  "code": ""
+ },
+ {
+  "q": "비뇨의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=54"
+  ],
+  "section": "비뇨의학과",
+  "code": ""
+ },
+ {
+  "q": "산부인과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=55"
+  ],
+  "section": "산부인과",
+  "code": ""
+ },
+ {
+  "q": "성형외과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=56"
+  ],
+  "section": "성형외과",
+  "code": ""
+ },
+ {
+  "q": "소화기내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=58"
+  ],
+  "section": "소화기내과",
+  "code": ""
+ },
+ {
+  "q": "신경과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=59"
+  ],
+  "section": "신경과",
+  "code": ""
+ },
+ {
+  "q": "신경외과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=60"
+  ],
+  "section": "신경외과",
+  "code": ""
+ },
+ {
+  "q": "신장내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=61"
+  ],
+  "section": "신장내과",
+  "code": ""
+ },
+ {
+  "q": "심장내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=62"
+  ],
+  "section": "심장내과",
+  "code": ""
+ },
+ {
+  "q": "심장혈관흉부외과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=79"
+  ],
+  "section": "심장혈관흉부외과",
+  "code": ""
+ },
+ {
+  "q": "안과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=63"
+  ],
+  "section": "안과",
+  "code": ""
+ },
+ {
+  "q": "알레르기면역내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=80"
+  ],
+  "section": "알레르기면역내과",
+  "code": ""
+ },
+ {
+  "q": "영상의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=64"
+  ],
+  "section": "영상의학과",
+  "code": ""
+ },
+ {
+  "q": "외과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=65",
+   "https://www.ish.or.kr/main/center/view.do?v_idx=51"
+  ],
+  "section": "외과",
+  "code": ""
+ },
+ {
+  "q": "응급의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=66"
+  ],
+  "section": "응급의학과",
+  "code": ""
+ },
+ {
+  "q": "진료흐름도 진료과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=66"
+  ],
+  "section": "진료흐름도",
+  "code": ""
+ },
+ {
+  "q": "이비인후-두경부외과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=67"
+  ],
+  "section": "이비인후-두경부외과",
+  "code": ""
+ },
+ {
+  "q": "재활의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=68"
+  ],
+  "section": "재활의학과",
+  "code": ""
+ },
+ {
+  "q": "정신건강의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=69"
+  ],
+  "section": "정신건강의학과",
+  "code": ""
+ },
+ {
+  "q": "정형외과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=70"
+  ],
+  "section": "정형외과",
+  "code": ""
+ },
+ {
+  "q": "종양혈액내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=71"
+  ],
+  "section": "종양혈액내과",
+  "code": ""
+ },
+ {
+  "q": "직업환경의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=72"
+  ],
+  "section": "직업환경의학과",
+  "code": ""
+ },
+ {
+  "q": "진단검사의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=73"
+  ],
+  "section": "진단검사의학과",
+  "code": ""
+ },
+ {
+  "q": "치과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=74"
+  ],
+  "section": "치과",
+  "code": ""
+ },
+ {
+  "q": "피부과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=75"
+  ],
+  "section": "피부과",
+  "code": ""
+ },
+ {
+  "q": "한의과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=78"
+  ],
+  "section": "한의과",
+  "code": ""
+ },
+ {
+  "q": "핵의학과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=76"
+  ],
+  "section": "핵의학과",
+  "code": ""
+ },
+ {
+  "q": "호흡기내과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/view.do?v_idx=77"
+  ],
+  "section": "호흡기내과",
+  "code": ""
+ },
+ {
+  "q": "소아청소년 통합의료센터 진료과에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=52"
+  ],
+  "section": "소아청소년 통합의료센터",
+  "code": ""
+ },
+ {
+  "q": "진료과ㆍ의료진 소개에 대해 알려주세요",
+  "category": "department",
+  "urls": [
+   "https://www.ish.or.kr/main/part/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "전문센터 소개에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "로봇수술센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=51"
+  ],
+  "section": "로봇수술센터",
+  "code": ""
+ },
+ {
+  "q": "국제진료센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=48"
+  ],
+  "section": "국제진료센터",
+  "code": ""
+ },
+ {
+  "q": "진료의뢰 안내에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=48"
+  ],
+  "section": "진료의뢰 안내",
+  "code": ""
+ },
+ {
+  "q": "보험서비스에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=48"
+  ],
+  "section": "보험서비스",
+  "code": ""
+ },
+ {
+  "q": "문의 및 연락처에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=48"
+  ],
+  "section": "문의 및 연락처",
+  "code": ""
+ },
+ {
+  "q": "관절·척추센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=2"
+  ],
+  "section": "관절·척추센터",
+  "code": ""
+ },
+ {
+  "q": "내분비당뇨센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=4"
+  ],
+  "section": "내분비당뇨센터",
+  "code": ""
+ },
+ {
+  "q": "내시경센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=26"
+  ],
+  "section": "내시경센터",
+  "code": ""
+ },
+ {
+  "q": "뇌신경센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "뇌신경센터",
+  "code": ""
+ },
+ {
+  "q": "치매, 조기발견이 중요합니다에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "치매, 조기발견이 중요합니다",
+  "code": ""
+ },
+ {
+  "q": "뇌종양에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "뇌종양",
+  "code": ""
+ },
+ {
+  "q": "파킨슨병에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "파킨슨병",
+  "code": ""
+ },
+ {
+  "q": "뇌전증, 만성질환입니다에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "뇌전증, 만성질환입니다",
+  "code": ""
+ },
+ {
+  "q": "수면장애도 질환입니다에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "수면장애도 질환입니다",
+  "code": ""
+ },
+ {
+  "q": "지속적인 손발저림... 말초신경 이상에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "지속적인 손발저림... 말초신경 이상",
+  "code": ""
+ },
+ {
+  "q": "다발성 경화증... 지속적인 관리가 필요합니다에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=3"
+  ],
+  "section": "다발성 경화증... 지속적인 관리가 필요합니다",
+  "code": ""
+ },
+ {
+  "q": "소화기·간담췌 1센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=7"
+  ],
+  "section": "소화기·간담췌 1센터",
+  "code": ""
+ },
+ {
+  "q": "소화기·간담췌 2센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=8"
+  ],
+  "section": "소화기·간담췌 2센터",
+  "code": ""
+ },
+ {
+  "q": "신장센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=5"
+  ],
+  "section": "신장센터",
+  "code": ""
+ },
+ {
+  "q": "여성의학센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=9"
+  ],
+  "section": "여성의학센터",
+  "code": ""
+ },
+ {
+  "q": "장기이식센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=14"
+  ],
+  "section": "장기이식센터",
+  "code": ""
+ },
+ {
+  "q": "주요특징에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=14"
+  ],
+  "section": "주요특징",
+  "code": ""
+ },
+ {
+  "q": "신장이식에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=14"
+  ],
+  "section": "신장이식",
+  "code": ""
+ },
+ {
+  "q": "간이식에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=14"
+  ],
+  "section": "간이식",
+  "code": ""
+ },
+ {
+  "q": "호흡기센터에 대해 알려주세요",
+  "category": "center",
+  "urls": [
+   "https://www.ish.or.kr/main/center/view.do?v_idx=12"
+  ],
+  "section": "호흡기센터",
+  "code": ""
+ },
+ {
+  "q": "장비 '초정밀 최첨단 혈관조영진단기기 아주리온 7M12 / 아주리온 7M20'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '최첨단 혈관조영진단기기 - 아주리온 5M20'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '최첨단 MRI 시스템 - 고성능 3.0T MR 7700'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원의 첨단장비를 소개해 주세요",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '최첨단 CT(컴퓨터단층촬영) - Siemens Defintion Force'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '단일공 수술로봇 - 다빈치SP'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '무릎 인공관절 수술로봇 - 큐비스 조인트(CUVIS-joint)'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '최첨단 CT(컴퓨터단층촬영) - 소마톰 엑스사이트(SOMATOM X.Cite)'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '수술실 내 하이브리드 혈관조영 수술실 Angiography Artis zee biplane'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '가장 빠르고 가장 정밀한 선형가속 암 치료기 - 인피니티(Infinity)'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '인간친화적 MRI - 마그네톰 스카이라(MAGNETOM Skyra)'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '세계 최초 듀얼 소스 CT - SOMATOM Definition Flash'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 '핵의학과 장비 소개 - Gamma (Symbia E)'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 'Neuroendoscope, LOTTA, KARL STROZ, Germany'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 'Leksell Stereotactic System and Surgiplan, ELEKTA, Sweden'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "장비 'iNtellect Cranial Navigation System II, Stryker, USA'이(가) 뭔가요?",
+  "category": "equipment",
+  "urls": [
+   "https://www.ish.or.kr/main/equipment/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "편의시설안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/site/amenities/list1.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "층별위치안내에 대해 알려주세요",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/floor/list.do?sh_idx=1&sh_ref=4"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "진료 예약은 어떻게 하나요?",
+  "category": "guide",
+  "urls": [
+   "https://www.ish.or.kr/main/medicalReserve/step1.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "병원 주요 연혁을 알려주세요",
+  "category": "hospital_intro",
+  "urls": [
+   "https://www.ish.or.kr/main/history/list.do"
+  ],
+  "section": "",
+  "code": ""
+ },
+ {
+  "q": "산부인과 3D 초음파(12M) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB515"
+ },
+ {
+  "q": "기관지내시경초음파(EBUS, TBNA포함)(가이드시스를 이용한경우 포함) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EZ991"
+ },
+ {
+  "q": "Wrist MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE117"
+ },
+ {
+  "q": "Ankle(Ligament) MRI_제한적 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE421"
+ },
+ {
+  "q": "TERT gene promoter mutation(Real-time PCR) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "Y83543"
+ },
+ {
+  "q": "사람유전자 분자병리검사-유전성 유전자검사 MLPA 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "CZ585"
+ },
+ {
+  "q": "비유전성 유전자검사-기타[IGH/MYC/CEP 8 Gene(FISH)] 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FISH"
+ },
+ {
+  "q": "심장-선천성 심질환 경흉부 심초음파 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB430"
+ },
+ {
+  "q": "공기역학검사 (재검) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FZ688"
+ },
+ {
+  "q": "근골격계 US(단순) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB402"
+ },
+ {
+  "q": "지카 바이러스[핵산증폭법] 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "D658302KZ"
+ },
+ {
+  "q": "조영제 Heart MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI224"
+ },
+ {
+  "q": "단순초음파(Ⅰ)-초음파하 주사부위 표시 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB401"
+ },
+ {
+  "q": "조영제 하지(Thigh, foot, leg) MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE223"
+ },
+ {
+  "q": "기본조직검사 (초음파 유도하 생검) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB562"
+ },
+ {
+  "q": "조영제 TMJ MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI207"
+ },
+ {
+  "q": "소아 고지혈증 교육 (추적) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "AZ008"
+ },
+ {
+  "q": "조영제 Entrography(Crohn) MRI(금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI227"
+ },
+ {
+  "q": "동적 족저압측정 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EZ777"
+ },
+ {
+  "q": "조영제 Brain Multiple Sclerosis+MRA(CE)(금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI235"
+ },
+ {
+  "q": "눈의 계측검사[편측]-초음파 이용 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "E7800"
+ },
+ {
+  "q": "근골격계 초음파 (단순)-손목관절(편측) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB467"
+ },
+ {
+  "q": "기타 검사-상동 재조합 결핍 검사 [염기서열검사] 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "CZ980"
+ },
+ {
+  "q": "표준순음청력검사 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "F6341"
+ },
+ {
+  "q": "VNG 비디오전기안진검사 (두위 및 두위변환 안진) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FZ733"
+ },
+ {
+  "q": "Neck MRA (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI136"
+ },
+ {
+  "q": "GS 혈관초음파 17-동정맥루의 혈류 및 협착 측정 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB486"
+ },
+ {
+  "q": "Echocardiography Adult 경흉부 심초음파-일반 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB432"
+ },
+ {
+  "q": "외국인 VIP식-2 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "AMEAL"
+ },
+ {
+  "q": "이식형 결찰사를 이용한 전립선 결찰 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "RZ515"
+ },
+ {
+  "q": "비유전성 유전자검사-중합효소연쇄반응-확장-교잡반응[BRAF Gene] 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "C583117FZ"
+ },
+ {
+  "q": "RA FACTOR IgG 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "CZ421"
+ },
+ {
+  "q": "체외충격파치료 ELBOW [근골격계질환] 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "SZ084"
+ },
+ {
+  "q": "연속혈당측정검사-전문가용 연속혈당측정검사 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "F6961"
+ },
+ {
+  "q": "조영제 Pancreas MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI229"
+ },
+ {
+  "q": "발성 검사 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FZ688"
+ },
+ {
+  "q": "[신의료]방사선 치료를 위한 무표식 실시간 표면유도기법-계획 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "SSSSSS"
+ },
+ {
+  "q": "Brain T2 +Flair+GE +SWI+Diff MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HF101"
+ },
+ {
+  "q": "Elbow MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE116"
+ },
+ {
+  "q": "가족분만실A 병실 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "AB901"
+ },
+ {
+  "q": "외부 비급여 Hip MRI판독의뢰에따른 판독료 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE118001"
+ },
+ {
+  "q": "직장 및 에스장절제술 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "QZ966"
+ },
+ {
+  "q": "복잡추나-추간판장애, 척추협착 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "40720"
+ },
+ {
+  "q": "Hip MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE118"
+ },
+ {
+  "q": "Appendix MRI-임산부용 (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI127"
+ },
+ {
+  "q": "전방재위치교합장치 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "UZ045"
+ },
+ {
+  "q": "주조포스트 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "UZ001"
+ },
+ {
+  "q": "조영제 Ankle MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE221"
+ },
+ {
+  "q": "Anti GM1 Ab IgG - 인정비급여 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "CZ261"
+ },
+ {
+  "q": "Fat Abdomen MD CT 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HA515"
+ },
+ {
+  "q": "특실 병실 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "AO901"
+ },
+ {
+  "q": "두경부-경부초음파-갑상선·부갑상선 제외한 경부 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB415"
+ },
+ {
+  "q": "Pelvis MRI 종검 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI128"
+ },
+ {
+  "q": "내시경초음파-세침생검 (인정비급여) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EZ992"
+ },
+ {
+  "q": "수면다원-적정압력 검사 (CPAP Titration) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "F6290"
+ },
+ {
+  "q": "포경수술 환상절개 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "R3822"
+ },
+ {
+  "q": "F-18 플루트메타몰 뇌 양전자방출단층촬영 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HZ228"
+ },
+ {
+  "q": "L-SPINE MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI111"
+ },
+ {
+  "q": "T-SPINE MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI110"
+ },
+ {
+  "q": "수술 중 초음파 - OL B (복잡) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EZ985"
+ },
+ {
+  "q": "맞춤 전정 운동 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "MZ016"
+ },
+ {
+  "q": "외부판독 Orbit MRI 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HJ605"
+ },
+ {
+  "q": "진정내시경 환자관리료 Ⅰ 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EA001"
+ },
+ {
+  "q": "Brain MRI+MRA 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI135"
+ },
+ {
+  "q": "제한적 Brain MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI401"
+ },
+ {
+  "q": "C+T SPINE MRI 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI109"
+ },
+ {
+  "q": "도재전장온레이 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "UZ004"
+ },
+ {
+  "q": "동적체평형검사 Posturography F/U 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FZ731"
+ },
+ {
+  "q": "발한 신경 자극 검사 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FZ713"
+ },
+ {
+  "q": "혈관-두개외 혈관 도플러 초음파-경동맥 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB482"
+ },
+ {
+  "q": "기관지내시경초음파(EBUS, 시뮬레이션)(가이드시스를 이용한경우 포함) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EZ991"
+ },
+ {
+  "q": "외부판독 KNEE MRI 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HE120001"
+ },
+ {
+  "q": "핵산증폭-유전자형그룹1_인유두종바이러스(Human Papillomavirus, HPV)[real time PCR] 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "D658604D"
+ },
+ {
+  "q": "조영제 Neck MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI208"
+ },
+ {
+  "q": "Abdomen SONO-소장·대장 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB444"
+ },
+ {
+  "q": "BRAIN DEMENTIA(CE) MRI+MRA (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI235"
+ },
+ {
+  "q": "GS 혈관초음파 17-하지-동맥 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB487"
+ },
+ {
+  "q": "VVIP 병실(특실) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "AB901"
+ },
+ {
+  "q": "C+T+L spine MRI + whole spine sagittal T2 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI113"
+ },
+ {
+  "q": "증식치료(사지관절부위)Prolotherapy Extremity(Complex) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "MY142"
+ },
+ {
+  "q": "RA FACTOR IgA 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "CZ421"
+ },
+ {
+  "q": "SARS-CoV-2 항원검사 [일반면역검사]-간이검사(코로나19) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "D6620004"
+ },
+ {
+  "q": "T-Spine + Whole spine T2 Sagital MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI110"
+ },
+ {
+  "q": "Face MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI103"
+ },
+ {
+  "q": "GS Simple SONO Ⅱ(유방갑상선센터) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB402"
+ },
+ {
+  "q": "연속혈당측정검사-개인용 연속혈당측정검사-일반 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "F6963"
+ },
+ {
+  "q": "GS 혈관초음파 7-하지-정맥(단순초음파(Ⅱ)) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB402"
+ },
+ {
+  "q": "전류인지역치(CPT) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FY883"
+ },
+ {
+  "q": "PRE OP L-Spine + Whole spine T2 Sagital MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI111"
+ },
+ {
+  "q": "Neck MRI (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI108"
+ },
+ {
+  "q": "형광동소교잡반응검사 FISH(CDKN2A/CEP9) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "C5841"
+ },
+ {
+  "q": "조영제 Brain MRI+MRA+Neck MRA+Diff (금액) 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI235"
+ },
+ {
+  "q": "초음파(유방·액와부)-정밀 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB423"
+ },
+ {
+  "q": "Iodine 인정비급여 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "CZ191"
+ },
+ {
+  "q": "GS 혈관초음파 17-하지-정맥 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "EB488"
+ },
+ {
+  "q": "복잡추나 80%-추간판장애,척추협착 외 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "40721"
+ },
+ {
+  "q": "C+T SPINE MRI + whole spine sagittal T2 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "HI109"
+ },
+ {
+  "q": "뇌혈류초음파검사 + 미세색전검출검사 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FZ714"
+ },
+ {
+  "q": "인식력검사(소아), DTVP 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "FZ433"
+ },
+ {
+  "q": "소아 당뇨병 인슐린 주사교육 비급여 비용이 얼마예요?",
+  "category": "nonpayment",
+  "urls": [
+   "https://www.ish.or.kr/main/nonpayment/list.do"
+  ],
+  "section": "",
+  "code": "AZ001"
+ }
+]

@@ -77,3 +77,12 @@
 .sendBtn { background: var(--accent); color: #fff; }
 .sendBtn:disabled { opacity: .45; cursor: default; }
 .srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* 음성 입력 */
+.micOn { background: #FDECEA; color: var(--danger); }
+.micBtn:disabled { opacity: .45; cursor: default; }
+.voiceStatus { margin: 0; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--accent); }
+.voiceError { color: var(--danger); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: pulse 1s infinite ease-in-out; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
