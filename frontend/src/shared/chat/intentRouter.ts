@@ -4,7 +4,9 @@
 export type SymptomTopic = 'digestive' | 'headache' | 'respiratory';
 // 오시는 길 화면의 탭 (지하철 / 버스 / 자가용)
 export type DirectionsTopic = 'subway' | 'bus' | 'car';
-export type Topic = SymptomTopic | DirectionsTopic;
+// 건강검진 안내 화면의 카드 (종합 / 국가 / 특수)
+export type CheckupTopic = 'general' | 'national' | 'special';
+export type Topic = SymptomTopic | DirectionsTopic | CheckupTopic;
 
 export const SYMPTOM_INTENT = 'symptom.guide';
 
@@ -142,10 +144,26 @@ const RULES: Rule[] = [
     reply: '외래 안내로 이동할게요',
     patterns: [/외래|접수|초진|재진/],
   },
+  // 검진 종류를 말하면 건강검진 안내의 해당 카드를 열어서 보여 준다 (아래 일반 규칙보다 먼저)
   {
-    intent: 'info.health', label: '건강 정보',
-    reply: '건강 정보로 이동할게요',
-    patterns: [/건강\s*정보|검사\s*안내|질환/],
+    intent: 'info.health', label: '건강검진 안내', topic: 'general',
+    reply: '종합검진 안내로 이동할게요',
+    patterns: [/종합\s*검진|개인\s*검진|기업\s*검진/],
+  },
+  {
+    intent: 'info.health', label: '건강검진 안내', topic: 'national',
+    reply: '국가검진 안내로 이동할게요',
+    patterns: [/국가\s*검진|공단\s*검진|암\s*검진/],
+  },
+  {
+    intent: 'info.health', label: '건강검진 안내', topic: 'special',
+    reply: '특수검진 안내로 이동할게요',
+    patterns: [/특수\s*검진|유해\s*(인자|물질)|야간\s*작업/],
+  },
+  {
+    intent: 'info.health', label: '건강검진 안내',
+    reply: '건강검진 안내로 이동할게요',
+    patterns: [/건강\s*정보|검진|검사\s*안내|질환/],
   },
 ];
 

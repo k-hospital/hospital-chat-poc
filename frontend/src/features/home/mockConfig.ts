@@ -16,7 +16,7 @@ export const mockConfig: ChatConfig = {
     { id: 'outpatient', label: '외래 안내', description: '접수 · 진료 절차', icon: 'clipboard', intent: 'info.outpatient', requiresAuth: false, order: 1, visible: true },
     { id: 'doctors', label: '의료진 찾기', description: '진료과 · 전문 분야', icon: 'stethoscope', intent: 'doctor.search', requiresAuth: false, order: 2, visible: true },
     { id: 'directions', label: '오시는 길', description: '교통 · 주차', icon: 'pin', intent: 'info.directions', requiresAuth: false, order: 3, visible: true },
-    { id: 'health', label: '건강 정보', description: '질환 · 검사 안내', icon: 'book', intent: 'info.health', requiresAuth: false, order: 4, visible: true },
+    { id: 'health', label: '건강검진 안내', description: '검진 종류 · 준비사항', icon: 'book', intent: 'info.health', requiresAuth: false, order: 4, visible: true },
   ],
   faqs: [
     { id: 'parking', label: '주차 안내', icon: 'pin', intent: 'faq.parking', requiresAuth: false, order: 1, visible: true },
