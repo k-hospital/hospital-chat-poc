@@ -1,0 +1,73 @@
+/* 상담원 화면 — PC용 (최소 폭 960px 기준), 챗봇과 같은 색 */
+.app, .loginWrap {
+  --accent: #1F4E8C; --accent-soft: #E3ECF7; --ink: #152238; --ink-sub: #4A5668;
+  --line: #DDE3EB; --ground: #F4F6F9; --danger: #B42318; --ok: #157347;
+  font-family: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  color: var(--ink); background: var(--ground);
+}
+.app button, .app input, .loginWrap button, .loginWrap input { font-family: inherit; }
+.app :focus-visible, .loginWrap :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.app { height: 100dvh; display: flex; flex-direction: column; }
+
+.loginWrap { height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.login { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 14px; padding: 28px 24px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.login h1 { margin: 0 0 4px; font-size: 20px; }
+.login label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-sub); }
+.login input { height: 42px; padding: 0 12px; border: 1.5px solid #C9D3E0; border-radius: 10px; font-size: 14.5px; }
+
+.top { display: flex; align-items: center; gap: 12px; padding: 10px 20px; background: #fff; border-bottom: 1px solid var(--line); }
+.top h1 { margin: 0; font-size: 17px; flex: 1; }
+.me { font-size: 13px; font-weight: 600; }
+.on, .off { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 12px; }
+.on { color: var(--ok); background: #E6F4EA; }
+.off { color: var(--danger); background: #FDECEA; }
+.notice { margin: 0; padding: 8px 20px; background: #FFF4E5; color: #7A4A00; font-size: 13px; }
+
+.main { flex: 1; min-height: 0; display: grid; grid-template-columns: 300px 1fr; }
+.side { border-right: 1px solid var(--line); background: #fff; overflow-y: auto; padding: 12px; }
+.side h2 { margin: 16px 4px 8px; font-size: 13px; color: var(--ink-sub); }
+.tabs { display: flex; gap: 4px; }
+.tabs button { flex: 1; height: 36px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-size: 13px; cursor: pointer; }
+.tabs button[aria-selected='true'] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.item { display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid var(--line); border-radius: 10px; }
+.item div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.item strong { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item small { font-size: 11.5px; color: var(--ink-sub); }
+.chatItem { width: 100%; display: flex; align-items: center; gap: 6px; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 13px; text-align: left; cursor: pointer; }
+.chatItem span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chatItem em { font-style: normal; font-size: 11px; color: var(--danger); }
+.chatItem b { min-width: 20px; height: 20px; border-radius: 10px; background: var(--danger); color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+.sel { border-color: var(--accent); background: var(--accent-soft); }
+.empty { margin: 8px 4px; font-size: 13px; color: var(--ink-sub); }
+
+.panel { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+.chat, .callbacks { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.chatHead { display: flex; align-items: center; gap: 10px; padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--line); }
+.chatHead strong { flex: 1; font-size: 15px; }
+.hint { font-size: 12px; color: var(--ink-sub); }
+.messages { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.history { padding: 10px 14px; border: 1px dashed #C9D3E0; border-radius: 10px; background: #fff; font-size: 13px; }
+.history summary { cursor: pointer; font-weight: 600; color: var(--ink-sub); }
+.history p { margin: 6px 0 0; line-height: 1.5; white-space: pre-line; }
+.history b { color: var(--accent); margin-right: 4px; }
+.mine, .theirs { margin: 0; max-width: 70%; padding: 9px 14px; font-size: 14px; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; overflow-wrap: anywhere; }
+.mine { align-self: flex-end; background: var(--accent); color: #fff; border-radius: 14px 14px 4px 14px; }
+.theirs { align-self: flex-start; background: #fff; border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; }
+.mine time, .theirs time { font-size: 10.5px; opacity: .7; align-self: flex-end; }
+.system { margin: 2px 0; align-self: center; font-size: 12px; color: var(--ink-sub); background: #E7ECF2; padding: 4px 12px; border-radius: 12px; }
+.input { display: flex; gap: 8px; padding: 12px 20px; background: #fff; border-top: 1px solid var(--line); }
+.input input { flex: 1; height: 42px; padding: 0 14px; border: 1.5px solid #C9D3E0; border-radius: 10px; font-size: 14px; }
+
+.primary, .danger, .ghost, .small { border-radius: 10px; font-size: 13px; cursor: pointer; }
+.primary { height: 42px; padding: 0 18px; border: none; background: var(--accent); color: #fff; font-weight: 700; }
+.primary:disabled, .small:disabled { opacity: .45; cursor: default; }
+.danger { height: 34px; padding: 0 14px; border: 1px solid var(--danger); background: #fff; color: var(--danger); font-weight: 600; }
+.ghost { height: 34px; padding: 0 12px; border: 1px solid var(--line); background: #fff; color: var(--ink-sub); }
+.small { height: 32px; padding: 0 12px; border: 1px solid var(--accent); background: #fff; color: var(--accent); font-weight: 600; }
+.error { margin: 0; color: var(--danger); font-size: 13px; }
+
+.callbacks table { margin: 16px 20px; border-collapse: collapse; background: #fff; font-size: 13px; }
+.callbacks th, .callbacks td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.callbacks th { color: var(--ink-sub); font-weight: 600; background: #F8FAFC; }
+.callbacks td a { color: var(--accent); font-weight: 600; }

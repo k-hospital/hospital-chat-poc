@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { MainScreen } from './features/home/MainScreen';
 import { mockConfig } from './features/home/mockConfig';
 import type { ChatConfig } from './shared/types/config';
@@ -9,6 +9,14 @@ import { routeQuestion, routeSuggestion, type RouteResult } from './shared/chat/
 import { classifyWithServer, type RoutedIntent } from './shared/chat/llmRouter';
 import { HOME_SCREEN, screenSuggestions, type Suggestion } from './shared/chat/suggestions';
 import { ChatInputBar, type ChatEcho } from './shared/ui/ChatInputBar';
+// AI 상담(외국어 답변)·음성·상담원 연결 — ai-backend(/v1/chat, /v1/stt, /v1/handoff)와 짝
+import { ChatView, type ChatTurn } from './features/chat/ChatView';
+import { HandoffView } from './features/handoff/HandoffView';
+import { ChatApiError, postChat } from './shared/api/chat';
+import type { TranscriptLine } from './shared/api/handoff';
+
+// 한글이 하나도 없고 글자(영문·한자 등)가 있으면 외국어 질문 → ai-backend가 그 언어로 답변
+const isForeign = (text: string) => !/[가-힣ㄱ-ㅎ]/.test(text) && /\p{L}/u.test(text);
 import styles from './App.module.css';
 
 // 백엔드 주소: 배포 시 VITE_API_BASE 환경변수로 지정 (비우면 같은 도메인의 /v1)
@@ -17,7 +25,9 @@ const API_BASE = import.meta.env.VITE_API_BASE ?? '';
 export default function App() {
   const [config, setConfig] = useState<ChatConfig | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-  const [view, setView] = useState<'home' | 'settings'>('home');
+  const [view, setView] = useState<'home' | 'settings' | 'chat' | 'handoff'>('home');
+  const [turns, setTurns] = useState<ChatTurn[]>([]);
+  const [handoffMode, setHandoffMode] = useState<'agent' | 'callback'>('agent');
   // screen: 지금 화면의 기능(intent) — 화면별 추천 질문 목록을 고르는 데 사용
   const [page, setPage] = useState<{ url: string; title: string; screen: string; query?: PageQuery } | null>(null);
   const [links, setLinks] = useState<LinkMap>(loadLinks);
@@ -39,7 +49,40 @@ export default function App() {
     window.setTimeout(() => setNotice(null), 2000);
   };
 
-  const isLinked = (key: string) => Boolean(links[key]);
+  // 상담원 연결·콜백은 이 앱(HandoffView)이 직접 처리하므로 연결 주소 없이도 사용 가능
+  const isLinked = (key: string) => key === AGENT_KEY || key === CALLBACK_KEY || Boolean(links[key]);
+
+  // 외국어 질문 → AI 답변 화면 (ai-backend POST /v1/chat)
+  const chat = async (question: string, lang?: string) => {
+    const id = Date.now();
+    setEcho(null);
+    setPage(null);
+    setView('chat');
+    setTurns((ts) => [...ts, { id, question, status: 'loading' }]);
+    try {
+      const res = await postChat(question, lang);
+      setTurns((ts) => ts.map((t) => (t.id === id ? { ...t, status: 'done', res } : t)));
+    } catch (e) {
+      const error = e instanceof ChatApiError ? e.message : '잠시 서비스를 이용할 수 없어요. 잠시 후 다시 시도해 주세요.';
+      setTurns((ts) => ts.map((t) => (t.id === id ? { ...t, status: 'error', error } : t)));
+    }
+  };
+
+  // 상담원 연결 (국내 전용) — mode="callback"이면 바로 콜백 요청
+  const openHandoff = (mode: 'agent' | 'callback') => {
+    setEcho(null);
+    setPage(null);
+    setHandoffMode(mode);
+    setView('handoff');
+  };
+  // 상담원에게 넘길 AI 대화 (최근 10번)
+  const transcript = useMemo<TranscriptLine[]>(() => turns.slice(-10).flatMap((t) => {
+    const lines: TranscriptLine[] = [{ role: 'user', text: t.question }];
+    if (t.res) lines.push({ role: 'bot', text: t.res.answer });
+    return lines;
+  }), [turns]);
+  // 마지막 답변이 외국어면 상담원 연결 버튼을 숨긴다 (국내 전용)
+  const lastLang = [...turns].reverse().find((t) => t.res)?.res?.lang ?? 'ko';
 
   // 메뉴 선택: 연결 주소가 등록돼 있으면 챗봇 안에서 이동, 없으면 "준비중" 안내 후 종료
   const openLink = (key: string, label: string) => {
@@ -104,6 +147,7 @@ export default function App() {
     latestAsk.current += 1;
     const id = latestAsk.current;
     if (suggestion) return showResult(question, routeSuggestion(question, suggestion.intent, suggestion.label));
+    if (isForeign(question)) return void chat(question);   // 외국어 입력 → AI 답변 (한국어는 아래 팀 흐름 그대로)
 
     const byRules = routeQuestion(question);
     if (byRules.kind === 'emergency' || !config.llmRouting) return showResult(question, byRules);
@@ -138,6 +182,12 @@ export default function App() {
           // 같은 화면에 다른 질문이 오면 새로 불러오지 않고 입력 문구만 다시 전달 (예: 오시는 길 탭 전환)
           <PageViewer key={page.url} url={page.url} title={page.title}
             query={page.query} onBack={() => { setPage(null); setEcho(null); }} />
+        ) : view === 'handoff' ? (
+          <HandoffView mode={handoffMode} transcript={transcript} hoursText={config.operatingHoursText}
+            onBack={() => setView(turns.length > 0 ? 'chat' : 'home')} />
+        ) : view === 'chat' ? (
+          <ChatView turns={turns} onBack={() => setView('home')}
+            onAgent={lastLang === 'ko' ? () => openHandoff(config.isOperatingHours ? 'agent' : 'callback') : undefined} />
         ) : inSettings ? (
           <SettingsScreen config={config} links={links} onSave={save} onBack={() => setView('home')} />
         ) : (
@@ -146,16 +196,19 @@ export default function App() {
             isLinked={isLinked}
             handlers={{
               onAction: (m) => openLink(m.intent, m.label),
-              onAgent: () => openLink(AGENT_KEY, '상담원 연결'),
-              onCallback: () => openLink(CALLBACK_KEY, '콜백 요청'),
+              onAgent: () => openHandoff('agent'),
+              onCallback: () => openHandoff('callback'),
               onSettings: () => { setEcho(null); setView('settings'); },
             }}
           />
         )}
       </div>
       {/* 설정 화면은 하단 저장 버튼과 겹치므로 입력 바를 숨긴다 */}
-      {!inSettings && (
-        <ChatInputBar disclaimer={config.disclaimer} echo={echo} suggestions={suggestions} onSend={ask} onCloseEcho={() => setEcho(null)} />
+      {!inSettings && view !== 'handoff' && (
+        <ChatInputBar disclaimer={config.disclaimer} echo={echo} suggestions={suggestions} onSend={ask}
+          // 음성: 한국어는 입력과 같은 팀 흐름(응급·질문 분류), 영어·중국어는 그 언어로 AI 답변
+          onVoice={(t, lang) => (lang && lang !== 'ko' ? void chat(t, lang) : ask(t))}
+          onCloseEcho={() => setEcho(null)} />
       )}
       {notice && (
         <div role="status" style={{

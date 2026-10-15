@@ -161,3 +161,6 @@ frontend/scripts/llm-eval/results/
 # 사내 서버 주소가 들어가는 로컬 전용 설정 (공개 저장소에 올리지 않는다)
 *.local.ps1
 *.local.json
+
+# ai-backend: 콜백 전화번호 DB (개인정보)
+ai-backend/*.db
