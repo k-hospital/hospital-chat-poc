@@ -27,6 +27,10 @@ services:
     # 서버 주소·모델·아이디/비밀번호는 .env 에서만 설정한다 (.env.example 참고, 저장소에는 올라가지 않음)
     env_file:
       - .env
+    # ai-backend 로 /v1 일부 경로를 넘기는 프록시. 비어 있으면 꺼져 있어 지금과 똑같이 동작한다.
+    # 켤 때는 .env 에서 AI_BACKEND_URL=http://ai-backend:8100 (AI_BACKEND.md 참고)
+    environment:
+      AI_BACKEND_URL: ${AI_BACKEND_URL:-}
     ports:
       - "${CHATPOC_BIND:-0.0.0.0}:${CHATPOC_PORT:-18080}:8000"
     networks:
@@ -46,6 +50,67 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+  # ── ai-backend (음성인식 · 외국어 답변 · 상담원 연결) ─────────────────────────
+  # profile "ai" 로 분리되어 있다: `docker compose config --services` 와 `up -d --no-deps chatbot` 에는 나타나지 않고,
+  # 아래처럼 명시했을 때만 만들어진다. 켜기 전에 AI_BACKEND.md 의 "결정 사항"을 확인받는다.
+  #   docker compose --profile ai up -d --build --no-deps ai-backend
+  # 호스트 포트를 열지 않는다 — chatbot 컨테이너가 같은 네트워크(chatpoc_net)에서 http://ai-backend:8100 으로만 부른다.
+  ai-backend:
+    profiles: ["ai"]
+    container_name: chatpoc-ai-backend
+    image: chatpoc/ai-backend:${CHATPOC_VERSION:-latest}
+    build:
+      context: ../..
+      dockerfile: docker/chatpoc/Dockerfile.ai-backend
+      args:
+        PIP_INDEX_URL: ${PIP_INDEX_URL:-}
+    restart: unless-stopped
+    # 설정은 같은 .env 의 AI_* 항목에서 받는다 (.env.example 참고). 팀 backend 의 LLM_* 와 이름이 겹치지 않게 접두사를 붙였다.
+    environment:
+      QDRANT_URL: ${AI_QDRANT_URL:-}
+      DENSE_EMBEDDING_URL: ${AI_DENSE_EMBEDDING_URL:-}
+      SPARSE_EMBEDDING_URL: ${AI_SPARSE_EMBEDDING_URL:-}
+      RERANKER_URL: ${AI_RERANKER_URL:-}
+      LLM_BASE_URL: ${AI_LLM_BASE_URL:-}
+      LLM_MODEL: ${AI_LLM_MODEL:-}
+      LLM_API_KEY: ${AI_LLM_API_KEY:-}
+      KO_LLM_BASE_URL: ${AI_KO_LLM_BASE_URL:-}
+      KO_LLM_MODEL: ${AI_KO_LLM_MODEL:-}
+      KO_LLM_API_KEY: ${AI_KO_LLM_API_KEY:-}
+      STT_URL: ${AI_STT_URL:-}
+      STT_MODEL: ${AI_STT_MODEL:-}
+      AGENT_PASSWORD: ${AI_AGENT_PASSWORD:-}
+      HOSPITAL_PHONE: ${AI_HOSPITAL_PHONE:-}
+      HANDOFF_OPEN: ${AI_HANDOFF_OPEN:-08:30}
+      HANDOFF_CLOSE: ${AI_HANDOFF_CLOSE:-17:30}
+      HANDOFF_HOURS_TEXT: ${AI_HANDOFF_HOURS_TEXT:-평일 08:30 – 17:30}
+      # 접속자 IP 별 요청 제한은 앞단(chatbot 프록시)에서 하므로 여기서는 끈다 (여기서 보이는 IP 는 프록시뿐)
+      RATE_LIMIT_PER_MINUTE: "0"
+      CALLBACK_DB: /data/callbacks.db
+    volumes:
+      - ai_data:/data
+    networks:
+      - chatpoc
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 768m
+    pids_limit: 256
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# 콜백(전화번호) SQLite 만 저장한다. profile "ai" 를 켜기 전에는 만들어지지 않는다.
+volumes:
+  ai_data:
+    name: chatpoc_ai_data
 
 networks:
   chatpoc:
